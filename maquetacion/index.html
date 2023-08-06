@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>😺 SANTEX | Mascotas Perdidas y en Adopcion</title>
+
+    <!-- STYLES -->
+    <link rel="stylesheet" href="./resources/styles/global.css" />
+    <link rel="stylesheet" href="./resources/styles/style.css" />
+
+    <!-- FONTS -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Advent Pro:wght@400&display=swap" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Averia Libre:wght@700&display=swap" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bodoni Moda:wght@800&display=swap" />
+
+</head>
+
+<body>
+
+    <!-- NAVBAR -->
+
+    <nav>
+
+        <div class="logo">
+            <a href="./index.html"><img src="./resources/img/imagenes-web/huella.png"
+                    alt="Huella"></a><!--ver si cambiamos-->
+            <p class="logo-text">SANTEX</p>
+        </div>
+        <ul class="links">
+            <li><a href="./index.html" id="inicio">Inicio</a></li>
+            <li><a href="#" id="sobre-nosotros">Integrantes</a></li>
+            <li><a href="#" id="consejos">Consejos</a></li>
+            <li><a href="#" id="buscar-ahora">Busca ahora!</a></li>
+            <li><a href="#" id="reportar-perdida" class="links--hide">Reportar Perdida</a></li>
+            <!-- Mostrar a logeados-->
+            <li><a href="#" class="cards-dni links--hide">Tus mascotas</a></li> <!-- Mostrar a logeados-->
+
+            <li><a class="login" href="#" id="abrir-login">Inicia Sesion</a></li><!-- Mostrar NO logeado -->
+            <div class="contenedor-modal-login" id="contenedor-modal-login">
+                <div class="modal-login">
+                    <form action="#" method="get">
+                        <h3>Inicie Sesion</h3>
+                        <input type="email" id="emailLogin" placeholder="Email" class="contenedor_vacio">
+                        <input type="password" id="passwordLogin" placeholder="Contraseña" class="contenedor_vacio">
+                        <div>
+                            <button type="button" id="btn_ingresar">Ingresar</button>
+                        </div>
+                    </form>
+                    <p id="cerrar-login">x</p>
+                </div>
+            </div>
+            <li><a class="registrarse" href="#" id="abrir-register">Registrarse</a></li><!-- Mostrar NO logeado -->
+            <div class="contenedor-modal-register" id="contenedor-modal-register">
+                <div class="modal-register">
+                    <form action="#" method="post">
+                        <h3>Crear una cuenta</h3>
+                        <input type="text" placeholder="Nombre" id="nombre">
+                        <input type="text" placeholder="Apellido" id="apellido">
+                        <input type="text" placeholder="Telefono" id="telefono">
+                        <input type="email" placeholder="Email" id="email">
+                        <input type="number" placeholder="DNI" id="dni">
+                        <input type="password" placeholder="Contraseña" id="password">
+                        <div>
+                            <button type="submit" id="btn_registrar" id="abrir-falla">Registrar</button>
+                            <!-- abrir-falla-->
+                        </div>
+                    </form>
+                    <p id="cerrar-register">x</p>
+                    <div class="contenedor-modal-falla" id="contenedor-modal-falla">
+                        <!--logica falla-->
+                    </div>
+                </div>
+            </div>
+            <li><a class="logout links--hide show--inline" href="#" id="logout">Cerrar Sesion</a></li>
+            <!-- Mostrar a logeados-->
+        </ul>
+
+    </nav>
+
+    <!-- SECCION PORTADA -->
+
+    <div class="portada">
+        <div class="encuentra-div">Encuentra</div>
+        <div class="tu-mascota-div">Tu Mascota</div>
+        <img class="rectangle-icon" alt="" src="./resources/img/imagenes-web/cat1.png" />
+        <img class="rectangle-icon1" alt="" src="./resources/img/imagenes-web/dog1.png" />
+        <img class="rectangle-icon2" alt="" src="./resources/img/imagenes-web/dog2.png" />
+        <a href="#contenedor-ayuda"><img src="./resources/img/imagenes-web/flecha-hacia-abajo.png" alt="Flecha"
+                class="flecha-hacia-abajo"></a>
+    </div>
+
+    <!-- QUEREMOS AYUDARTE -->
+    <div class="contenedor-ayuda" id="contenedor-ayuda">
+        <div class="contenedor-textos-ayuda">
+            <h2>Podemos ayudarte</h2>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Tenetur enim similique ipsam qui id corporis,
+                explicabo quas necessitatibus eveniet eum pariatur placeat delectus consectetur unde ipsum expedita
+                nesciunt excepturi soluta!</p>
+        </div>
+        <div class="carousel">
+            <div class="carousel-items">
+                <div class="carousel-item">
+                    <img src="./resources/img/fotos-mascotas/gato-blanco.jpg" alt="">
+                </div>
+                <div class="carousel-item">
+                    <img src="./resources/img/rectangle-44@2x.png" alt="">
+                </div>
+                <div class="carousel-item">
+                    <img src="./resources/img/rectangle-41@2x.png" alt="">
+                </div>
+                <div class="carousel-item">
+                    <img src="./resources/img/rectangle-42@2x.png" alt="">
+                </div>
+                <div class="carousel-item">
+                    <img src="./resources/img/fotos-mascotas/gato-atigrado.jpg" alt="">
+                </div>
+                <div class="carousel-item">
+                    <img src="./resources/img/fotos-mascotas/gato-negro.jpg" alt="">
+                </div>
+                <div class="carousel-item">
+                    <img src="./resources/img/fotos-mascotas/perro-labrador.jpg" alt="">
+                </div>
+                <div class="carousel-item">
+                    <img src="./resources/img/fotos-mascotas/gato-naranja-parado.jpg" alt="">
+                </div>
+                <div class="carousel-item">
+                    <img src="./resources/img/fotos-mascotas/gato-negro-parado.jpg" alt="">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- QUE HACEMOS -->
+
+    <div class="contenedor-nosotros">
+        <img src="./resources/img/imagenes-web/que-hacemos1.png" alt="Gato">
+        <div class="contenedor-textos-nosotros">
+            <h2>Que hacemos</h2>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Facere soluta aut nostrum, optio hic reiciendis unde esse, aspernatur accusantium nemo quidem corporis sequi deleniti excepturi tempora minima velit. Iste, necessitatibus.</p>
+            <div class="boton-nosotros">
+                <a href="#">Conocé sus historias</a>
+            </div>
+        </div>
+        <img src="./resources/img/imagenes-web/que-hacemos2.png" alt="" class="Perro">
+    </div>
+
+    <!-- COMO LO LOGRAMOS -->
+
+    <div class="contenedor-logros">
+        <div class="contenedor">
+            <div class="contenedor-textos-logros">
+                <h2>Como lo logramos</h2>
+                <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Amet dolorem eaque at natus explicabo reiciendis maxime voluptatibus animi nihil porro.</p>
+                <ul>
+                    <li>Lorem ipsum dolor sit amet consectetur.</li>
+                    <li>Lorem ipsum dolor sit amet consectetur.</li>
+                    <li>Lorem ipsum dolor sit amet consectetur.</li>
+                    <li>Lorem ipsum dolor sit amet consectetur.</li>
+                    <li>Lorem ipsum dolor sit amet consectetur.</li>
+                </ul>
+            </div>
+            <img src="./resources/img/rectangle-51@2x.png" alt="">
+        </div>
+        <div class="contenedor-cards">
+            <div class="card-1">
+                <img src="./resources/img/icon-web/1.png" alt="Icon">
+                <p class="size">120+</p>
+                <p>Mascotas encontradas</p>
+            </div>
+            <div class="card-3">
+                <img src="./resources/img/icon-web/3.png" alt="Icon">
+                <p class="size">50+</p>
+                <p>Nuevos dueños</p>
+            </div>
+            <div class="card-4">
+                <img src="./resources/img/icon-web/4.png" alt="Icon">
+                <p class="size">3</p>
+                <p>Ciudades</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- INTEGRANTES -->
+
+    <div class="contenedor-sobre-nosotros" id="integrantes">
+        <div class="contenedor-titulo">
+            <h2>Integrantes</h2>
+        </div>
+        <!-- <div class="contenedor-integrantes">
+            <div class="integrante">
+                <img src="https://avatars.githubusercontent.com/u/93406033?v=4" alt="Cinthia">
+                <p>Cinthia Vota</p>
+                <a href="https://github.com/VCinthia" target="_blank">GitHub</a>
+            </div>            
+        </div> -->
+    </div>
+
+    <!-- ¿TENES DUDAS? -->
+
+    <div class="contenedor-dudas">
+        <div class="contenedor-textos-dudas">
+            <h2>¿Tenes <span>dudas?</span></h2>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolor obcaecati amet natus ratione accusantium
+                inventore eaque commodi est aut voluptates.</p>
+        </div>
+        <form class="contenedor-email">
+            <input type="email" placeholder="Email" id="user-email">
+            <button id="btn-email">Enviar</button>
+        </form>
+    </div>
+
+    <!-- FOOTER -->
+
+    <footer>
+        <div class="logo-footer">
+            <img src="./resources/img/imagenes-web/huella.png" alt="Huella">
+            <p class="logo-text">SANTEX</p>
+            <div>
+                <img class="img-social" src="./resources/img/icon-web/facebook.png" alt="">
+                <img class="img-social" src="./resources/img/icon-web/instagram (2).png" alt="">
+                <img class="img-social" src="./resources/img/icon-web/twitter.png" alt="">
+            </div>
+        </div>
+        <div class="footer-enlaces">
+            <h3>Nombre Página</h3>
+            <a href="#">Inicio</a>
+            <a href="#">Sobre Nosotros</a>
+            <a href="#">Consejos</a>
+        </div>
+        <div class="footer-enlaces">
+            <h3>Publicidad</h3>
+            <a href="#">Marcas</a>
+            <a href="#">Politica de Privacidad</a>
+            <a href="#">Preguntas Frecuentes</a>
+        </div>
+        <div class="footer-enlaces">
+            <h3>Contactanos</h3>
+            <a href="#">nombrepag@gmail.com</a>
+            <a href="#">+549-000-000-0000</a>
+            <a href="#">Calle 0000 - Ciudad</a>
+        </div>
+    </footer>
+
+    <!-- SCRIPTS -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <!--ver version de favicon para iconos-->
+
+</body>
+
+</html>

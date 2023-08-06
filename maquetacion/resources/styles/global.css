@@ -1,0 +1,48 @@
+:root {
+    /* FONTS */
+    --font-advent-pro: "Advent Pro";
+    --font-bodoni-moda: "Bodoni Moda";
+    --font-averia-libre: "Averia Libre";
+
+    /* COLORS */    
+    --color-black: #000;
+    --color-white1: #F1EFEE;
+    --color-white2: #fafafa;
+    --color-grey: #8b8991;
+    --color-primary: #c4d9d0;
+    --color-secondary: #33797f;
+    --color-tertiary: #d9a927;
+    
+    --color-pink:#DB8A6F;
+    /* --color-menu: ; */
+
+    --color-transp: rgba(0, 0, 0, 0.5);
+    --image-back: url('../img/');
+
+    /* FONT SIZES */    
+    /*? web*/
+    --font-size-titulos-secundarios: 30px;
+    --font-size-titulo-principal: 50px;
+    --font-size-textos-tarjetas: 19px;
+    --font-size-numeros-tarjetas: 30px;
+    --font-size-menu: 16px;
+    --font-size-logos: 50px;
+    --font-size-footer: 14px;
+    /*? mobile*/
+    /* --font-mb-size-titulos-secundarios: 19px;
+    --font-mb-size-titulo-principal: 50px;
+    --font-mb-size-textos-tarjetas: 16px;
+    --font-mb-size-numeros-tarjetas: 16px;
+    --font-mb-size-menu: 12px;
+    --font-mb-size-logos: 20px; */
+
+    /* PADDINGS */
+    --padding-content: 20px;
+    --padding-xxs: 8px;
+    --padding-xs: 15px;
+    --padding-sm: 35px;
+    --padding-md: 40px;
+
+    /* BORDER RADIUS */
+    --border-button: 4px;
+}
