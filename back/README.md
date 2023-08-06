@@ -101,3 +101,11 @@ $ nest g s nombredelacarpeta / service
 $ npm i --save @nestjs/serve-static
 • La interacción entre nuestra API y MySQL la va a gestionar TypeORM
 $ npm i --save @nestjs/typeorm typeorm mysql
+
+
+//////////////// PARA CLONAR:
+$ git clone https://github.com/VCinthia/Santex-Mascotas.git
+
+
+$ npm install
+$ npm run start o $ npm run start:dev
