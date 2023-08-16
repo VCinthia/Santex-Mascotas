@@ -1,59 +1,71 @@
-@import '~normalize.css';
-
 :root {
-    /* FONTS */
-    --font-advent-pro: "Advent Pro";
-    --font-bodoni-moda: "Bodoni Moda";
-    --font-averia-libre: "Averia Libre";
-  
-    /* COLORS */
-    --color-black: #000;
-    --color-white1: #f1efee;
-    --color-white2: #fafafa;
-    --color-gray: #8b8991;
-    --color-pink: #db8a6f;
-    --color-primary: #c4d9d0;
-    --color-secondary: #33797f;
-    --color-tertiary: #d9a927;
-  
-    /* --color-menu: ; */
-    --color-transp: rgba(0, 0, 0, 0.5);
-    --image-back: url("../../maquetacion/resources/img/imagenes-web/huella.png");
-  
-    /* FONT SIZES */
-    /*? web*/
-    --font-size-xxs: 0.875em; /*14px*/
-    --font-size-xs: 1em; /*16px*/
-    --font-size-sm: 1.1875em; /*19px*/
-    --font-size-md: 1.875em; /*30px*/
-    --font-size-xl: 3.125em; /*50px*/
-    --font-size-xxl: 7em; /*112px*/
-  
-    /*? mobile*/
-    /* --font-mb-size-titulos-secundarios: 19px;
+  /* FONTS */
+  --font-advent-pro: "Advent Pro";
+  --font-bodoni-moda: "Bodoni Moda";
+  --font-averia-libre: "Averia Libre";
+
+  /* COLORS */
+  --color-black: #000;
+  --color-white1: #f1efee;
+  --color-white2: #fafafa;
+  --color-gray: #8b8991;
+  --color-pink: #db8a6f;
+  --color-primary: #c4d9d0;
+  --color-secondary: #33797f;
+  --color-tertiary: #d9a927;
+
+  /* --color-menu: ; */
+  --color-transp: rgba(0, 0, 0, 0.5);
+  /* --image-back: url("../../maquetacion/resources/img/imagenes-web/huella.png"); */
+
+  /* FONT SIZES */
+  /*? web*/
+  --font-size-xxs: 0.875em;
+  /*14px*/
+  --font-size-xs: 1em;
+  /*16px*/
+  --font-size-sm: 1.1875em;
+  /*19px*/
+  --font-size-md: 1.875em;
+  /*30px*/
+  --font-size-xl: 3.125em;
+  /*50px*/
+  --font-size-xxl: 7em;
+  /*112px*/
+
+  /*? mobile*/
+  /* --font-mb-size-titulos-secundarios: 19px;
       --font-mb-size-titulo-principal: 50px;
       --font-mb-size-textos-tarjetas: 16px;
       --font-mb-size-numeros-tarjetas: 16px;
       --font-mb-size-menu: 12px;
       --font-mb-size-logos: 20px; */
-  
-    /* PADDINGS */
-    /* PADDINGS */
-    --padding-content: 1.25rem; /*20px*/
-    --padding-xxs: 0.5rem; /*8px*/
-    --padding-xs: 0.938rem; /*15px*/
-    --padding-sm: 2.188rem; /*35px*/
-    --padding-md: 2.5rem; /*40px*/
-    --padding-xl: 3.125rem; /*50px*/
-  
-    /* BORDER RADIUS */
-    --border-xxs: 4px;
-    --border-xs: 15px;
-    --border-sm: 30px;
-    --border-md: 60px;
-    --border-lg: 160px;
-  }
-  
+
+  /* PADDINGS */
+  /* PADDINGS */
+  --padding-content: 1.25rem;
+  /*20px*/
+  --padding-xxs: 0.5rem;
+  /*8px*/
+  --padding-xs: 0.938rem;
+  /*15px*/
+  --padding-sm: 2.188rem;
+  /*35px*/
+  --padding-md: 2.5rem;
+  /*40px*/
+  --padding-xl: 3.125rem;
+  /*50px*/
+
+  /* BORDER RADIUS */
+  --border-xxs: 4px;
+  --border-xs: 15px;
+  --border-sm: 30px;
+  --border-md: 60px;
+  --border-lg: 160px;
+}
+
+
+@import '~normalize.css';
 
 * {
   margin: 0;
@@ -62,6 +74,8 @@
 }
 
 body {
+  /* margin: 10px;
+  padding: 10px; */
   background-color: var(--color-primary);
   font-family: var(--font-advent-pro);
   color: var(--color-black);
