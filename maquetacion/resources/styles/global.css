@@ -20,13 +20,12 @@
 
   /* FONT SIZES */
   /*? web*/
-  --font-size-titulos-secundarios: 1.875em; /*30px*/
-  --font-size-titulo-principal: 3.125em; /*50px*/
-  --font-size-textos-tarjetas: 1.1875em; /*19px*/
-  --font-size-numeros-tarjetas: 1.875em; /*30px*/
-  --font-size-menu: 1em; /*16px*/
-  --font-size-logos: 3.125em; /*50px*/
-  --font-size-footer: 0.875em; /*14px*/
+  --font-size-xxs: 0.875em; /*14px*/
+  --font-size-xs: 1em; /*16px*/
+  --font-size-sm: 1.1875em; /*19px*/
+  --font-size-md: 1.875em; /*30px*/
+  --font-size-xl: 3.125em; /*50px*/
+  --font-size-xxl: 7em; /*112px*/
 
   /*? mobile*/
   /* --font-mb-size-titulos-secundarios: 19px;
