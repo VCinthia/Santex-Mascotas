@@ -132,7 +132,7 @@ nav ul li a {
 } */
 
 /*PORTADA*/
-.portada {
+/* .portada {
   height: 50rem;
 }
 
@@ -184,7 +184,7 @@ nav ul li a {
   position: absolute;
   top: 115%;
   left: 30%;
-}
+} */
 
 /*PODEMOS AYUDARTE*/
 .contenedor-ayuda {
@@ -517,7 +517,7 @@ nav ul li a {
 }
 
 /*FOOTER*/
-footer {
+/* footer {
   height: 15rem;
   display: flex;
   padding: var(--padding-md);
@@ -559,6 +559,6 @@ footer {
 .footer-enlaces a {
   text-decoration: none;
   color: var(--color-black);
-}
+} */
 
 /*MODAL*/
