@@ -292,7 +292,7 @@ nav ul li a {
   top: 90px;
 } */
 
-/*COMO LO LOGRAMOS*/
+/* COMO LO LOGRAMOS
 .contenedor-logros {
   padding: var(--padding-md);
   position: relative;
@@ -389,9 +389,9 @@ nav ul li a {
   font-size: var(--font-size-md);
   font-family: var(--font-averia-libre);
   font-weight: 600;
-}
+} */
 
-/*INTEGRANTES*/
+/* INTEGRANTES
 .contenedor-titulo h2 {
   font-family: var(--font-bodoni-moda);
   font-size: var(--font-size-xl);
@@ -455,9 +455,9 @@ nav ul li a {
 
 .contenedor-sobre-nosotros a:hover::before {
   transform: scaleX(1);
-}
+} */
 
-/*¿TENES DUDAS?*/
+/* ¿TENES DUDAS?
 .contenedor-dudas {
   padding: var(--padding-md);
   height: 30rem;
@@ -514,7 +514,7 @@ nav ul li a {
   font-size: var(--font-size-xs);
   box-shadow: -3px -3px var(--color-tertiary);
   cursor: pointer;
-}
+} */
 
 /*FOOTER*/
 /* footer {

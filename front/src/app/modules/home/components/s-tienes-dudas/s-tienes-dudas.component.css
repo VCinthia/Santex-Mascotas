@@ -1,0 +1,58 @@
+/*¿TENES DUDAS?*/
+.contenedor-dudas {
+    padding: var(--padding-md);
+    height: 30rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    background-color: #fff;
+  }
+  
+  .contenedor-textos-dudas {
+    width: 30rem;
+  }
+  
+  .contenedor-textos-dudas h2 {
+    font-family: var(--font-bodoni-moda);
+    font-size: var(--font-size-xl);
+    margin-bottom: 2rem;
+  }
+  
+  .contenedor-textos-dudas h2 span {
+    color: var(--color-tertiary);
+  }
+  
+  .contenedor-textos-dudas p {
+    font-size: 1.3125em;
+  }
+  
+  .contenedor-email {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .contenedor-email input {
+    border: 0;
+    padding: var(--padding-xxs);
+    border-bottom: 2px solid var(--color-tertiary);
+    background-color: var(--color-primary);
+    margin-bottom: 1rem;
+    width: 20rem;
+    outline: none;
+    font-family: var(--font-advent-pro);
+    font-size: var(--font-size-xs);
+  }
+  
+  .contenedor-email button {
+    width: 7rem;
+    margin: auto;
+    padding: 0.7rem;
+    border-radius: var(--border-xs);
+    border: 0;
+    background-color: var(--color-secondary);
+    color: #fff;
+    font-family: var(--font-advent-pro);
+    font-size: var(--font-size-xs);
+    box-shadow: -3px -3px var(--color-tertiary);
+    cursor: pointer;
+  }
