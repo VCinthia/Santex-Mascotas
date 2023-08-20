@@ -1,34 +1,36 @@
 import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
 import { BarrioService } from './barrio.service';
-import { CreateBarrioDto } from './dto/create-barrio.dto';
-import { UpdateBarrioDto } from './dto/update-barrio.dto';
+//import { CreateBarrioDto } from './dto/create-barrio.dto';
+//import { UpdateBarrioDto } from './dto/update-barrio.dto';
+import { Barrio } from './entities/barrio.entity';
 
 @Controller('barrio')
 export class BarrioController {
   constructor(private readonly barrioService: BarrioService) {}
 
-  @Post()
-  create(@Body() createBarrioDto: CreateBarrioDto) {
-    return this.barrioService.create(createBarrioDto);
+  @Post('/nuevoBarrio')
+  create(@Body() nuevoBarrio: string) {
+    return this.barrioService.createBarrio(nuevoBarrio);
   }
 
-  @Get()
-  findAll() {
-    return this.barrioService.findAll();
+
+  @Get('/getListaBarrios')
+  async getListaBarrios(): Promise<Barrio[]> {
+    return this.barrioService.getAllBarrio();
   }
 
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.barrioService.findOne(+id);
+  @Get(':getIdBarrio')
+  findOne(@Param('id') id: number) {
+    return this.barrioService.getBarrioById(id);
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateBarrioDto: UpdateBarrioDto) {
-    return this.barrioService.update(+id, updateBarrioDto);
+  update(@Param('id') id: number,@Body() updateBarrio: Barrio) {
+    return this.barrioService.updateBarrio(+id, updateBarrio);
   }
 
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.barrioService.remove(+id);
+  @Delete(':deleteBarrio')
+  remove(@Param('id') id: number) {
+    return this.barrioService.removeBarrio(id);
   }
 }

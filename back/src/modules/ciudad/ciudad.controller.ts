@@ -1,34 +1,36 @@
 import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
 import { CiudadService } from './ciudad.service';
-import { CreateCiudadDto } from './dto/create-ciudad.dto';
-import { UpdateCiudadDto } from './dto/update-ciudad.dto';
+import { Ciudad } from './entities/ciudad.entity';
+//import { CreateCiudadDto } from './dto/create-ciudad.dto';
+//import { UpdateCiudadDto } from './dto/update-ciudad.dto';
 
 @Controller('ciudad')
 export class CiudadController {
   constructor(private readonly ciudadService: CiudadService) {}
 
-  @Post()
-  create(@Body() createCiudadDto: CreateCiudadDto) {
-    return this.ciudadService.create(createCiudadDto);
+  @Post('/nuevaCiudad')
+  create(@Body() nuevaCiudad: string) {
+    return this.ciudadService.createCiudad(nuevaCiudad);
   }
 
-  @Get()
-  findAll() {
-    return this.ciudadService.findAll();
+
+  @Get('/getListaCiudades')
+  async getListaciudades(): Promise<Ciudad[]> {
+    return this.ciudadService.getAllCiudad();
   }
 
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.ciudadService.findOne(+id);
+  @Get(':getIdCiudad')
+  findOne(@Param('id') id: number) {
+    return this.ciudadService.getCiudadById(id);
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateCiudadDto: UpdateCiudadDto) {
-    return this.ciudadService.update(+id, updateCiudadDto);
+  update(@Param('id') id: number,@Body() updateCiudad: Ciudad) {
+    return this.ciudadService.updateCiudad(+id, updateCiudad);
   }
 
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.ciudadService.remove(+id);
+  @Delete(':deleteCiudad')
+  remove(@Param('id') id: number) {
+    return this.ciudadService.removeCiudad(id);
   }
 }

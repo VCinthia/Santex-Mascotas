@@ -1,5 +1,6 @@
 import{ Table, Column, PrimaryKey, Model, AutoIncrement} from 'sequelize-typescript';
 
+//falta la relacion con la tabla mascotas 
 
 @Table({
   tableName: 'especies',
