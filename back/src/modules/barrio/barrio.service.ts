@@ -3,7 +3,7 @@ import { Barrio } from './entities/barrio.entity';
 //import { CreateBarrioDto } from './dto/create-barrio.dto';
 //import { UpdateBarrioDto } from './dto/update-barrio.dto';
 import { InjectModel } from '@nestjs/sequelize/dist/common';
-import { FindOptions} from 'sequelize';
+import { FindOptions } from 'sequelize';
 
 @Injectable()
 export class BarrioService {
@@ -26,34 +26,32 @@ export class BarrioService {
       throw new HttpException(error.message, HttpStatus.INTERNAL_SERVER_ERROR);
     }
   }
- 
-  public async createBarrio (nombreBarrio: string): Promise<Barrio> {
+
+  public async createBarrio(nombreBarrio: string): Promise<Barrio> {
     try {
       const condition: FindOptions = { where: { especie: nombreBarrio } };
       const barrioExist: Barrio = await this.barrioEntity.findOne(condition);
 
-      if(!barrioExist){
+      if (!barrioExist) {
         const barrioCreated = await this.barrioEntity.create(nombreBarrio);
-            
+
         if (barrioCreated) {
           return barrioCreated;
         } else {
           throw new HttpException(
             'El barrio no pudo crearse.',
-          HttpStatus.BAD_REQUEST,
+            HttpStatus.BAD_REQUEST,
           );
         }
-       
-      } else{
+      } else {
         throw new HttpException(
           'El barrio ya se encuentra registrado.',
           HttpStatus.BAD_REQUEST,
         );
       }
     } catch (error) {
-        throw new HttpException(error.message, HttpStatus.INTERNAL_SERVER_ERROR);
+      throw new HttpException(error.message, HttpStatus.INTERNAL_SERVER_ERROR);
     }
-    
   }
 
   public async getAllBarrio(): Promise<Barrio[]> {
@@ -69,7 +67,7 @@ export class BarrioService {
     }
   }
 
-  public async updateBarrio(id: number, updateBarrio : Barrio): Promise<Barrio> {
+  public async updateBarrio(id: number, updateBarrio: Barrio): Promise<Barrio> {
     try {
       const condition: FindOptions = { where: { idBarrio: id } };
       const barrioExist: Barrio = await this.barrioEntity.findOne(condition);
@@ -87,7 +85,7 @@ export class BarrioService {
 
   public async removeBarrio(id: number): Promise<boolean> {
     try {
-      const condition: FindOptions = { where: {idBarrio: id } };
+      const condition: FindOptions = { where: { idBarrio: id } };
       const barrio: Barrio = await this.barrioEntity.findOne(condition);
       if (!barrio) {
         throw new HttpException(this.barrioNotFound, HttpStatus.BAD_REQUEST);

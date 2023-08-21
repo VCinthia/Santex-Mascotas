@@ -1,4 +1,12 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+} from '@nestjs/common';
 import { CiudadService } from './ciudad.service';
 import { Ciudad } from './entities/ciudad.entity';
 //import { CreateCiudadDto } from './dto/create-ciudad.dto';
@@ -13,23 +21,22 @@ export class CiudadController {
     return this.ciudadService.createCiudad(nuevaCiudad);
   }
 
-
   @Get('/getListaCiudades')
   async getListaciudades(): Promise<Ciudad[]> {
     return this.ciudadService.getAllCiudad();
   }
 
-  @Get(':getIdCiudad')
+  @Get('/getCiudadById/:id')
   findOne(@Param('id') id: number) {
     return this.ciudadService.getCiudadById(id);
   }
 
-  @Patch(':id')
-  update(@Param('id') id: number,@Body() updateCiudad: Ciudad) {
+  @Patch('/updateCiudad/:id')
+  update(@Param('id') id: number, @Body() updateCiudad: Ciudad) {
     return this.ciudadService.updateCiudad(+id, updateCiudad);
   }
 
-  @Delete(':deleteCiudad')
+  @Delete('/updateCiudad/:id')
   remove(@Param('id') id: number) {
     return this.ciudadService.removeCiudad(id);
   }

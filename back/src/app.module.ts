@@ -1,28 +1,26 @@
-import { UsuariosModule } from './modules/usuarios/usuarios.module';
+import { HttpExceptionFilter } from './middleware/response.middleware';
+import { UsuarioModule } from './modules/usuario/usuarios.module';
+import { EspecieModule } from './modules/especie/especie.module';
+import { MascotaModule } from './modules/mascota/mascota.module';
+import { BarrioModule } from './modules/barrio/barrio.module';
+import { CiudadModule } from './modules/ciudad/ciudad.module';
 import { dataBaseConfig } from './database/database.config';
+import { LoginModule } from './modules/login/login.module';
 import { SequelizeModule } from '@nestjs/sequelize';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { Module } from '@nestjs/common';
-import { LoginModule } from './modules/login/login.module';
-import { BarrioModule } from './modules/barrio/barrio.module';
-import { CiudadModule } from './modules/ciudad/ciudad.module';
-import { EspecieModule } from './modules/especie/especie.module';
-import { MascotaModule } from './modules/mascota/mascota.module';
 import { APP_FILTER } from '@nestjs/core';
-import { HttpExceptionFilter } from './middleware/response.middleware';
-// ver de agregar el resto de las entidades
-
+import { Module } from '@nestjs/common';
 
 @Module({
   imports: [
     SequelizeModule.forRoot(dataBaseConfig),
-    UsuariosModule,
+    UsuarioModule,
     LoginModule,
     BarrioModule,
     CiudadModule,
     EspecieModule,
-    MascotaModule
+    MascotaModule,
   ],
   controllers: [AppController],
   providers: [

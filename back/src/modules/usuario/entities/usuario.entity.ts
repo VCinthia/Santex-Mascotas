@@ -5,8 +5,10 @@ import {
   ForeignKey,
   BelongsTo,
   PrimaryKey,
+  HasMany,
 } from 'sequelize-typescript';
 import { Login } from 'src/modules/login/entities/login.entity';
+import { Mascota } from 'src/modules/mascota/entities/mascota.entity';
 
 @Table({
   tableName: 'usuarios',
@@ -30,6 +32,9 @@ export class Usuario extends Model<Usuario> {
   private userEmail: string;
   @BelongsTo(() => Login)
   public user: Login;
+
+  @HasMany(() => Mascota)
+  mascotas: Mascota[];
 
   // métodos getters y setters
   public getDniPersona(): string {

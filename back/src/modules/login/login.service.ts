@@ -5,7 +5,7 @@ import { FindOptions } from 'sequelize';
 
 @Injectable()
 export class LoginService {
-  userNotFount = 'No existe el usuario.';
+  userNotFound = 'No existe el usuario.';
   constructor(
     @InjectModel(Login)
     private readonly loginEntity: typeof Login,
@@ -33,7 +33,7 @@ export class LoginService {
       if (loginList) {
         return loginList;
       } else {
-        throw new HttpException(this.userNotFount, HttpStatus.BAD_REQUEST);
+        throw new HttpException(this.userNotFound, HttpStatus.BAD_REQUEST);
       }
     } catch (error) {
       throw new HttpException(error.message, HttpStatus.INTERNAL_SERVER_ERROR);
@@ -47,7 +47,7 @@ export class LoginService {
       if (login) {
         return login;
       } else {
-        throw new HttpException(this.userNotFount, HttpStatus.BAD_REQUEST);
+        throw new HttpException(this.userNotFound, HttpStatus.BAD_REQUEST);
       }
     } catch (error) {
       throw new HttpException(error.message, HttpStatus.INTERNAL_SERVER_ERROR);
@@ -59,7 +59,7 @@ export class LoginService {
       const condition: FindOptions = { where: { email: id } };
       const loginExist: Login = await this.loginEntity.findOne(condition);
       if (!loginExist) {
-        throw new HttpException(this.userNotFount, HttpStatus.BAD_REQUEST);
+        throw new HttpException(this.userNotFound, HttpStatus.BAD_REQUEST);
       } else {
         loginExist.setPassword(login.getPassword());
         await loginExist.save();
@@ -75,7 +75,7 @@ export class LoginService {
       const condition: FindOptions = { where: { email: id } };
       const user: Login = await this.loginEntity.findOne(condition);
       if (!user) {
-        throw new HttpException(this.userNotFount, HttpStatus.BAD_REQUEST);
+        throw new HttpException(this.userNotFound, HttpStatus.BAD_REQUEST);
       } else {
         await this.loginEntity.destroy(condition);
       }

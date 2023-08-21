@@ -11,4 +11,4 @@ import { Login } from '../login/entities/login.entity';
   controllers: [UsuariosController],
   providers: [UsuariosService, LoginService],
 })
-export class UsuariosModule {}
+export class UsuarioModule {}

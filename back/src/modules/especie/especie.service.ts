@@ -1,7 +1,7 @@
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { Especie } from './entities/especie.entity';
 import { InjectModel } from '@nestjs/sequelize/dist/common';
-import { FindOptions} from 'sequelize';
+import { FindOptions } from 'sequelize';
 //import { CreateEspecieDto } from './dto/create-especie.dto';
 //import { UpdateEspecieDto } from './dto/update-especie.dto';
 
@@ -26,34 +26,32 @@ export class EspecieService {
       throw new HttpException(error.message, HttpStatus.INTERNAL_SERVER_ERROR);
     }
   }
- 
-  public async createEspecie (nombreEspecie: string): Promise<Especie> {
+
+  public async createEspecie(nombreEspecie: string): Promise<Especie> {
     try {
       const condition: FindOptions = { where: { especie: nombreEspecie } };
       const especieExist: Especie = await this.especieEntity.findOne(condition);
 
-      if(!especieExist){
+      if (!especieExist) {
         const especieCreated = await this.especieEntity.create(nombreEspecie);
-            
+
         if (especieCreated) {
           return especieCreated;
         } else {
           throw new HttpException(
             'La especie no pudo crearse.',
-          HttpStatus.BAD_REQUEST,
+            HttpStatus.BAD_REQUEST,
           );
         }
-       
-      } else{
+      } else {
         throw new HttpException(
           'La especie ya se encuentra registrada.',
           HttpStatus.BAD_REQUEST,
         );
       }
     } catch (error) {
-        throw new HttpException(error.message, HttpStatus.INTERNAL_SERVER_ERROR);
+      throw new HttpException(error.message, HttpStatus.INTERNAL_SERVER_ERROR);
     }
-    
   }
 
   public async getAllEspecie(): Promise<Especie[]> {
@@ -69,7 +67,10 @@ export class EspecieService {
     }
   }
 
-  public async updateEspecie(id: number, updateEspecie : Especie): Promise<Especie> {
+  public async updateEspecie(
+    id: number,
+    updateEspecie: Especie,
+  ): Promise<Especie> {
     try {
       const condition: FindOptions = { where: { idEspecie: id } };
       const especieExist: Especie = await this.especieEntity.findOne(condition);
@@ -87,7 +88,7 @@ export class EspecieService {
 
   public async removeEspecie(id: number): Promise<boolean> {
     try {
-      const condition: FindOptions = { where: {idEspecie: id } };
+      const condition: FindOptions = { where: { idEspecie: id } };
       const especie: Especie = await this.especieEntity.findOne(condition);
       if (!especie) {
         throw new HttpException(this.especieNotFound, HttpStatus.BAD_REQUEST);

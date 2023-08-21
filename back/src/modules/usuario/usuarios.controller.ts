@@ -16,7 +16,7 @@ export class UsuariosController {
   constructor(private readonly usuariosService: UsuariosService) {}
 
   @Post('/createUsuario')
-  create(@Body() usuarioData: UsuarioDTO) {
+  createUsuario(@Body() usuarioData: UsuarioDTO) {
     return this.usuariosService.createUsuario(usuarioData);
   }
 
@@ -26,7 +26,7 @@ export class UsuariosController {
   }
 
   @Get('/getUsuario/:id')
-  findOne(@Param('id') id: string) {
+  getUserById(@Param('id') id: string) {
     return this.usuariosService.getUserById(id);
   }
 
