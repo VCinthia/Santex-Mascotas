@@ -16,8 +16,8 @@ import { Especie } from './entities/especie.entity';
 export class EspecieController {
   constructor(private readonly especieService: EspecieService) {}
 
-  @Post('/nuevaEspecie')
-  create(@Body() nuevaEspecie: string) {
+  @Post('/nuevaEspecie/:nuevaEspecie')
+  create(@Param('nuevaEspecie') nuevaEspecie: string) {
     return this.especieService.createEspecie(nuevaEspecie);
   }
 

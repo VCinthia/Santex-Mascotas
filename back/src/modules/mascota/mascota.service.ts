@@ -1,5 +1,5 @@
 import { Injectable, HttpException, HttpStatus } from '@nestjs/common';
-import { mascotaDto } from './dto/create-mascota.dto';
+import { MascotaDto } from './dto/create-mascota.dto';
 import { InjectModel } from '@nestjs/sequelize/dist/common';
 import { Mascota } from './entities/mascota.entity';
 import { FindOptions } from 'sequelize';
@@ -13,7 +13,10 @@ export class MascotaService {
     private readonly mascotaModel: typeof Mascota,
   ) {}
 
-  public async createMascota(createMascotaDto: mascotaDto): Promise<Mascota> {
+  public async createMascota(
+    file: Express.Multer.File,
+    createMascotaDto: MascotaDto,
+  ): Promise<Mascota> {
     try {
       if (createMascotaDto) {
         const condition: FindOptions = {
@@ -24,7 +27,7 @@ export class MascotaService {
           const mascota: MascotaEntity = new MascotaEntity(
             createMascotaDto.color,
             createMascotaDto.fechaCarga,
-            createMascotaDto.foto,
+            file.buffer,
             createMascotaDto.descripcion,
             createMascotaDto.adoptable,
             createMascotaDto.estado,
@@ -84,7 +87,8 @@ export class MascotaService {
 
   public async updateMascota(
     id: number,
-    mascotaDto: mascotaDto,
+    file: Express.Multer.File,
+    mascotaDto: MascotaDto,
   ): Promise<Mascota> {
     try {
       const condition: FindOptions = { where: { idMascota: id } };
@@ -94,7 +98,7 @@ export class MascotaService {
       } else {
         mascota.setColor(mascotaDto.color);
         mascota.setFechaCarga(mascotaDto.fechaCarga);
-        mascota.setFoto(mascotaDto.foto);
+        mascota.setFoto(file.buffer);
         mascota.setDescripcion(mascotaDto.descripcion);
         mascota.setAdoptable(mascotaDto.adoptable);
         mascota.setEstado(mascotaDto.estado);

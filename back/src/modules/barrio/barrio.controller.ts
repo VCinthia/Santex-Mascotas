@@ -11,13 +11,14 @@ import { BarrioService } from './barrio.service';
 //import { CreateBarrioDto } from './dto/create-barrio.dto';
 //import { UpdateBarrioDto } from './dto/update-barrio.dto';
 import { Barrio } from './entities/barrio.entity';
+import { CreateBarrioDto } from './dto/create-barrio.dto';
 
 @Controller('barrio')
 export class BarrioController {
   constructor(private readonly barrioService: BarrioService) {}
 
   @Post('/nuevoBarrio')
-  create(@Body() nuevoBarrio: string) {
+  create(@Body() nuevoBarrio: CreateBarrioDto) {
     return this.barrioService.createBarrio(nuevoBarrio);
   }
 

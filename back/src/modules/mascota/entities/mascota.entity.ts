@@ -5,6 +5,7 @@ import {
   Model,
   AutoIncrement,
   ForeignKey,
+  DataType,
 } from 'sequelize-typescript';
 import { Barrio } from 'src/modules/barrio/entities/barrio.entity';
 import { Especie } from 'src/modules/especie/entities/especie.entity';
@@ -25,8 +26,8 @@ export class Mascota extends Model<Mascota> {
   @Column
   private fechaCarga: Date;
 
-  @Column
-  private foto: string;
+  @Column(DataType.BLOB('long'))
+  private foto: Buffer;
 
   @Column
   private descripcion: string;
@@ -68,10 +69,10 @@ export class Mascota extends Model<Mascota> {
   public setFechaCarga(fechaCarga: Date): void {
     this.fechaCarga = fechaCarga;
   }
-  public getFoto(): string {
+  public getFoto(): Buffer {
     return this.foto;
   }
-  public setFoto(foto: string): void {
+  public setFoto(foto: Buffer): void {
     this.foto = foto;
   }
   public getDescripcion(): string {

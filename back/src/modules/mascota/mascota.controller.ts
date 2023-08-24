@@ -6,17 +6,24 @@ import {
   Patch,
   Param,
   Delete,
+  UseInterceptors,
+  UploadedFile,
 } from '@nestjs/common';
 import { MascotaService } from './mascota.service';
-import { mascotaDto } from './dto/create-mascota.dto';
+import { MascotaDto } from './dto/create-mascota.dto';
+import { FileInterceptor } from '@nestjs/platform-express';
 
 @Controller('mascota')
 export class MascotaController {
   constructor(private readonly mascotaService: MascotaService) {}
 
   @Post('/createMascota')
-  createMascota(@Body() createMascotaDto: mascotaDto) {
-    return this.mascotaService.createMascota(createMascotaDto);
+  @UseInterceptors(FileInterceptor('file'))
+  createMascota(
+    @UploadedFile() file: Express.Multer.File,
+    @Body() createMascotaDto: MascotaDto,
+  ) {
+    return this.mascotaService.createMascota(file, createMascotaDto);
   }
 
   @Get('/getListMascota')
@@ -30,8 +37,13 @@ export class MascotaController {
   }
 
   @Patch('/updateMascota/:id')
-  updateMascota(@Param('id') id: string, @Body() mascotaDto: mascotaDto) {
-    return this.mascotaService.updateMascota(+id, mascotaDto);
+  @UseInterceptors(FileInterceptor('file'))
+  updateMascota(
+    @Param('id') id: string,
+    file: Express.Multer.File,
+    @Body() mascotaDto: MascotaDto,
+  ) {
+    return this.mascotaService.updateMascota(+id, file, mascotaDto);
   }
 
   @Delete('/deleteMascota/:id')

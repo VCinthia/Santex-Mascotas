@@ -29,7 +29,7 @@ export class CiudadService {
 
   public async createCiudad(nombreCiudad: string): Promise<Ciudad> {
     try {
-      const condition: FindOptions = { where: { ciudad: nombreCiudad } };
+      const condition: FindOptions = { where: { nombre: nombreCiudad } };
       const ciudadExist: Ciudad = await this.ciudadEntity.findOne(condition);
 
       if (!ciudadExist) {

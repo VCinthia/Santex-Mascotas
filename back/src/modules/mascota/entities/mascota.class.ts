@@ -1,7 +1,7 @@
 export class MascotaEntity {
   color: string;
   fechaCarga: Date;
-  foto: string;
+  foto: Buffer;
   descripcion: string;
   adoptable: boolean;
   estado: string;
@@ -11,7 +11,7 @@ export class MascotaEntity {
   constructor(
     color: string,
     fechaCarga: Date,
-    foto: string,
+    foto: Buffer,
     descripcion: string,
     adoptable: boolean,
     estado: string,

@@ -16,8 +16,8 @@ import { Ciudad } from './entities/ciudad.entity';
 export class CiudadController {
   constructor(private readonly ciudadService: CiudadService) {}
 
-  @Post('/nuevaCiudad')
-  create(@Body() nuevaCiudad: string) {
+  @Post('/nuevaCiudad/:nombre')
+  create(@Param('nombre') nuevaCiudad: string) {
     return this.ciudadService.createCiudad(nuevaCiudad);
   }
 

@@ -4,6 +4,8 @@ import { Barrio } from './entities/barrio.entity';
 //import { UpdateBarrioDto } from './dto/update-barrio.dto';
 import { InjectModel } from '@nestjs/sequelize/dist/common';
 import { FindOptions } from 'sequelize';
+import { CreateBarrioDto } from './dto/create-barrio.dto';
+import { BarrioEntity } from './entities/barrio.class';
 
 @Injectable()
 export class BarrioService {
@@ -27,13 +29,17 @@ export class BarrioService {
     }
   }
 
-  public async createBarrio(nombreBarrio: string): Promise<Barrio> {
+  public async createBarrio(barrioDTO: CreateBarrioDto): Promise<Barrio> {
     try {
-      const condition: FindOptions = { where: { especie: nombreBarrio } };
+      const condition: FindOptions = { where: { barrio: barrioDTO.nombre } };
       const barrioExist: Barrio = await this.barrioEntity.findOne(condition);
 
       if (!barrioExist) {
-        const barrioCreated = await this.barrioEntity.create(nombreBarrio);
+        const barrio: BarrioEntity = new BarrioEntity(
+          barrioDTO.nombre,
+          barrioDTO.idCiudad,
+        );
+        const barrioCreated = await this.barrioEntity.create(barrio);
 
         if (barrioCreated) {
           return barrioCreated;
