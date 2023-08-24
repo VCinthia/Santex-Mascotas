@@ -12,22 +12,16 @@ import { Barrio } from 'src/modules/barrio/entities/barrio.entity';
   tableName: 'ciudades',
 })
 export class Ciudad extends Model<Ciudad> {
-  //@PrimaryGeneratedColumn
   @PrimaryKey
-  @AutoIncrement // verificar que dentro de las configuraciones de la DB lo permita!
+  @AutoIncrement
   @Column
-  idCiudad: number; //@Column
+  idCiudad: number;
 
   @Column
   nombre: string;
 
   @HasMany(() => Barrio)
   ciudad: Barrio[];
-  /*@ForeignKey(() => Barrio)
-    @Column
-    private xxxx : string;
-    @BelongsTo(() => Barrio)
-    public xxxx : Barrio;*/
 
   // getter and setters
   public getIdCiudad(): number {

@@ -3,13 +3,11 @@ import {
   Get,
   Post,
   Body,
-  Patch,
+  Put,
   Param,
   Delete,
 } from '@nestjs/common';
 import { BarrioService } from './barrio.service';
-//import { CreateBarrioDto } from './dto/create-barrio.dto';
-//import { UpdateBarrioDto } from './dto/update-barrio.dto';
 import { Barrio } from './entities/barrio.entity';
 import { CreateBarrioDto } from './dto/create-barrio.dto';
 
@@ -32,12 +30,12 @@ export class BarrioController {
     return this.barrioService.getBarrioById(id);
   }
 
-  @Patch('/updateBarrio/:id')
+  @Put('/updateBarrio/:id')
   update(@Param('id') id: number, @Body() updateBarrio: Barrio) {
     return this.barrioService.updateBarrio(+id, updateBarrio);
   }
 
-  @Delete('/updateBarrio/:id')
+  @Delete('/deleteBarrio/:id')
   remove(@Param('id') id: number) {
     return this.barrioService.removeBarrio(id);
   }

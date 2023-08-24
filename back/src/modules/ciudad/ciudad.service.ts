@@ -1,7 +1,5 @@
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { Ciudad } from './entities/ciudad.entity';
-//import { CreateCiudadDto } from './dto/create-ciudad.dto';
-//import { UpdateCiudadDto } from './dto/update-ciudad.dto';
 import { InjectModel } from '@nestjs/sequelize/dist/common';
 import { FindOptions } from 'sequelize';
 
@@ -27,13 +25,16 @@ export class CiudadService {
     }
   }
 
-  public async createCiudad(nombreCiudad: string): Promise<Ciudad> {
+  public async createCiudad(ciudad: string): Promise<Ciudad> {
     try {
-      const condition: FindOptions = { where: { nombre: nombreCiudad } };
+      const condition: FindOptions = { where: { nombre: ciudad } };
       const ciudadExist: Ciudad = await this.ciudadEntity.findOne(condition);
 
       if (!ciudadExist) {
-        const ciudadCreated = await this.ciudadEntity.create(nombreCiudad);
+        console.log(ciudad);
+        const ciudadCreated = await this.ciudadEntity.create({
+          nombre: ciudad,
+        });
 
         if (ciudadCreated) {
           return ciudadCreated;

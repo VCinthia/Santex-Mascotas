@@ -3,14 +3,12 @@ import {
   Get,
   Post,
   Body,
-  Patch,
   Param,
   Delete,
+  Put,
 } from '@nestjs/common';
 import { CiudadService } from './ciudad.service';
 import { Ciudad } from './entities/ciudad.entity';
-//import { CreateCiudadDto } from './dto/create-ciudad.dto';
-//import { UpdateCiudadDto } from './dto/update-ciudad.dto';
 
 @Controller('ciudad')
 export class CiudadController {
@@ -31,12 +29,12 @@ export class CiudadController {
     return this.ciudadService.getCiudadById(id);
   }
 
-  @Patch('/updateCiudad/:id')
+  @Put('/updateCiudad/:id')
   update(@Param('id') id: number, @Body() updateCiudad: Ciudad) {
     return this.ciudadService.updateCiudad(+id, updateCiudad);
   }
 
-  @Delete('/updateCiudad/:id')
+  @Delete('/deleteCiudad/:id')
   remove(@Param('id') id: number) {
     return this.ciudadService.removeCiudad(id);
   }

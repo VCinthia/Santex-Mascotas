@@ -61,7 +61,7 @@ export class LoginService {
       if (!loginExist) {
         throw new HttpException(this.userNotFound, HttpStatus.BAD_REQUEST);
       } else {
-        loginExist.setPassword(login.getPassword());
+        loginExist.setPassword(login['password']);
         await loginExist.save();
         return loginExist;
       }

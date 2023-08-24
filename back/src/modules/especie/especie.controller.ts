@@ -3,14 +3,12 @@ import {
   Get,
   Post,
   Body,
-  Patch,
   Param,
   Delete,
+  Put,
 } from '@nestjs/common';
 import { EspecieService } from './especie.service';
 import { Especie } from './entities/especie.entity';
-//import { CreateEspecieDto } from './dto/create-especie.dto';
-//import { UpdateEspecieDto } from './dto/update-especie.dto';
 
 @Controller('especie')
 export class EspecieController {
@@ -31,12 +29,12 @@ export class EspecieController {
     return this.especieService.getEspecieById(id);
   }
 
-  @Patch('/updateEspecie/:id')
+  @Put('/updateEspecie/:id')
   update(@Param('id') id: number, @Body() updateEspecie: Especie) {
     return this.especieService.updateEspecie(+id, updateEspecie);
   }
 
-  @Delete('/updateEspecie/:id')
+  @Delete('/deleteEspecie/:id')
   remove(@Param('id') id: number) {
     return this.especieService.removeEspecie(id);
   }

@@ -3,11 +3,11 @@ import {
   Get,
   Post,
   Body,
-  Patch,
   Param,
   Delete,
   UseInterceptors,
   UploadedFile,
+  Put,
 } from '@nestjs/common';
 import { MascotaService } from './mascota.service';
 import { MascotaDto } from './dto/create-mascota.dto';
@@ -36,11 +36,11 @@ export class MascotaController {
     return this.mascotaService.getMascotaById(+id);
   }
 
-  @Patch('/updateMascota/:id')
+  @Put('/updateMascota/:id')
   @UseInterceptors(FileInterceptor('file'))
   updateMascota(
+    @UploadedFile() file: Express.Multer.File,
     @Param('id') id: string,
-    file: Express.Multer.File,
     @Body() mascotaDto: MascotaDto,
   ) {
     return this.mascotaService.updateMascota(+id, file, mascotaDto);

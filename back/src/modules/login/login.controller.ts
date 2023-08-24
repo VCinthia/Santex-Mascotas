@@ -13,7 +13,7 @@ import { Login } from './entities/login.entity';
 @Controller('login')
 export class LoginController {
   constructor(private readonly loginService: LoginService) {}
-
+  //TODO REVER CONTROLADOR
   @Get('/getListaLogin')
   async getListaLogin(): Promise<Login[]> {
     return this.loginService.getAllLogin();

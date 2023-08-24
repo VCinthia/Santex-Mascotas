@@ -33,7 +33,9 @@ export class EspecieService {
       const especieExist: Especie = await this.especieEntity.findOne(condition);
 
       if (!especieExist) {
-        const especieCreated = await this.especieEntity.create(nombreEspecie);
+        const especieCreated = await this.especieEntity.create({
+          especie: nombreEspecie,
+        });
 
         if (especieCreated) {
           return especieCreated;

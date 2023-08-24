@@ -17,7 +17,7 @@ export class BarrioService {
 
   public async getBarrioById(id: number): Promise<Barrio> {
     try {
-      const condition: FindOptions = { where: { idBarrio: id } };
+      const condition: FindOptions = { where: { idUbicacion: id } };
       const barrio: Barrio = await this.barrioEntity.findOne(condition);
       if (barrio) {
         return barrio;
@@ -75,7 +75,7 @@ export class BarrioService {
 
   public async updateBarrio(id: number, updateBarrio: Barrio): Promise<Barrio> {
     try {
-      const condition: FindOptions = { where: { idBarrio: id } };
+      const condition: FindOptions = { where: { idUbicacion: id } };
       const barrioExist: Barrio = await this.barrioEntity.findOne(condition);
       if (!barrioExist) {
         throw new HttpException(this.barrioNotFound, HttpStatus.BAD_REQUEST);
@@ -91,7 +91,7 @@ export class BarrioService {
 
   public async removeBarrio(id: number): Promise<boolean> {
     try {
-      const condition: FindOptions = { where: { idBarrio: id } };
+      const condition: FindOptions = { where: { idUbicacion: id } };
       const barrio: Barrio = await this.barrioEntity.findOne(condition);
       if (!barrio) {
         throw new HttpException(this.barrioNotFound, HttpStatus.BAD_REQUEST);
