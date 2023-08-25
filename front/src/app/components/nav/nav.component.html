@@ -1,25 +1,28 @@
 <!-- NAVBAR -->
 <nav>
-    <div class="logo">
-      <a href="./index.html">
-        <img src="../../../assets/resources/img/imagenes-web/huella.png" alt="Huella" />
-      </a>
-      <p class="logo-text">SANTEX</p>
-    </div>
-    <ul class="links">
-      <li><a href="/home" id="inicio">Inicio</a></li>
-      <li><a href="#" id="sobre-nosotros">Integrantes</a></li>
-      <li><a href="#" id="consejos">Consejos</a></li>
-      <li><a href="#" id="buscar-ahora">Busca ahora!</a></li>
-      <li><a href="/reportar-perdida" id="reportar-perdida" >Reportar Perdida</a></li><!--class="links--hide"-->
-      <!-- Mostrar a logeados-->
-      <li><a href="#" class="cards-dni links--hide">Tus mascotas</a></li>
-      <!-- Mostrar a logeados-->
 
-      <li><a class="login" href="#" id="abrir-login">Inicia Sesion</a></li>
-      <!-- Mostrar NO logeado -->
+  <div class="logo">
+    <a href="./index.html">
+      <img
+        src="../../../assets/resources/img/imagenes-web/huella.png" alt="Huella" />
+    </a>
+    <p class="logo-text">SANTEX</p>
+  </div>
+  <ul class="links">
+    <li><a id="inicio" routerLink="/home">Inicio</a></li>
+    <li><a href="#" id="sobre-nosotros">Integrantes</a></li>
+    <li><a href="#" id="consejos">Consejos</a></li>
+    <li><a id="buscar-ahora" routerLink="/buscar-ahora">Busca ahora!</a></li>
+    <li><a id="reportar-perdida" routerLink="/reportar-perdida" class="links--hide">Reportar Perdida</a></li>
+    <!-- Mostrar a logeados-->
+    <li><a href="#" class="cards-dni links--hide">Tus mascotas</a></li>
+    <!-- Mostrar a logeados-->
 
-      <!-- <div class="contenedor-modal-login" id="contenedor-modal-login">
+
+    <li><a class="login" href="#" id="abrir-login">Inicia Sesion</a></li>
+    <!-- Mostrar NO logeado -->
+
+    <!-- <div class="contenedor-modal-login" id="contenedor-modal-login">
         <div class="modal-login">
           <form action="#" method="get">
             <h3>Inicie Sesion</h3>
@@ -37,10 +40,10 @@
         </div>
       </div> -->
 
-      <li><a class="registrarse" href="#" id="abrir-register">Registrarse</a></li>
-      <!-- Mostrar NO logeado -->
+    <li><a class="registrarse" href="#" id="abrir-register">Registrarse</a></li>
+    <!-- Mostrar NO logeado -->
 
-      <!-- <div class="contenedor-modal-register" id="contenedor-modal-register">
+    <!-- <div class="contenedor-modal-register" id="contenedor-modal-register">
         <div class="modal-register">
           <form action="#" method="post">
             <h3>Crear una cuenta</h3>
@@ -58,6 +61,10 @@
           <div class="contenedor-modal-falla" id="contenedor-modal-falla"></div>
         </div>
       </div> -->
-      <li><a class="logout links--hide show--inline" href="#" id="logout">Cerrar Sesion</a></li>
-    </ul>
-  </nav>
+    <li>
+      <a class="logout links--hide show--inline" href="#" id="logout"
+        >Cerrar Sesion</a
+      >
+    </li>
+  </ul>
+</nav>

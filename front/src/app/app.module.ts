@@ -8,17 +8,13 @@ import { FooterComponent } from './components/footer/footer.component';
 
 
 @NgModule({
-  declarations: [
-    AppComponent
-    
-  ],
+  declarations: [AppComponent, NavComponent],
   imports: [
     BrowserModule,
-    AppRoutingModule,
-    NavComponent,// lo cambie de declarations a imports,
-    FooterComponent // lo cambie de declarations a imports,
+    AppRoutingModule, // lo cambie de declarations a imports,
+    FooterComponent, // lo cambie de declarations a imports,
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
