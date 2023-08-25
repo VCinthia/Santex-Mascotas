@@ -1,3 +1,5 @@
+export * from './buscar-ahora/components/form-buscar-ahora';
+export * from './buscar-ahora';
 export * from './home/components/s-como-logramos';
 export * from './home/components/s-integrantes';
 export * from './home/components/s-podemos-ayudarte';
