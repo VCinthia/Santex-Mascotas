@@ -1,27 +1,23 @@
 <!-- NAVBAR -->
 <nav>
+
   <div class="logo">
     <a href="./index.html">
       <img
-        src="../../../assets/resources/img/imagenes-web/huella.png"
-        alt="Huella"
-      />
+        src="../../../assets/resources/img/imagenes-web/huella.png" alt="Huella" />
     </a>
     <p class="logo-text">SANTEX</p>
   </div>
   <ul class="links">
-    <li><a href="./index.html" id="inicio">Inicio</a></li>
+    <li><a id="inicio" routerLink="/home">Inicio</a></li>
     <li><a href="#" id="sobre-nosotros">Integrantes</a></li>
     <li><a href="#" id="consejos">Consejos</a></li>
-    <li>
-      <a id="buscar-ahora" routerLink="/buscar-ahora">Busca ahora!</a>
-    </li>
-    <li>
-      <a href="#" id="reportar-perdida" class="links--hide">Reportar Perdida</a>
-    </li>
+    <li><a id="buscar-ahora" routerLink="/buscar-ahora">Busca ahora!</a></li>
+    <li><a id="reportar-perdida" routerLink="/reportar-perdida" class="links--hide">Reportar Perdida</a></li>
     <!-- Mostrar a logeados-->
     <li><a href="#" class="cards-dni links--hide">Tus mascotas</a></li>
     <!-- Mostrar a logeados-->
+
 
     <li><a class="login" href="#" id="abrir-login">Inicia Sesion</a></li>
     <!-- Mostrar NO logeado -->

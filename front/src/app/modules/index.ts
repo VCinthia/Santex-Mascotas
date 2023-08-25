@@ -7,3 +7,6 @@ export * from './home/components/s-portada';
 export * from './home/components/s-que-hacemos';
 export * from './home/components/s-tienes-dudas';
 export * from './home';
+export * from './reportar-perdida/components/form-busqueda';
+export * from './reportar-perdida/components';
+export * from './reportar-perdida';

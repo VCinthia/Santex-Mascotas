@@ -14,9 +14,6 @@ import { STienesDudasComponent } from './components/s-tienes-dudas/s-tienes-duda
 @NgModule({
   declarations: [
     HomeComponent,
-    
-    
-    
   ],
   imports: [
     CommonModule,
