@@ -4,7 +4,8 @@ import { InjectModel } from '@nestjs/sequelize/dist/common';
 import { FindOptions } from 'sequelize';
 import { UsuarioDTO } from './usuarioDTO/usuario.dto';
 import { UsuarioEntity } from './entities/usuario.class';
-import { Login } from '../login/entities/login.entity';
+import { LoginService } from '../login/login.service';
+import { LoginEntity } from '../login/entities/login.class';
 
 @Injectable()
 export class UsuariosService {
@@ -12,8 +13,7 @@ export class UsuariosService {
   constructor(
     @InjectModel(Usuario)
     private readonly userModel: typeof Usuario,
-    @InjectModel(Login)
-    private readonly loginEntity: typeof Login,
+    private readonly loginService: LoginService,
   ) {}
 
   public async createUsuario(usuarioDTO: UsuarioDTO): Promise<Usuario> {
@@ -24,7 +24,15 @@ export class UsuariosService {
         };
         const usuario = await this.userModel.findOne(condition);
         if (!usuario) {
-          const loginCreate = this.loginEntity.create(usuarioDTO.user);
+          const passwordHash = await this.loginService.hashPassword(
+            usuarioDTO.user.password,
+          );
+          usuarioDTO.user.password = passwordHash;
+          const login: LoginEntity = new LoginEntity(
+            usuarioDTO.user.email,
+            usuarioDTO.user.password,
+          );
+          const loginCreate = this.loginService.createLogin(login);
           if (loginCreate) {
             const usuario: UsuarioEntity = new UsuarioEntity(
               usuarioDTO.dniPersona,
@@ -99,6 +107,7 @@ export class UsuariosService {
       if (!usuario) {
         throw new HttpException(this.userNotFound, HttpStatus.BAD_REQUEST);
       } else {
+        //TODO UPDATE LOGIN
         usuario.setNombre(personaDTO.nombre);
         usuario.setApellido(personaDTO.apellido);
         usuario.setTelefono(personaDTO.telefono);
@@ -112,6 +121,7 @@ export class UsuariosService {
 
   public async deleteUsuario(id: string): Promise<boolean> {
     try {
+      //TODO delete login
       const condition: FindOptions = { where: { dniPersona: id } };
       const persona: Usuario = await this.userModel.findOne(condition);
       if (!persona) {
