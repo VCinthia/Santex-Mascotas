@@ -8,11 +8,12 @@ import {
   UseInterceptors,
   UploadedFile,
   Put,
+  UseGuards,
 } from '@nestjs/common';
 import { MascotaService } from './mascota.service';
 import { MascotaDto } from './dto/create-mascota.dto';
 import { FileInterceptor } from '@nestjs/platform-express';
-
+import { JwtAuthGuard } from '../auth/jwt/auth.guard';
 @Controller('mascota')
 export class MascotaController {
   constructor(private readonly mascotaService: MascotaService) {}
@@ -36,6 +37,7 @@ export class MascotaController {
     return this.mascotaService.getMascotaById(+id);
   }
 
+  @UseGuards(JwtAuthGuard)
   @Put('/updateMascota/:id')
   @UseInterceptors(FileInterceptor('file'))
   updateMascota(
@@ -46,6 +48,7 @@ export class MascotaController {
     return this.mascotaService.updateMascota(+id, file, mascotaDto);
   }
 
+  @UseGuards(JwtAuthGuard)
   @Delete('/deleteMascota/:id')
   deleteMascota(@Param('id') id: string) {
     return this.mascotaService.deleteMascotaById(+id);

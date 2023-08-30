@@ -27,10 +27,9 @@ export class UsuariosService {
           const passwordHash = await this.loginService.hashPassword(
             usuarioDTO.user.password,
           );
-          usuarioDTO.user.password = passwordHash;
           const login: LoginEntity = new LoginEntity(
             usuarioDTO.user.email,
-            usuarioDTO.user.password,
+            passwordHash,
           );
           const loginCreate = this.loginService.createLogin(login);
           if (loginCreate) {
@@ -66,9 +65,7 @@ export class UsuariosService {
 
   public async getListaUsuarios(): Promise<Usuario[]> {
     try {
-      const usuarios: Usuario[] = await this.userModel.findAll({
-        include: { all: true },
-      });
+      const usuarios: Usuario[] = await this.userModel.findAll();
       if (usuarios) {
         return usuarios;
       } else {
@@ -81,10 +78,7 @@ export class UsuariosService {
 
   public async getUserById(id: string): Promise<Usuario> {
     try {
-      const condition: FindOptions = {
-        include: { all: true },
-        where: { dniPersona: id },
-      };
+      const condition: FindOptions = { where: { dniPersona: id } };
       const persona: Usuario = await this.userModel.findOne(condition);
 
       if (persona) {
@@ -107,10 +101,15 @@ export class UsuariosService {
       if (!usuario) {
         throw new HttpException(this.userNotFound, HttpStatus.BAD_REQUEST);
       } else {
-        //TODO UPDATE LOGIN
+        const userLogin: LoginEntity = new LoginEntity(
+          personaDTO.user.email,
+          personaDTO.user.password,
+        );
+        this.loginService.updateLogin(userLogin);
         usuario.setNombre(personaDTO.nombre);
         usuario.setApellido(personaDTO.apellido);
         usuario.setTelefono(personaDTO.telefono);
+        usuario.setUpdateAt(new Date());
       }
       await usuario.save();
       return usuario;

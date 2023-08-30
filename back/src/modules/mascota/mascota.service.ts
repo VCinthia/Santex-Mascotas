@@ -105,6 +105,7 @@ export class MascotaService {
         mascota.setIdEspecie(mascotaDto.idEspecie);
         mascota.setDniPersona(mascotaDto.dniPersona);
         mascota.setIdUbicacion(mascotaDto.idUbicacion);
+        mascota.setUpdateAt(new Date());
       }
       await mascota.save();
       return mascota;

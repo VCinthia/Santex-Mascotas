@@ -43,14 +43,17 @@ export class LoginService {
     }
   }
 
-  public async updateLogin(id: string, login: Login): Promise<Login> {
+  public async updateLogin(login: LoginEntity): Promise<Login> {
     try {
-      const condition: FindOptions = { where: { email: id } };
+      const condition: FindOptions = { where: { email: login.email } };
       const loginExist: Login = await this.loginModel.findOne(condition);
       if (!loginExist) {
         throw new HttpException(this.userNotFound, HttpStatus.BAD_REQUEST);
       } else {
-        loginExist.setPassword(login['password']);
+        const hashPassword = await this.hashPassword(login.password);
+        loginExist.setEmail(login.email);
+        loginExist.setPassword(hashPassword);
+        loginExist.setUpdateAt(new Date());
         await loginExist.save();
         return loginExist;
       }
@@ -77,12 +80,5 @@ export class LoginService {
   async hashPassword(password: string): Promise<string> {
     const saltRounds = 10;
     return bcrypt.hash(password, saltRounds);
-  }
-
-  async comparePasswords(
-    enteredPassword: string,
-    hashedPassword: string,
-  ): Promise<boolean> {
-    return bcrypt.compare(enteredPassword, hashedPassword);
   }
 }

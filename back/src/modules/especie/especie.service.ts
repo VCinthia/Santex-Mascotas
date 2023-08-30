@@ -80,6 +80,7 @@ export class EspecieService {
         throw new HttpException(this.especieNotFound, HttpStatus.BAD_REQUEST);
       } else {
         especieExist.setEspecie(updateEspecie.especie);
+        especieExist.setUpdateAt(new Date());
         await especieExist.save();
         return especieExist;
       }

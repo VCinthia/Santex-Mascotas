@@ -70,4 +70,10 @@ export class Usuario extends Model<Usuario> {
   public setUserEmail(email: string): void {
     this.userEmail = email;
   }
+  public getUpdateAt(): Date {
+    return this.updatedAt;
+  }
+  public setUpdateAt(newDate: Date): void {
+    this.updatedAt = newDate;
+  }
 }

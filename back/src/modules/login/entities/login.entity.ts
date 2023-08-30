@@ -24,4 +24,10 @@ export class Login extends Model<Login> {
   public setPassword(password: string): void {
     this.password = password;
   }
+  public getUpdateAt(): Date {
+    return this.updatedAt;
+  }
+  public setUpdateAt(newDate: Date): void {
+    this.updatedAt = newDate;
+  }
 }

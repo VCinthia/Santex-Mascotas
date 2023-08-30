@@ -43,4 +43,10 @@ export class Barrio extends Model<Barrio> {
   public getidCiudad(): number {
     return this.idCiudad;
   }
+  public getUpdateAt(): Date {
+    return this.updatedAt;
+  }
+  public setUpdateAt(newDate: Date): void {
+    this.updatedAt = newDate;
+  }
 }
