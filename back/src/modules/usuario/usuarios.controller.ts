@@ -20,8 +20,8 @@ export class UsuariosController {
   }
 
   @Get('/getUsuario/:id')
-  getUserById(@Param('id') id: number) {
-    return this.usuariosService.getUserByDNI(id);
+  getUserById(@Param('dni') dni: number) {
+    return this.usuariosService.getUserByDNI(dni);
   }
 
   @Put('/updateUsuario/:id')
