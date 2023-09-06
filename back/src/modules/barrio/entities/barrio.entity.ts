@@ -14,7 +14,6 @@ import { Mascota } from 'src/modules/mascota/entities/mascota.entity';
   tableName: 'barrios',
 })
 export class Barrio extends Model<Barrio> {
-  //@PrimaryGeneratedColumn
   @PrimaryKey
   @AutoIncrement
   @Column
@@ -45,5 +44,11 @@ export class Barrio extends Model<Barrio> {
   }
   public setIdCiudad(idCiudad: number): void {
     this.idCiudad = idCiudad;
+  }
+  public getUpdateAt(): Date {
+    return this.updatedAt;
+  }
+  public setUpdateAt(newDate: Date): void {
+    this.updatedAt = newDate;
   }
 }

@@ -33,4 +33,10 @@ export class Ciudad extends Model<Ciudad> {
   public setNombre(nombre: string): void {
     this.nombre = nombre;
   }
+  public getUpdateAt(): Date {
+    return this.updatedAt;
+  }
+  public setUpdateAt(newDate: Date): void {
+    this.updatedAt = newDate;
+  }
 }

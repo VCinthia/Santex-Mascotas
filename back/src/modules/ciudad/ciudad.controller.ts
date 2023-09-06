@@ -18,7 +18,6 @@ export class CiudadController {
   create(@Param('nombre') nuevaCiudad: string) {
     return this.ciudadService.createCiudad(nuevaCiudad);
   }
-
   @Get('/getListaCiudades')
   async getListaciudades(): Promise<Ciudad[]> {
     return this.ciudadService.getAllCiudad();

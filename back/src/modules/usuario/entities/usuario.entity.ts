@@ -91,4 +91,10 @@ export class Usuario extends Model<Usuario> {
   public setUser(user: Login): void {
     this.user = user;
   }
+  public getUpdateAt(): Date {
+    return this.updatedAt;
+  }
+  public setUpdateAt(newDate: Date): void {
+    this.updatedAt = newDate;
+  }
 }

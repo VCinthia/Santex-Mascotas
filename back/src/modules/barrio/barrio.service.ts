@@ -81,6 +81,7 @@ export class BarrioService {
         throw new HttpException(this.barrioNotFound, HttpStatus.BAD_REQUEST);
       } else {
         barrioExist.setBarrio(updateBarrio.barrio);
+        barrioExist.setUpdateAt(new Date());
         await barrioExist.save();
         return barrioExist;
       }

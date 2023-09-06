@@ -117,4 +117,10 @@ export class Mascota extends Model<Mascota> {
   public setIdUbicacion(idUbicacion: number): void {
     this.idUbicacion = idUbicacion;
   }
+  public getUpdateAt(): Date {
+    return this.updatedAt;
+  }
+  public setUpdateAt(newDate: Date): void {
+    this.updatedAt = newDate;
+  }
 }

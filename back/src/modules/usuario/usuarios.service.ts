@@ -50,6 +50,11 @@ export class UsuariosService {
             HttpStatus.BAD_REQUEST,
           );
         }
+        if (!usuario.getActivo()) {
+          usuario.setActivo(false);
+          await usuario.save();
+          return usuario;
+        }
         throw new HttpException(
           'El usuario ya se encuentra registrado.',
           HttpStatus.BAD_REQUEST,
@@ -65,35 +70,21 @@ export class UsuariosService {
     }
   }
 
-  public async getListaUsuarios(): Promise<Usuario[]> {
-    // sacar del controller est funcion, no tiene uso desde el front
-    try {
-      const usuarios: Usuario[] = await this.userModel.findAll({
-        include: { all: true },
-        //habria que filtrar por user activos?
-      });
-      if (usuarios) {
-        return usuarios;
-      } else {
-        throw new HttpException(this.userNotFound, HttpStatus.BAD_REQUEST);
-      }
-    } catch (error) {
-      throw new HttpException(error.message, HttpStatus.INTERNAL_SERVER_ERROR);
-    }
-  }
-
   public async getUserById(id: number): Promise<UsuarioLoginDTO> {
     try {
       const condition: FindOptions = {
-        where: { idUser: id },
+        where: { idUsuario: id },
       };
       const persona: Usuario = await this.userModel.findOne(condition);
       if (persona) {
+        if (!persona.getActivo()) {
+          throw new HttpException(this.userNotFound, HttpStatus.BAD_REQUEST);
+        }
         const login = await this.loginService.getLoginById(
           persona.getIdLogin(),
         );
         let usuarioLogin: UsuarioLoginDTO;
-        usuarioLogin.id = persona.getIdLogin();
+        usuarioLogin.id = persona.getIdUsuario();
         usuarioLogin.dniPersona = persona.getDniPersona();
         usuarioLogin.apellido = persona.getApellido();
         usuarioLogin.email = login.getEmail();
@@ -114,15 +105,20 @@ export class UsuariosService {
     personaDTO: UsuarioDTO,
   ): Promise<Usuario> {
     try {
-      const condition: FindOptions = { where: { dniPersona: id } }; //where: { idLogin: id }ver si iria el idLogin o idUSer?
+      const condition: FindOptions = { where: { idUsuario: id } };
       const usuario: Usuario = await this.userModel.findOne(condition);
       if (!usuario) {
         throw new HttpException(this.userNotFound, HttpStatus.BAD_REQUEST);
       } else {
-        //TODO UPDATE LOGIN
+        const userLogin: LoginEntity = new LoginEntity(
+          personaDTO.user.email,
+          personaDTO.user.password,
+        );
+        this.loginService.updateLogin(userLogin);
         usuario.setNombre(personaDTO.nombre);
         usuario.setApellido(personaDTO.apellido);
         usuario.setTelefono(personaDTO.telefono);
+        usuario.setUpdateAt(new Date());
       }
       await usuario.save();
       return usuario;
@@ -133,7 +129,7 @@ export class UsuariosService {
 
   public async deleteUsuario(id: number): Promise<boolean> {
     try {
-      const condition: FindOptions = { where: { idUser: id } };
+      const condition: FindOptions = { where: { idUsuario: id } };
       const persona: Usuario = await this.userModel.findOne(condition);
       if (!persona) {
         throw new HttpException(this.userNotFound, HttpStatus.BAD_REQUEST);

@@ -31,7 +31,6 @@ export class CiudadService {
       const ciudadExist: Ciudad = await this.ciudadEntity.findOne(condition);
 
       if (!ciudadExist) {
-        console.log(ciudad);
         const ciudadCreated = await this.ciudadEntity.create({
           nombre: ciudad,
         });
@@ -77,6 +76,7 @@ export class CiudadService {
         throw new HttpException(this.ciudadNotFound, HttpStatus.BAD_REQUEST);
       } else {
         ciudadExist.setNombre(updateCiudad.nombre);
+        ciudadExist.setUpdateAt(new Date());
         await ciudadExist.save();
         return ciudadExist;
       }
