@@ -18,8 +18,8 @@ export class Usuario extends Model<Usuario> {
   @PrimaryKey
   @AutoIncrement
   @Column
-  private idUsuario: number;  
-  
+  private idUsuario: number;
+
   @Column
   private dniPersona: number;
 
@@ -35,11 +35,10 @@ export class Usuario extends Model<Usuario> {
   @Column
   private activo: boolean;
 
-  
-  @ForeignKey(() => Login)  
+  @ForeignKey(() => Login)
   @Column
   private idLogin: number;
- 
+
   @BelongsTo(() => Login)
   private user: Login;
 

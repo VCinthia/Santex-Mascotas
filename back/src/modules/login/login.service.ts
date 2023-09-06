@@ -43,13 +43,14 @@ export class LoginService {
     }
   }
 
-  public async updateLogin(id: string, login: Login): Promise<Login> {
+  public async updateLogin(id: number, login: Login): Promise<Login> {
     try {
-      const condition: FindOptions = { where: { email: id } };
+      const condition: FindOptions = { where: { idLogin: id } };
       const loginExist: Login = await this.loginModel.findOne(condition);
       if (!loginExist) {
         throw new HttpException(this.userNotFound, HttpStatus.BAD_REQUEST);
       } else {
+        loginExist.setPassword(login['email']);
         loginExist.setPassword(login['password']);
         await loginExist.save();
         return loginExist;

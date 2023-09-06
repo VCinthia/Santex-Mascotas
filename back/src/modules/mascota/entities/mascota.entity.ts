@@ -67,7 +67,7 @@ export class Mascota extends Model<Mascota> {
     return this.tamanio;
   }
   public setTamanio(tamanio: string): void {
-    this.tamanio= tamanio;
+    this.tamanio = tamanio;
   }
   public getFechaCarga(): Date {
     return this.fechaCarga;
@@ -109,7 +109,7 @@ export class Mascota extends Model<Mascota> {
     return this.idUsuario;
   }
   public setIdUsuario(idUsuario: number): void {
-    this.idUsuario = this.idUsuario;
+    this.idUsuario = idUsuario;
   }
   public getIdUbicacion(): number {
     return this.idUbicacion;

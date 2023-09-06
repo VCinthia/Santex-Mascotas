@@ -28,10 +28,9 @@ export class UsuariosService {
           const passwordHash = await this.loginService.hashPassword(
             usuarioDTO.user.password,
           );
-          usuarioDTO.user.password = passwordHash;
           const login: LoginEntity = new LoginEntity(
             usuarioDTO.user.email,
-            usuarioDTO.user.password,
+            passwordHash,
           );
           const loginCreate = await this.loginService.createLogin(login);
           if (loginCreate) {
@@ -42,7 +41,6 @@ export class UsuariosService {
               usuarioDTO.telefono,
               true,
               loginCreate.getIdLogin(),
-
             );
             const newUsuario = await this.userModel.create(usuario);
             return newUsuario;
@@ -67,7 +65,8 @@ export class UsuariosService {
     }
   }
 
-  public async getListaUsuarios(): Promise<Usuario[]> { // sacar del controller est funcion, no tiene uso desde el front
+  public async getListaUsuarios(): Promise<Usuario[]> {
+    // sacar del controller est funcion, no tiene uso desde el front
     try {
       const usuarios: Usuario[] = await this.userModel.findAll({
         include: { all: true },
@@ -83,23 +82,21 @@ export class UsuariosService {
     }
   }
 
-  public async getUserById(id: number): Promise<UsuarioLoginDTO> { //cambie el tipo de dato de "string" a "number"
+  public async getUserById(id: number): Promise<UsuarioLoginDTO> {
     try {
       const condition: FindOptions = {
         where: { idUser: id },
-      //repensar como va a hacer el login y que dato va a tener el front para buscar el user
-      // where: { idLogin: id }, para eso el DTO deberia guardar en la tabla ese dato, una vez creado el login!
-      
       };
       const persona: Usuario = await this.userModel.findOne(condition);
       if (persona) {
-
-        const email = await (await this.loginService.getLoginById(persona.getIdLogin())).getEmail();
-        let usuarioLogin : UsuarioLoginDTO;
-        usuarioLogin.id = persona.getIdUser();
+        const login = await this.loginService.getLoginById(
+          persona.getIdLogin(),
+        );
+        let usuarioLogin: UsuarioLoginDTO;
+        usuarioLogin.id = persona.getIdLogin();
         usuarioLogin.dniPersona = persona.getDniPersona();
         usuarioLogin.apellido = persona.getApellido();
-        usuarioLogin.email = email;
+        usuarioLogin.email = login.getEmail();
         usuarioLogin.nombre = persona.getNombre();
         usuarioLogin.telefono = persona.getTelefono();
         usuarioLogin.activo = persona.getActivo();
@@ -117,7 +114,7 @@ export class UsuariosService {
     personaDTO: UsuarioDTO,
   ): Promise<Usuario> {
     try {
-      const condition: FindOptions = { where: { dniPersona: id } };//where: { idLogin: id }ver si iria el idLogin o idUSer?
+      const condition: FindOptions = { where: { dniPersona: id } }; //where: { idLogin: id }ver si iria el idLogin o idUSer?
       const usuario: Usuario = await this.userModel.findOne(condition);
       if (!usuario) {
         throw new HttpException(this.userNotFound, HttpStatus.BAD_REQUEST);
@@ -134,7 +131,7 @@ export class UsuariosService {
     }
   }
 
-  public async deleteUsuario(id: number): Promise<Usuario> {//modifique Promise de "boolean" por "Usuario"
+  public async deleteUsuario(id: number): Promise<boolean> {
     try {
       const condition: FindOptions = { where: { idUser: id } };
       const persona: Usuario = await this.userModel.findOne(condition);
@@ -142,9 +139,9 @@ export class UsuariosService {
         throw new HttpException(this.userNotFound, HttpStatus.BAD_REQUEST);
       } else {
         persona.setActivo(false);
+        await persona.save();
+        return true;
       }
-      await persona.save();
-      return persona;
     } catch (error) {
       throw new HttpException(error.message, HttpStatus.INTERNAL_SERVER_ERROR);
     }

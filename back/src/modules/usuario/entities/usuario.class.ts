@@ -4,7 +4,7 @@ export class UsuarioEntity {
   nombre: string;
   apellido: string;
   telefono: string;
-  activo:boolean;
+  activo: boolean;
   idLogin: number;
   constructor(
     dniPersona: number,

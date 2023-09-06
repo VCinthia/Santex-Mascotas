@@ -43,7 +43,7 @@ export class Barrio extends Model<Barrio> {
   public getIdCiudad(): number {
     return this.idCiudad;
   }
-  public setIdCiudad(idCiudad : number): void {
+  public setIdCiudad(idCiudad: number): void {
     this.idCiudad = idCiudad;
   }
 }

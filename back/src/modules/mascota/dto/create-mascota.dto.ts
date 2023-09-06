@@ -6,7 +6,7 @@ export class MascotaDto {
   readonly foto: Express.Multer.File;
   readonly descripcion: string;
   readonly estado: string;
-  readonly activo:boolean;
-  readonly dniPersona: string;
+  readonly activo: boolean;
+  readonly idUsuario: number;
   readonly idUbicacion: number;
 }

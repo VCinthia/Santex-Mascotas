@@ -8,7 +8,6 @@ import {
   Put,
 } from '@nestjs/common';
 import { UsuariosService } from './usuarios.service';
-import { Usuario } from './entities/usuario.entity';
 import { UsuarioDTO } from './usuarioDTO/usuario.dto';
 
 @Controller('usuarios')
@@ -20,13 +19,8 @@ export class UsuariosController {
     return this.usuariosService.createUsuario(usuarioData);
   }
 
-  @Get('/getListaUsuarios')
-  public async getListaUsuarios(): Promise<Usuario[]> {
-    return this.usuariosService.getListaUsuarios();
-  }
-
   @Get('/getUsuario/:id')
-  getUserById(@Param('id') id:number) {
+  getUserById(@Param('id') id: number) {
     return this.usuariosService.getUserById(id);
   }
 

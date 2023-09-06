@@ -20,7 +20,7 @@ export class MascotaService {
     try {
       if (createMascotaDto) {
         const condition: FindOptions = {
-          where: { dniPersona: createMascotaDto.dniPersona },
+          where: { idUsuario: createMascotaDto.idUsuario },
         };
         const mascotaExist = await this.mascotaModel.findOne(condition);
         if (!mascotaExist) {
@@ -33,7 +33,7 @@ export class MascotaService {
             createMascotaDto.estado,
             createMascotaDto.activo,
             createMascotaDto.idEspecie,
-            createMascotaDto.dniPersona,
+            createMascotaDto.idUsuario,
             createMascotaDto.idUbicacion,
           );
           const newmascota = await this.mascotaModel.create(mascota);
@@ -56,11 +56,11 @@ export class MascotaService {
 
   public async getListMascotas(): Promise<Mascota[]> {
     try {
-     let condition: FindOptions = {
+      const condition: FindOptions = {
         include: { all: true },
-        where: { activo: true },//
+        where: { activo: true },
       };
-// ver si es necesario crear otra funcion que me permita traer las mascotas activas, eligiendo si estan "perdidas" o son "adoptables"
+      // ver si es necesario crear otra funcion que me permita traer las mascotas activas, eligiendo si estan "perdidas" o son "adoptables"
       const mascotaList: Mascota[] = await this.mascotaModel.findAll(condition);
       if (mascotaList) {
         return mascotaList;
@@ -75,8 +75,8 @@ export class MascotaService {
   public async getMascotaById(id: number): Promise<Mascota> {
     try {
       const condition: FindOptions = {
-        include: { all: true },//ver..
-        where: { idMascota: id },//ver esta sentencia
+        include: { all: true },
+        where: { idMascota: id },
       };
       const mascota: Mascota = await this.mascotaModel.findOne(condition);
       if (mascota) {
@@ -108,7 +108,7 @@ export class MascotaService {
         mascota.setEstado(mascotaDto.estado);
         mascota.setActivo(mascotaDto.activo);
         mascota.setIdEspecie(mascotaDto.idEspecie);
-        mascota.setDniPersona(mascotaDto.dniPersona);
+        mascota.setIdUsuario(mascotaDto.idUsuario);
         mascota.setIdUbicacion(mascotaDto.idUbicacion);
       }
       await mascota.save();
@@ -125,7 +125,7 @@ export class MascotaService {
       if (!mascota) {
         throw new HttpException(this.petNotFound, HttpStatus.BAD_REQUEST);
       } else {
-        mascota.setActivo(false);// modifique el estado de la mascota
+        mascota.setActivo(false);
       }
       await mascota.save();
       return mascota;

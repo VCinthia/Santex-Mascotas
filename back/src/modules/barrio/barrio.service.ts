@@ -1,7 +1,5 @@
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { Barrio } from './entities/barrio.entity';
-//import { CreateBarrioDto } from './dto/create-barrio.dto';
-//import { UpdateBarrioDto } from './dto/update-barrio.dto';
 import { InjectModel } from '@nestjs/sequelize/dist/common';
 import { FindOptions } from 'sequelize';
 import { CreateBarrioDto } from './dto/create-barrio.dto';
@@ -62,7 +60,9 @@ export class BarrioService {
 
   public async getAllBarrio(): Promise<Barrio[]> {
     try {
-      const barrioList: Barrio[] = await this.barrioEntity.findAll();
+      const barrioList: Barrio[] = await this.barrioEntity.findAll({
+        include: { all: true },
+      });
       if (barrioList) {
         return barrioList;
       } else {

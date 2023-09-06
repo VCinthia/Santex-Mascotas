@@ -1,4 +1,10 @@
-import { Column, Table, PrimaryKey, AutoIncrement,Model } from 'sequelize-typescript';
+import {
+  Column,
+  Table,
+  PrimaryKey,
+  AutoIncrement,
+  Model,
+} from 'sequelize-typescript';
 
 @Table({
   tableName: 'login',

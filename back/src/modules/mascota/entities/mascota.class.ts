@@ -4,7 +4,7 @@ export class MascotaEntity {
   fechaCarga: Date;
   foto: Buffer;
   descripcion: string;
-  estado:string;
+  estado: string;
   activo: boolean;
   idEspecie: number;
   idUsuario: number;
@@ -15,7 +15,7 @@ export class MascotaEntity {
     fechaCarga: Date,
     foto: Buffer,
     descripcion: string,
-    estado:string,
+    estado: string,
     activo: boolean,
     idEspecie: number,
     idUsuario: number,
