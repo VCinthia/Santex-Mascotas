@@ -50,8 +50,11 @@ export class UsuariosService {
             HttpStatus.BAD_REQUEST,
           );
         }
-        if (!usuario.getActivo()) {
-          usuario.setActivo(false);
+        const login = await this.loginService.getLoginById(
+          usuario.getIdLogin(),
+        );
+        if (!usuario.getActivo() && login.getEmail() == usuarioDTO.user.email) {
+          usuario.setActivo(true);
           await usuario.save();
           return usuario;
         }
@@ -61,7 +64,7 @@ export class UsuariosService {
         );
       } else {
         throw new HttpException(
-          'Los datos para crear la persona no son válidos.',
+          'Los datos para crear al usuario no son válidos.',
           HttpStatus.BAD_REQUEST,
         );
       }
@@ -70,10 +73,10 @@ export class UsuariosService {
     }
   }
 
-  public async getUserById(id: number): Promise<UsuarioLoginDTO> {
+  public async getUserByDNI(dni: number): Promise<UsuarioLoginDTO> {
     try {
       const condition: FindOptions = {
-        where: { idUsuario: id },
+        where: { dniPersona: dni },
       };
       const persona: Usuario = await this.userModel.findOne(condition);
       if (persona) {

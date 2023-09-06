@@ -21,7 +21,7 @@ export class UsuariosController {
 
   @Get('/getUsuario/:id')
   getUserById(@Param('id') id: number) {
-    return this.usuariosService.getUserById(id);
+    return this.usuariosService.getUserByDNI(id);
   }
 
   @Put('/updateUsuario/:id')
