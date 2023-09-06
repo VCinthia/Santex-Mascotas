@@ -1,4 +1,5 @@
 export class LoginEntity {
+  idLogin: number;
   email: string;
   password: string;
   constructor(email: string, password: string) {

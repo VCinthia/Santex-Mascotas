@@ -1,32 +1,35 @@
 export class MascotaEntity {
   color: string;
+  tamanio: string;
   fechaCarga: Date;
   foto: Buffer;
   descripcion: string;
-  adoptable: boolean;
-  estado: string;
+  estado:string;
+  activo: boolean;
   idEspecie: number;
-  dniPersona: string;
+  idUsuario: number;
   idUbicacion: number;
   constructor(
     color: string,
+    tamanio: string,
     fechaCarga: Date,
     foto: Buffer,
     descripcion: string,
-    adoptable: boolean,
-    estado: string,
+    estado:string,
+    activo: boolean,
     idEspecie: number,
-    dniPersona: string,
+    idUsuario: number,
     idUbicacion: number,
   ) {
     this.color = color;
+    this.tamanio = tamanio;
     this.fechaCarga = fechaCarga;
     this.foto = foto;
     this.descripcion = descripcion;
-    this.adoptable = adoptable;
     this.estado = estado;
+    this.activo = activo;
     this.idEspecie = idEspecie;
-    this.dniPersona = dniPersona;
+    this.idUsuario = idUsuario;
     this.idUbicacion = idUbicacion;
   }
 }

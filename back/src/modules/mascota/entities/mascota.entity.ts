@@ -24,6 +24,9 @@ export class Mascota extends Model<Mascota> {
   private color: string;
 
   @Column
+  private tamanio: string;
+
+  @Column
   private fechaCarga: Date;
 
   @Column(DataType.BLOB('long'))
@@ -33,10 +36,10 @@ export class Mascota extends Model<Mascota> {
   private descripcion: string;
 
   @Column
-  private adoptable: boolean;
+  private estado: string;
 
   @Column
-  private estado: string;
+  private activo: boolean;
 
   @ForeignKey(() => Especie)
   @Column
@@ -44,7 +47,7 @@ export class Mascota extends Model<Mascota> {
 
   @ForeignKey(() => Usuario)
   @Column
-  private dniPersona: string;
+  private idUsuario: number;
 
   @ForeignKey(() => Barrio)
   @Column
@@ -54,14 +57,17 @@ export class Mascota extends Model<Mascota> {
   public getIdMascota(): number {
     return this.idMascota;
   }
-  public setIdMascota(idMascota: number): void {
-    this.idMascota = idMascota;
-  }
   public getColor(): string {
     return this.color;
   }
   public setColor(color: string): void {
     this.color = color;
+  }
+  public getTamanio(): string {
+    return this.tamanio;
+  }
+  public setTamanio(tamanio: string): void {
+    this.tamanio= tamanio;
   }
   public getFechaCarga(): Date {
     return this.fechaCarga;
@@ -81,11 +87,11 @@ export class Mascota extends Model<Mascota> {
   public setDescripcion(descripcion: string): void {
     this.descripcion = descripcion;
   }
-  public getAdoptable(): boolean {
-    return this.adoptable;
+  public getActivo(): boolean {
+    return this.activo;
   }
-  public setAdoptable(adoptable: boolean): void {
-    this.adoptable = adoptable;
+  public setActivo(activo: boolean): void {
+    this.activo = activo;
   }
   public getEstado(): string {
     return this.estado;
@@ -99,11 +105,11 @@ export class Mascota extends Model<Mascota> {
   public setIdEspecie(idEspecie: number): void {
     this.idEspecie = idEspecie;
   }
-  public getDniPersona(): string {
-    return this.dniPersona;
+  public getIdUsuario(): number {
+    return this.idUsuario;
   }
-  public setDniPersona(dniPersona: string): void {
-    this.dniPersona = dniPersona;
+  public setIdUsuario(idUsuario: number): void {
+    this.idUsuario = this.idUsuario;
   }
   public getIdUbicacion(): number {
     return this.idUbicacion;

@@ -26,9 +26,9 @@ export class MascotaController {
     return this.mascotaService.createMascota(file, createMascotaDto);
   }
 
-  @Get('/getListMascota')
-  getListMascota() {
-    return this.mascotaService.getListMascotas();
+  @Get('/getListMascota')// agrego el estado por el que queremos filtrar, modifico función
+  getListMascota(@Param('estado') estado: string) {
+    return this.mascotaService.getListMascotas(estado);
   }
 
   @Get('/getMascotaById/:id')

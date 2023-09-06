@@ -29,9 +29,9 @@ export class LoginService {
     }
   }
 
-  public async getLoginById(id: string): Promise<Login> {
+  public async getLoginById(id: number): Promise<Login> {
     try {
-      const condition: FindOptions = { where: { email: id } };
+      const condition: FindOptions = { where: { idLogin: id } };
       const login: Login = await this.loginModel.findOne(condition);
       if (login) {
         return login;

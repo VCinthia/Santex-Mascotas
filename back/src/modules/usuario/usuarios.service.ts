@@ -6,6 +6,7 @@ import { UsuarioDTO } from './usuarioDTO/usuario.dto';
 import { UsuarioEntity } from './entities/usuario.class';
 import { LoginService } from '../login/login.service';
 import { LoginEntity } from '../login/entities/login.class';
+import { UsuarioLoginDTO } from './usuarioDTO/usuarioLogin.dto';
 
 @Injectable()
 export class UsuariosService {
@@ -32,14 +33,16 @@ export class UsuariosService {
             usuarioDTO.user.email,
             usuarioDTO.user.password,
           );
-          const loginCreate = this.loginService.createLogin(login);
+          const loginCreate = await this.loginService.createLogin(login);
           if (loginCreate) {
             const usuario: UsuarioEntity = new UsuarioEntity(
               usuarioDTO.dniPersona,
               usuarioDTO.nombre,
               usuarioDTO.apellido,
               usuarioDTO.telefono,
-              usuarioDTO.user.email,
+              true,
+              loginCreate.getIdLogin(),
+
             );
             const newUsuario = await this.userModel.create(usuario);
             return newUsuario;
@@ -64,10 +67,11 @@ export class UsuariosService {
     }
   }
 
-  public async getListaUsuarios(): Promise<Usuario[]> {
+  public async getListaUsuarios(): Promise<Usuario[]> { // sacar del controller est funcion, no tiene uso desde el front
     try {
       const usuarios: Usuario[] = await this.userModel.findAll({
         include: { all: true },
+        //habria que filtrar por user activos?
       });
       if (usuarios) {
         return usuarios;
@@ -79,16 +83,27 @@ export class UsuariosService {
     }
   }
 
-  public async getUserById(id: string): Promise<Usuario> {
+  public async getUserById(id: number): Promise<UsuarioLoginDTO> { //cambie el tipo de dato de "string" a "number"
     try {
       const condition: FindOptions = {
-        include: { all: true },
-        where: { dniPersona: id },
+        where: { idUser: id },
+      //repensar como va a hacer el login y que dato va a tener el front para buscar el user
+      // where: { idLogin: id }, para eso el DTO deberia guardar en la tabla ese dato, una vez creado el login!
+      
       };
       const persona: Usuario = await this.userModel.findOne(condition);
-
       if (persona) {
-        return persona;
+
+        const email = await (await this.loginService.getLoginById(persona.getIdLogin())).getEmail();
+        let usuarioLogin : UsuarioLoginDTO;
+        usuarioLogin.id = persona.getIdUser();
+        usuarioLogin.dniPersona = persona.getDniPersona();
+        usuarioLogin.apellido = persona.getApellido();
+        usuarioLogin.email = email;
+        usuarioLogin.nombre = persona.getNombre();
+        usuarioLogin.telefono = persona.getTelefono();
+        usuarioLogin.activo = persona.getActivo();
+        return usuarioLogin;
       } else {
         throw new HttpException(this.userNotFound, HttpStatus.BAD_REQUEST);
       }
@@ -98,11 +113,11 @@ export class UsuariosService {
   }
 
   public async updateUsuario(
-    id: string,
+    id: number,
     personaDTO: UsuarioDTO,
   ): Promise<Usuario> {
     try {
-      const condition: FindOptions = { where: { dniPersona: id } };
+      const condition: FindOptions = { where: { dniPersona: id } };//where: { idLogin: id }ver si iria el idLogin o idUSer?
       const usuario: Usuario = await this.userModel.findOne(condition);
       if (!usuario) {
         throw new HttpException(this.userNotFound, HttpStatus.BAD_REQUEST);
@@ -119,17 +134,17 @@ export class UsuariosService {
     }
   }
 
-  public async deleteUsuario(id: string): Promise<boolean> {
+  public async deleteUsuario(id: number): Promise<Usuario> {//modifique Promise de "boolean" por "Usuario"
     try {
-      //TODO delete login
-      const condition: FindOptions = { where: { dniPersona: id } };
+      const condition: FindOptions = { where: { idUser: id } };
       const persona: Usuario = await this.userModel.findOne(condition);
       if (!persona) {
         throw new HttpException(this.userNotFound, HttpStatus.BAD_REQUEST);
       } else {
-        await persona.destroy(condition);
+        persona.setActivo(false);
       }
-      return true;
+      await persona.save();
+      return persona;
     } catch (error) {
       throw new HttpException(error.message, HttpStatus.INTERNAL_SERVER_ERROR);
     }

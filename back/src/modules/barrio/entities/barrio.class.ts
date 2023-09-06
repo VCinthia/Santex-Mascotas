@@ -6,4 +6,5 @@ export class BarrioEntity {
     this.barrio = barrio;
     this.idCiudad = idCiudad;
   }
+
 }

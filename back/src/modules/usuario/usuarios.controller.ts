@@ -26,17 +26,17 @@ export class UsuariosController {
   }
 
   @Get('/getUsuario/:id')
-  getUserById(@Param('id') id: string) {
+  getUserById(@Param('id') id:number) {
     return this.usuariosService.getUserById(id);
   }
 
   @Put('/updateUsuario/:id')
-  updateUsuario(@Param('id') id: string, @Body() updateUsuarioDto: UsuarioDTO) {
+  updateUsuario(@Param('id') id: number, @Body() updateUsuarioDto: UsuarioDTO) {
     return this.usuariosService.updateUsuario(id, updateUsuarioDto);
   }
 
   @Delete('/deleteUsuario/:id')
-  deleteUsuario(@Param('id') id: string) {
+  deleteUsuario(@Param('id') id: number) {
     return this.usuariosService.deleteUsuario(id);
   }
 }

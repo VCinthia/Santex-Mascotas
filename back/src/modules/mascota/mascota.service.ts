@@ -26,11 +26,12 @@ export class MascotaService {
         if (!mascotaExist) {
           const mascota: MascotaEntity = new MascotaEntity(
             createMascotaDto.color,
+            createMascotaDto.tamanio,
             createMascotaDto.fechaCarga,
             file.buffer,
             createMascotaDto.descripcion,
-            createMascotaDto.adoptable,
             createMascotaDto.estado,
+            createMascotaDto.activo,
             createMascotaDto.idEspecie,
             createMascotaDto.dniPersona,
             createMascotaDto.idUbicacion,
@@ -55,9 +56,12 @@ export class MascotaService {
 
   public async getListMascotas(): Promise<Mascota[]> {
     try {
-      const mascotaList: Mascota[] = await this.mascotaModel.findAll({
+     let condition: FindOptions = {
         include: { all: true },
-      });
+        where: { activo: true },//
+      };
+// ver si es necesario crear otra funcion que me permita traer las mascotas activas, eligiendo si estan "perdidas" o son "adoptables"
+      const mascotaList: Mascota[] = await this.mascotaModel.findAll(condition);
       if (mascotaList) {
         return mascotaList;
       } else {
@@ -71,8 +75,8 @@ export class MascotaService {
   public async getMascotaById(id: number): Promise<Mascota> {
     try {
       const condition: FindOptions = {
-        include: { all: true },
-        where: { idMascota: id },
+        include: { all: true },//ver..
+        where: { idMascota: id },//ver esta sentencia
       };
       const mascota: Mascota = await this.mascotaModel.findOne(condition);
       if (mascota) {
@@ -97,11 +101,12 @@ export class MascotaService {
         throw new HttpException(this.petNotFound, HttpStatus.BAD_REQUEST);
       } else {
         mascota.setColor(mascotaDto.color);
+        mascota.setTamanio(mascotaDto.tamanio);
         mascota.setFechaCarga(mascotaDto.fechaCarga);
         mascota.setFoto(file.buffer);
         mascota.setDescripcion(mascotaDto.descripcion);
-        mascota.setAdoptable(mascotaDto.adoptable);
         mascota.setEstado(mascotaDto.estado);
+        mascota.setActivo(mascotaDto.activo);
         mascota.setIdEspecie(mascotaDto.idEspecie);
         mascota.setDniPersona(mascotaDto.dniPersona);
         mascota.setIdUbicacion(mascotaDto.idUbicacion);
@@ -113,16 +118,17 @@ export class MascotaService {
     }
   }
 
-  public async deleteMascotaById(id: number): Promise<boolean> {
+  public async deleteMascotaById(id: number): Promise<Mascota> {
     try {
-      const condition: FindOptions = { where: { dniPersona: id } };
-      const persona: Mascota = await this.mascotaModel.findOne(condition);
-      if (!persona) {
+      const condition: FindOptions = { where: { idMascota: id } };
+      const mascota: Mascota = await this.mascotaModel.findOne(condition);
+      if (!mascota) {
         throw new HttpException(this.petNotFound, HttpStatus.BAD_REQUEST);
       } else {
-        await persona.destroy(condition);
+        mascota.setActivo(false);// modifique el estado de la mascota
       }
-      return true;
+      await mascota.save();
+      return mascota;
     } catch (error) {
       throw new HttpException(error.message, HttpStatus.INTERNAL_SERVER_ERROR);
     }

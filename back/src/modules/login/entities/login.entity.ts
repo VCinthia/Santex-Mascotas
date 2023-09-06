@@ -1,10 +1,14 @@
-import { Column, Table, PrimaryKey, Model } from 'sequelize-typescript';
+import { Column, Table, PrimaryKey, AutoIncrement,Model } from 'sequelize-typescript';
 
 @Table({
   tableName: 'login',
 })
 export class Login extends Model<Login> {
   @PrimaryKey
+  @AutoIncrement
+  @Column
+  private idLogin: number;
+
   @Column
   private email: string;
 
@@ -12,6 +16,9 @@ export class Login extends Model<Login> {
   private password: string;
 
   // getter and setters
+  public getIdLogin(): number {
+    return this.idLogin;
+  }
   public getEmail(): string {
     return this.email;
   }

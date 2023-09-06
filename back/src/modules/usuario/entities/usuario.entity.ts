@@ -5,6 +5,7 @@ import {
   ForeignKey,
   BelongsTo,
   PrimaryKey,
+  AutoIncrement,
   HasMany,
 } from 'sequelize-typescript';
 import { Login } from 'src/modules/login/entities/login.entity';
@@ -15,8 +16,12 @@ import { Mascota } from 'src/modules/mascota/entities/mascota.entity';
 })
 export class Usuario extends Model<Usuario> {
   @PrimaryKey
+  @AutoIncrement
   @Column
-  private dniPersona: string;
+  private idUsuario: number;  
+  
+  @Column
+  private dniPersona: number;
 
   @Column
   private nombre: string;
@@ -27,18 +32,29 @@ export class Usuario extends Model<Usuario> {
   @Column
   private telefono: string;
 
-  @ForeignKey(() => Login)
   @Column
-  private userEmail: string;
+  private activo: boolean;
+
+  
+  @ForeignKey(() => Login)  
+  @Column
+  private idLogin: number;
+ 
   @BelongsTo(() => Login)
-  public user: Login;
+  private user: Login;
 
   @HasMany(() => Mascota)
-  mascotas: Mascota[];
+  private mascotas: Mascota[];
 
   // métodos getters y setters
-  public getDniPersona(): string {
+  public getIdUsuario(): number {
+    return this.idUsuario;
+  }
+  public getDniPersona(): number {
     return this.dniPersona;
+  }
+  public setDniPersona(dniPersona: number): void {
+    this.dniPersona = dniPersona;
   }
   public getNombre(): string {
     return this.nombre;
@@ -58,16 +74,22 @@ export class Usuario extends Model<Usuario> {
   public setTelefono(telefono: string): void {
     this.telefono = telefono;
   }
+  public getActivo(): boolean {
+    return this.activo;
+  }
+  public setActivo(activo: boolean): void {
+    this.activo = activo;
+  }
+  public getIdLogin(): number {
+    return this.idLogin;
+  }
+  public setIdLogin(idLogin: number): void {
+    this.idLogin = idLogin;
+  }
   public getUser(): Login {
     return this.user;
   }
   public setUser(user: Login): void {
     this.user = user;
-  }
-  public getUserEmail(): string {
-    return this.userEmail;
-  }
-  public setUserEmail(email: string): void {
-    this.userEmail = email;
   }
 }

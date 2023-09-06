@@ -31,7 +31,7 @@ export class Barrio extends Model<Barrio> {
   mascotas: Mascota[];
 
   // getter and setters
-  public getidUbicacion(): number {
+  public getIdUbicacion(): number {
     return this.idUbicacion;
   }
   public getBarrio(): string {
@@ -40,7 +40,10 @@ export class Barrio extends Model<Barrio> {
   public setBarrio(barrio: string): void {
     this.barrio = barrio;
   }
-  public getidCiudad(): number {
+  public getIdCiudad(): number {
     return this.idCiudad;
+  }
+  public setIdCiudad(idCiudad : number): void {
+    this.idCiudad = idCiudad;
   }
 }
