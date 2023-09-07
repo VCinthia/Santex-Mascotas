@@ -70,11 +70,11 @@ form input{
     display: block;
     background-color: var(--color-white1);
     /*para boton cargar img*/
-    border: none;
+    /* border: none; */
     padding: var(--padding-xxs);
     border-radius: var(--border-xs);
     border: 2px solid var(--color-tertiary);
-    outline: none;
+    /* outline: none; */
     text-align: center;
     width: 20rem;
     margin-bottom: 0.5rem;
