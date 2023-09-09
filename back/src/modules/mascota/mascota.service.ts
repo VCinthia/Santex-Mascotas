@@ -2,8 +2,11 @@ import { Injectable, HttpException, HttpStatus } from '@nestjs/common';
 import { MascotaDto } from './dto/create-mascota.dto';
 import { InjectModel } from '@nestjs/sequelize/dist/common';
 import { Mascota } from './entities/mascota.entity';
-import { FindOptions } from 'sequelize';
+import { FindOptions, Op } from 'sequelize';
 import { MascotaEntity } from './entities/mascota.class';
+import { Especie } from '../especie/entities/especie.entity';
+import { Ciudad } from '../ciudad/entities/ciudad.entity';
+import { FilterMascota } from './dto/filterMascota.dto';
 
 @Injectable()
 export class MascotaService {
@@ -132,6 +135,39 @@ export class MascotaService {
       return mascota;
     } catch (error) {
       throw new HttpException(error.message, HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+  }
+
+  public async buscarMascotas(mascota: FilterMascota): Promise<any> {
+    try {
+      const condition: FindOptions = {
+        where: {
+          [Op.or]: [
+            { tipo: { [Op.iLike]: `%${mascota.tipo}%` } },
+            { color: { [Op.iLike]: `%${mascota.color}%` } },
+            { tamanio: { [Op.iLike]: `%${mascota.tamanio}%` } },
+            { '$Especie.nombre$': { [Op.iLike]: `%${mascota.raza}%` } },
+            { '$Ciudad.nombre$': { [Op.iLike]: `%${mascota.zona}%` } },
+          ],
+        },
+        include: [
+          {
+            model: Especie,
+            attributes: [],
+          },
+          {
+            model: Ciudad,
+            attributes: [],
+          },
+        ],
+      };
+
+      const mascotas = await Mascota.findAll(condition);
+
+      return mascotas;
+    } catch (error) {
+      console.error('Error al buscar mascotas:', error);
+      throw error;
     }
   }
 }

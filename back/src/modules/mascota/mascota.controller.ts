@@ -14,6 +14,7 @@ import { MascotaService } from './mascota.service';
 import { MascotaDto } from './dto/create-mascota.dto';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { JwtAuthGuard } from '../auth/jwt/auth.guard';
+import { FilterMascota } from './dto/filterMascota.dto';
 @Controller('mascota')
 export class MascotaController {
   constructor(private readonly mascotaService: MascotaService) {}
@@ -52,5 +53,10 @@ export class MascotaController {
   @Delete('/deleteMascota/:id')
   deleteMascota(@Param('id') id: string) {
     return this.mascotaService.deleteMascotaById(+id);
+  }
+
+  @Get('/buscarMascotas')
+  buscarMascotas(@Body() mascota: FilterMascota) {
+    return this.mascotaService.buscarMascotas(mascota);
   }
 }

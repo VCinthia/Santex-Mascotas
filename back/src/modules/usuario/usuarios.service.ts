@@ -24,7 +24,19 @@ export class UsuariosService {
           where: { dniPersona: usuarioDTO.dniPersona },
         };
         const usuario = await this.userModel.findOne(condition);
-        if (!usuario) {
+        const login = await this.loginService.getLoginById(
+          usuario.getIdLogin(),
+        );
+        if (
+          usuario &&
+          usuario.getActivo() &&
+          login.getEmail() == usuarioDTO.user.email
+        ) {
+          throw new HttpException(
+            `El usuario con dni ${usuarioDTO.dniPersona} y email ${usuarioDTO.user.email} ya se encuentra registrado.`,
+            HttpStatus.BAD_REQUEST,
+          );
+        } else {
           const passwordHash = await this.loginService.hashPassword(
             usuarioDTO.user.password,
           );
@@ -50,18 +62,6 @@ export class UsuariosService {
             HttpStatus.BAD_REQUEST,
           );
         }
-        const login = await this.loginService.getLoginById(
-          usuario.getIdLogin(),
-        );
-        if (!usuario.getActivo() && login.getEmail() == usuarioDTO.user.email) {
-          usuario.setActivo(true);
-          await usuario.save();
-          return usuario;
-        }
-        throw new HttpException(
-          'El usuario ya se encuentra registrado.',
-          HttpStatus.BAD_REQUEST,
-        );
       } else {
         throw new HttpException(
           'Los datos para crear al usuario no son válidos.',
