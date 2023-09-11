@@ -12,11 +12,15 @@ const routes: Routes = [
     path: 'buscar-ahora',
     loadChildren: () => import('./modules').then((m) => m.BuscarAhoraModule),
   },
-  { 
-    path : 'reportar-perdida', 
-    loadChildren: () => import('./modules').then(m => m.ReportarPerdidaModule)
-  }
-
+  {
+    path: 'reportar-perdida',
+    loadChildren: () =>
+      import('./modules').then((m) => m.ReportarPerdidaModule),
+  },
+  {
+    path: 'log-in',
+    loadChildren: () => import('./modules').then((m) => m.LogInModule),
+  },
 ];
 
 @NgModule({
