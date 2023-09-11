@@ -1,0 +1,54 @@
+.contenedor-register {
+  margin: 3rem 0;
+}
+
+.main-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+}
+
+form h3 {
+  font-family: var(--font-bodoni-moda);
+  font-size: 4em;
+  margin-bottom: 2rem;
+}
+
+form label {
+  font-family: var(--font-bodoni-moda);
+  font-size: var(--font-size-sm);
+  font-weight: 400;
+  margin-bottom: 0.5rem;
+}
+
+form input {
+  background-color: rgba(217, 217, 217, 1);
+  border: 2px solid var(--color-tertiary);
+  border-radius: var(--border-xs);
+  padding: 0.5rem;
+  margin-bottom: 2rem;
+}
+
+form input::placeholder {
+  text-align: center;
+  font-family: var(--font-advent-pro);
+  font-size: var(--font-size-sm);
+  font-weight: 800;
+}
+
+button {
+  font-family: var(--font-advent-pro);
+  font-size: var(--font-size-sm);
+  background-color: var(--color-secondary);
+  border-radius: var(--border-xs);
+  border: 0;
+  color: #fff;
+  padding: 0.7rem;
+  cursor: pointer;
+  box-shadow: -3px -3px var(--color-tertiary);
+}
