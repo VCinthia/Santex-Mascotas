@@ -15,3 +15,6 @@ export * from './unauthorized';
 export * from './unauthorized/log-in/components';
 export * from './unauthorized/log-in/components/log-in-form';
 export * from './unauthorized/log-in';
+export * from './unauthorized/register/components';
+export * from './unauthorized/register/components/register-form';
+export * from './unauthorized/register';
