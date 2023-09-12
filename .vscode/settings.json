@@ -1,0 +1,8 @@
+{
+    "exportall.config.folderListener": [
+        "/front/src/app/modules/home/components"
+    ],
+    "exportall.config.relExclusion": [
+        "/front/src/app/modules/home/index.ts"
+    ]
+}
