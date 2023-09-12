@@ -1,1 +1,1 @@
-export * from './form-busqueda';
+export * from './form-reportar';

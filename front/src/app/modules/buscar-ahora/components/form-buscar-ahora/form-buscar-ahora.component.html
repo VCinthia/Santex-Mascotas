@@ -1,10 +1,11 @@
 <div class="contenedor-form-busca">
+
+  <h2>Busca <br>Ahora</h2>
   <form action="#" id="contenedor-form-buscar">
-    <h2>Busca Ahora</h2>
     <label for="">¿Que buscas?</label>
     <select id="especiesCargar"></select>
     <label for="">Color</label>
-    <select id="color">
+    <select id="color" required>
       <option value="BLANCO" id="blanco">BLANCO</option>
       <option value="NEGRO" id="negro">NEGRO</option>
       <option value="NARANJA" id="naranja">NARANJA</option>
@@ -13,21 +14,23 @@
       <option value="MANCHADO" id="manchado">MANCHADO</option>
       <option value="ATIGRADO" id="atigrado">ATIGRADO</option>
       <option value="CREMA" id="crema">CREMA</option>
+      <option value="TODOS" id="color-todos">TODOS</option>
     </select>
     <label for="">Tamaño</label>
-    <select id="tamanio">
+    <select id="tamanio" required>
       <option value="PEQUEÑO" id="pequeño">PEQUEÑO</option>
       <option value="MEDIANO" id="mediano">MEDIANO</option>
       <option value="GRANDE" id="grande">GRANDE</option>
+      <option value="TODOS" id="tamanio-todos">TODOS</option>
     </select>
     <label class="label" for="">Ciudad</label>
-    <select id="ciudadesCargar"></select>
+    <select id="ciudadesCargar" required></select>
     <label for="">Barrio</label>
-    <select id="ubicacionesCargar"></select>
-    <label for="">Adoptable</label>
-    <select id="adoptable">
-      <option value="1" id="si-adoptable">SI</option>
-      <option value="0" id="no-adoptable">NO</option>
+    <select id="ubicacionesCargar" required></select>
+    <label for="">Tipo</label>
+    <select id="estado" required>
+      <option value="ADOPCION" id="adopcion">ADOPCION</option>
+      <option value="PERDIDO" id="perdido">PERDIDO</option>
     </select>
     <button id="carga-buscar">Busca ahora</button>
   </form>

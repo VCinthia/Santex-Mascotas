@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormBusquedaComponent } from './components/form-busqueda/form-busqueda.component';
+import { FormReportarComponent } from './components/form-reportar/form-reportar.component';
 import { ReportarPerdidaRoutingModule } from './reportar-perdida-routing.module';
 import { ReportarPerdidaComponent } from './reportar-perdida.component';
 
@@ -13,7 +13,7 @@ import { ReportarPerdidaComponent } from './reportar-perdida.component';
   imports: [
     CommonModule,    
     ReportarPerdidaRoutingModule,
-    FormBusquedaComponent
+    FormReportarComponent
   ]
 })
 export class ReportarPerdidaModule { }
