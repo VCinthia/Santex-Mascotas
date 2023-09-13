@@ -24,14 +24,7 @@ export class UsuariosService {
           where: { dniPersona: usuarioDTO.dniPersona },
         };
         const usuario = await this.userModel.findOne(condition);
-        const login = await this.loginService.getLoginById(
-          usuario.getIdLogin(),
-        );
-        if (
-          usuario &&
-          usuario.getActivo() &&
-          login.getEmail() == usuarioDTO.user.email
-        ) {
+        if (usuario && usuario.getActivo()) {
           throw new HttpException(
             `El usuario con dni ${usuarioDTO.dniPersona} y email ${usuarioDTO.user.email} ya se encuentra registrado.`,
             HttpStatus.BAD_REQUEST,
@@ -86,8 +79,8 @@ export class UsuariosService {
         const login = await this.loginService.getLoginById(
           persona.getIdLogin(),
         );
-        let usuarioLogin: UsuarioLoginDTO;
-        usuarioLogin.id = persona.getIdUsuario();
+        const usuarioLogin: UsuarioLoginDTO = new UsuarioLoginDTO();
+        usuarioLogin.idUsuario = persona.getIdUsuario();
         usuarioLogin.dniPersona = persona.getDniPersona();
         usuarioLogin.apellido = persona.getApellido();
         usuarioLogin.email = login.getEmail();

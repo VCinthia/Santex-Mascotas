@@ -47,8 +47,9 @@ export class AuthService {
         throw new UnauthorizedException('Contraseña incorrecta');
       }
     }
-    let usuarioLogin: UsuarioLoginDTO;
-    usuarioLogin.id = user.getIdUsuario();
+
+    const usuarioLogin: UsuarioLoginDTO = new UsuarioLoginDTO();
+    usuarioLogin.idUsuario = user.getIdUsuario();
     usuarioLogin.dniPersona = user.getDniPersona();
     usuarioLogin.apellido = user.getApellido();
     usuarioLogin.email = email;

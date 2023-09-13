@@ -1,5 +1,5 @@
 export class UsuarioLoginDTO {
-  id: number;
+  idUsuario: number;
   dniPersona: number;
   nombre: string;
   apellido: string;
