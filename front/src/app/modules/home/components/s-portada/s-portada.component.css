@@ -1,0 +1,55 @@
+/*PORTADA*/
+/*VER IMAGENES SE DESBORDAN*/
+.portada {
+    height: 50rem;
+  }
+  
+  .encuentra-div,
+  .tu-mascota-div {
+    font-size: var(--font-size-xxl);
+    font-family: var(--font-bodoni-moda);
+  }
+  
+  .encuentra-div {
+    position: absolute;
+    top: 40%;
+    left: 8%;
+    z-index: 1;
+  }
+  
+  .tu-mascota-div {
+    position: absolute;
+    top: 70%;
+    left: 45%;
+    z-index: 1;
+  }
+  
+  .rectangle-icon,
+  .rectangle-icon1,
+  .rectangle-icon2 {
+    width: 20rem;
+  }
+  
+  .rectangle-icon {
+    position: absolute;
+    top: 20%;
+    left: 45%;
+  }
+  
+  .rectangle-icon1 {
+    position: absolute;
+    top: 55%;
+    left: 15%;
+  }
+  
+  .rectangle-icon2 {
+    position: absolute;
+    top: 85%;
+    left: 56%;
+  }
+  
+  .flecha-hacia-abajo {
+    position: absolute;
+    top: 115%;
+    left: 30%;
+  }

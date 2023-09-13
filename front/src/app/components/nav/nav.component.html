@@ -1,0 +1,81 @@
+<!-- NAVBAR -->
+<nav>
+  <div class="logo">
+    <a href="./index.html">
+      <img
+        src="../../../assets/resources/img/imagenes-web/huella.png"
+        alt="Huella"
+      />
+    </a>
+    <p class="logo-text">SANTEX</p>
+  </div>
+  <ul class="links">
+    <li><a id="inicio" routerLink="/home">Inicio</a></li>
+    <li><a href="#" id="sobre-nosotros">Integrantes</a></li>
+    <li><a href="#" id="consejos">Consejos</a></li>
+    <li><a id="buscar-ahora" routerLink="/buscar-ahora">Busca ahora!</a></li>
+    <li>
+      <a id="reportar-perdida" routerLink="/reportar-perdida"
+        >Reportar Perdida</a
+      >
+    </li>
+    <!--class="links--hide" comentado para que aparezca el link reportar perdida-->
+    <!-- Mostrar a logeados-->
+    <li><a href="#" class="cards-dni links--hide">Tus mascotas</a></li>
+    <!-- Mostrar a logeados-->
+
+    <li>
+      <a class="login" routerLink="/log-in" id="abrir-login">Inicia Sesion</a>
+    </li>
+    <!-- Mostrar NO logeado -->
+
+    <!-- <div class="contenedor-modal-login" id="contenedor-modal-login">
+        <div class="modal-login">
+          <form action="#" method="get">
+            <h3>Inicie Sesion</h3>
+            <input type="email" id="emailLogin" placeholder="Email" class="contenedor_vacio" />
+            <input
+              type="password"
+              id="passwordLogin"
+              placeholder="Contraseña"
+              class="contenedor_vacio" />
+            <div>
+              <button type="button" id="btn_ingresar">Ingresar</button>
+            </div>
+          </form>
+          <p id="cerrar-login">x</p>
+        </div>
+      </div> -->
+
+    <li>
+      <a class="registrarse" routerLink="/register" id="abrir-register"
+        >Registrarse</a
+      >
+    </li>
+    <!-- Mostrar NO logeado -->
+
+    <!-- <div class="contenedor-modal-register" id="contenedor-modal-register">
+        <div class="modal-register">
+          <form action="#" method="post">
+            <h3>Crear una cuenta</h3>
+            <input type="text" placeholder="Nombre" id="nombre" />
+            <input type="text" placeholder="Apellido" id="apellido" />
+            <input type="text" placeholder="Telefono" id="telefono" />
+            <input type="email" placeholder="Email" id="email" />
+            <input type="number" placeholder="DNI" id="dni" />
+            <input type="password" placeholder="Contraseña" id="password" />
+            <div>
+              <button type="submit" id="btn_registrar" id="abrir-falla">Registrar</button>
+            </div>
+          </form>
+          <p id="cerrar-register">x</p>
+          <div class="contenedor-modal-falla" id="contenedor-modal-falla"></div>
+        </div>
+      </div> -->
+    <li>
+      <a class="logout links--hide show--inline" href="#" id="logout"
+        >Cerrar Sesion</a
+      >
+    </li>
+  </ul>
+</nav>
