@@ -1,20 +1,13 @@
-/* .contenedor-form-busca {
-  padding: var(--padding-md);
-  align-items: center;
-  justify-content: space-evenly;
-  margin: 2rem 0;
-} */
+h2 {
+  font-family: var(--font-bodoni-moda);
+  font-size: var(--font-size-xl);
+  margin-bottom: 2rem;
+}
 
 form {
   display: flex;
   flex-direction: column;
   width: 300px;
-}
-
-h2 {
-  font-family: var(--font-bodoni-moda);
-  font-size: var(--font-size-xl);
-  margin-bottom: 2rem;
 }
 
 form label {
