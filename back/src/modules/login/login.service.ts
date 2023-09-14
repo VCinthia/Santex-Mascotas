@@ -43,9 +43,12 @@ export class LoginService {
     }
   }
 
-  public async updateLogin(login: LoginEntity): Promise<Login> {
+  public async updateLogin(
+    idLogin: number,
+    login: LoginEntity,
+  ): Promise<Login> {
     try {
-      const condition: FindOptions = { where: { idLogin: login.idLogin } };
+      const condition: FindOptions = { where: { idLogin: idLogin } };
       const loginExist: Login = await this.loginModel.findOne(condition);
       if (!loginExist) {
         throw new HttpException(this.userNotFound, HttpStatus.BAD_REQUEST);

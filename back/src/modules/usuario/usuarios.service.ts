@@ -110,13 +110,14 @@ export class UsuariosService {
           personaDTO.user.email,
           personaDTO.user.password,
         );
-        this.loginService.updateLogin(userLogin);
+        this.loginService.updateLogin(usuario.getIdLogin(), userLogin);
+        usuario.setDniPersona(personaDTO.dniPersona);
         usuario.setNombre(personaDTO.nombre);
         usuario.setApellido(personaDTO.apellido);
         usuario.setTelefono(personaDTO.telefono);
         usuario.setUpdateAt(new Date());
+        await usuario.save();
       }
-      await usuario.save();
       return usuario;
     } catch (error) {
       throw new HttpException(error.message, HttpStatus.INTERNAL_SERVER_ERROR);
