@@ -1,0 +1,9 @@
+.podemos-ayudarte {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  padding: var(--padding-md);
+  background-color: #fff;
+  margin-top: 5rem;
+  height: 30rem;
+}
