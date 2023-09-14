@@ -15,10 +15,12 @@ import { MascotaDto } from './dto/create-mascota.dto';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { JwtAuthGuard } from '../auth/jwt/auth.guard';
 import { FilterMascota } from './dto/filterMascota.dto';
+import { Public } from './../auth/decorators/public.decorator';
 @Controller('mascota')
 export class MascotaController {
   constructor(private readonly mascotaService: MascotaService) {}
 
+  @Public()
   @Post('/createMascota')
   @UseInterceptors(FileInterceptor('file'))
   createMascota(
@@ -28,17 +30,19 @@ export class MascotaController {
     return this.mascotaService.createMascota(file, createMascotaDto);
   }
 
+  @Public()
   @Get('/getListMascota')
   getListMascota() {
     return this.mascotaService.getListMascotas();
   }
 
+  @Public()
   @Get('/getMascotaById/:id')
   getMascotaById(@Param('id') id: string) {
     return this.mascotaService.getMascotaById(+id);
   }
 
-  @UseGuards(JwtAuthGuard)
+  @Public()
   @Put('/updateMascota/:id')
   @UseInterceptors(FileInterceptor('file'))
   updateMascota(
@@ -55,6 +59,7 @@ export class MascotaController {
     return this.mascotaService.deleteMascotaById(+id);
   }
 
+  @Public()
   @Get('/buscarMascotas')
   buscarMascotas(@Body() mascota: FilterMascota) {
     return this.mascotaService.buscarMascotas(mascota);

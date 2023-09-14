@@ -122,7 +122,7 @@ export class MascotaService {
     }
   }
 
-  public async deleteMascotaById(id: number): Promise<Mascota> {
+  public async deleteMascotaById(id: number): Promise<boolean> {
     try {
       const condition: FindOptions = { where: { idMascota: id } };
       const mascota: Mascota = await this.mascotaModel.findOne(condition);
@@ -132,7 +132,7 @@ export class MascotaService {
         mascota.setActivo(false);
       }
       await mascota.save();
-      return mascota;
+      return true;
     } catch (error) {
       throw new HttpException(error.message, HttpStatus.INTERNAL_SERVER_ERROR);
     }
