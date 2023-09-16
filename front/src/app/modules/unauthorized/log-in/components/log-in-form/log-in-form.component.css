@@ -1,4 +1,4 @@
-.contenedor-login {
+/* .contenedor-login {
   margin: 3rem 0;
 }
 
@@ -49,6 +49,45 @@ button {
   border: 0;
   color: #fff;
   padding: 0.7rem;
+  cursor: pointer;
+  box-shadow: -3px -3px var(--color-tertiary);
+} */
+
+h2 {
+  font-family: var(--font-bodoni-moda);
+  font-size: var(--font-size-xl);
+  margin-bottom: 2rem;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  width: 300px;
+}
+
+form label {
+  margin-bottom: 0.5rem;
+}
+
+form input {
+  border: none;
+  padding: var(--padding-xxs);
+  border-radius: var(--border-xs);
+  margin-bottom: 1rem;
+  border: 2px solid var(--color-tertiary);
+  outline: none;
+}
+
+button {
+  font-family: var(--font-advent-pro);
+  font-size: var(--font-size-sm);
+  background-color: var(--color-secondary);
+  border-radius: var(--border-xs);
+  border: 0;
+  color: #fff;
+  width: 7rem;
+  padding: 0.7rem;
+  margin: 2rem 0 0 7rem;
   cursor: pointer;
   box-shadow: -3px -3px var(--color-tertiary);
 }
