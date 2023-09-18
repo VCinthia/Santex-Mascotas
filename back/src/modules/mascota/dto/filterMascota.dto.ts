@@ -1,5 +1,5 @@
 export class FilterMascota {
-  readonly tipo: string;
+  readonly especie: string;
   readonly color: string;
   readonly tamanio: string;
   readonly raza: string;
