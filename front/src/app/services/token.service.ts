@@ -12,13 +12,7 @@ export class TokenService {
   }
 
   getToken(): string | null {
-    const token = localStorage.getItem('token');
-    if (token !== null) {
-      return token;
-    } else {
-      // Manejar el caso en que el token sea null, posiblemente lanzar una excepción o devolver un valor predeterminado.
-      return ''; // O cualquier otro valor predeterminado que desees usar
-    }
+    return localStorage.getItem('token');
   }
   
 }

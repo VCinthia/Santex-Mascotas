@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
+import { LoginUserDTO } from 'src/app/models/login.dto';
 import { LoginService } from 'src/app/services/login.service';
 import { TokenService } from 'src/app/services/token.service';
 
@@ -7,14 +10,22 @@ import { TokenService } from 'src/app/services/token.service';
   templateUrl: './log-in.component.html',
   styleUrls: ['./log-in.component.css']
 })
-export class LogInComponent implements OnInit {
+export class LogInComponent /*implements OnInit*/ {
 
-  constructor(
-    private loginService : LoginService,
-    private tokenService : TokenService
-  ) { }
+  // user : LoginUserDTO = null;
 
-  ngOnInit(): void {
+  // constructor(
+  //   private loginService : LoginService,
+  //   private tokenService : TokenService,
+  //   private toastrService : ToastrService,
+  //   private router : Router
+  // ) { }
 
-  }
+  // ngOnInit(): void {
+
+  // }
+
+  // onLogin() : void {
+  //   this.user = new LoginUserDTO()
+  // }
 }

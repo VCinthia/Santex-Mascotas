@@ -1,16 +1,30 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { ToastrModule } from 'ngx-toastr';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NavComponent } from './components/nav/nav.component';
 import { FooterComponent } from './components/footer/footer.component';
+import { FormsModule } from '@angular/forms';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
 @NgModule({
   declarations: [AppComponent, NavComponent],
   imports: [
+    BrowserAnimationsModule,
+    HttpClientModule,
+    FormsModule,
     BrowserModule,
     AppRoutingModule, // lo cambie de declarations a imports,
     FooterComponent, // lo cambie de declarations a imports,
+    ToastrModule.forRoot({
+      timeOut: 3000, // Duración predeterminada de las notificaciones en milisegundos
+      positionClass: 'toast-top-right', // Posición predeterminada de las notificaciones
+      // preventDuplicates: true, // Evitar que se muestren notificaciones duplicadas
+    }),
+    
   ],
   providers: [],
   bootstrap: [AppComponent],
