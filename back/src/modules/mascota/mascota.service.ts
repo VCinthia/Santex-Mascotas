@@ -42,8 +42,8 @@ export class MascotaService {
         const bufferImg: Buffer = file && file.buffer ? file.buffer : null;
         if (!mascotaExist) {
           const mascota: MascotaEntity = new MascotaEntity(
-            createMascotaDto.color,
-            createMascotaDto.tamanio,
+            createMascotaDto.color.toLowerCase(),
+            createMascotaDto.tamanio.toLowerCase(),
             createMascotaDto.fechaCarga,
             bufferImg,
             createMascotaDto.descripcion,
@@ -118,8 +118,8 @@ export class MascotaService {
         throw new HttpException(this.petNotFound, HttpStatus.BAD_REQUEST);
       } else {
         const bufferImg = file && file.buffer ? file.buffer : null;
-        mascota.setColor(mascotaDto.color);
-        mascota.setTamanio(mascotaDto.tamanio);
+        mascota.setColor(mascotaDto.color.toLowerCase());
+        mascota.setTamanio(mascotaDto.tamanio.toLowerCase());
         mascota.setFechaCarga(mascotaDto.fechaCarga);
         mascota.setFoto(bufferImg);
         mascota.setDescripcion(mascotaDto.descripcion);
@@ -159,7 +159,7 @@ export class MascotaService {
 
       if (filtro.especie && filtro.especie.length > 0) {
         const especie = await Especie.findOne({
-          where: { especie: filtro.especie },
+          where: { especie: filtro.especie.toLowerCase() },
         });
 
         if (especie) {
@@ -167,17 +167,14 @@ export class MascotaService {
         }
       }
       if (filtro.color && filtro.color.length > 0) {
-        whereClause.color = filtro.color;
+        whereClause.color = filtro.color.toLowerCase();
       }
       if (filtro.tamanio && filtro.tamanio.length > 0) {
-        whereClause.tamanio = filtro.tamanio;
-      }
-      if (filtro.raza && filtro.raza.length > 0) {
-        whereClause.raza = filtro.raza;
+        whereClause.tamanio = filtro.tamanio.toLowerCase();
       }
       if (filtro.zona && filtro.zona.length > 0) {
         const barrio = await Barrio.findOne({
-          where: { barrio: filtro.zona },
+          where: { barrio: filtro.zona.toLowerCase() },
         });
         if (barrio) {
           whereClause.idUbicacion = barrio.getIdUbicacion();
