@@ -5,29 +5,27 @@ export class UserDTO {
     apellido: string;
     telefono: string;
     dniPersona: number;
-    userLogin : {
+    user : {
         email: string;
         password: string;
     };
     
-    // userLogin: {
+    // userLogin: UserLoginDTO
     //     email: string;
     //     password : string;
-    // }
-    // email: string;
-    // password: string;
+    
     //secret: string;
 
-    constructor(nombre: string, apellido: string, telefono: string, dniPersona: number, userLogin : {email: string, password: string},/* userLogin : any, email: string, password: string/*, secret: string,*/) {
+    constructor(nombre: string, apellido: string, telefono: string, dniPersona: number, user : {email: string, password: string},/* userLogin : any, email: string, password: string/*, secret: string,*/) {
         this.nombre = nombre;
         this.apellido = apellido;
         this.telefono = telefono;
         this.dniPersona = dniPersona;
-        this.userLogin = userLogin 
+        this.user = user 
         // this.userLogin = {
         //     email : email,
         //     password : password
+        //     this.secret = secret;
         // }
-        // this.secret = secret;
     }
 }

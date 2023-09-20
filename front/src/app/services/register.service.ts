@@ -9,12 +9,12 @@ import { Observable } from 'rxjs';
 })
 export class RegisterService {
 
-  userURL = environment.userURL;
+  userURL : string = environment.userURL;
 
   constructor(private httpClient: HttpClient) { }
 
   createUser(userDTO: UserDTO): Observable<any> {
-    return this.httpClient.post<any>(this.userURL + 'createUsuario', userDTO);
+    return this.httpClient.post<any>(this.userURL+'createUsuario', userDTO);
   }
   //createUser(userDTO: UserDTO): Observable<any> {
   //const headers = new HttpHeaders({

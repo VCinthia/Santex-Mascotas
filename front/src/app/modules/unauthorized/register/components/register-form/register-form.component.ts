@@ -53,17 +53,17 @@ export class RegisterFormComponent implements OnInit {
 
   onCreate(): void {
     //this.user = new LoginUserDTO(this.email, this.password);
-    const userLogin: LoginUserDTO = { email: this.email, password: this.password, };
+    const user: LoginUserDTO = { email: this.email, password: this.password, };
 
     console.log(`Ingreso login: email:${this.email} | password:${this.password}`);
 
-    this.userRegister = new UserDTO(this.nombre, this.apellido, this.telefono, this.dniPersona, userLogin /*this.email, this.password, this.secret*/);
+    this.userRegister = new UserDTO(this.nombre, this.apellido, this.telefono, this.dniPersona, user /*this.email, this.password, this.secret*/);
 
     console.log('Ingreso usuario:', this.userRegister);
 
     console.log(`Ingreso usuario: nombre:${this.nombre} | apellido:${this.apellido} | telefono:${this.telefono} | dniPersona:${this.dniPersona} | userLoginEmail:${this.email} | userLoginPassword:${this.password}`);
     console.log(`objeto user datos login: email:${this.email} | password:${this.password}`);
-    console.log(`objeto userLogin: ${userLogin}`);
+    console.log(`objeto userLogin: ${user}`);
     console.log(this.userRegister);
 
     this.registerService.createUser(this.userRegister).subscribe(data => {
