@@ -19,7 +19,7 @@ export class RegisterFormComponent implements OnInit {
   telefono: string;
   dniPersona: number;
 
-  user: LoginUserDTO | null = null;
+  //user: LoginUserDTO | null = null;
   email: string;
   password: string;
 
@@ -36,7 +36,7 @@ export class RegisterFormComponent implements OnInit {
     this.apellido = '';
     this.telefono = '';
     this.dniPersona = 0;
-    this.user = null;
+    //this.user = null;
     // this.userLogin?.email = '';
     // this.userLogin?.password = '';
     
@@ -52,34 +52,26 @@ export class RegisterFormComponent implements OnInit {
   //TODO: HACER FUNCION PARA MOSTRAR PHASE ONE O TWO EN FORM Y DESPUES ENVIAR TODO A FUNCION:
 
   onCreate(): void {
-    this.user = new LoginUserDTO(this.email, this.password);
+    //this.user = new LoginUserDTO(this.email, this.password);
+    const userLogin: LoginUserDTO = { email: this.email, password: this.password, };
 
     console.log(`Ingreso login: email:${this.email} | password:${this.password}`);
 
-    this.userRegister = new UserDTO(this.nombre, this.apellido, this.telefono, this.dniPersona, this.user/*, this.email, this.password, this.secret*/);
+    this.userRegister = new UserDTO(this.nombre, this.apellido, this.telefono, this.dniPersona, userLogin /*this.email, this.password, this.secret*/);
 
-    console.log(`Ingreso usuario: nombre:${this.nombre} | apellido:${this.apellido} | telefono:${this.telefono} | dniPersona:${this.dniPersona} | userLogin:${this.user.email} | userLogin:${this.user.email}, ${this.user.password}`);
-    console.log(`objeto user datos login: email:${this.user.email} | password:${this.user.password}`);
-    console.log(`objeto user: ${this.user}`);
+    console.log('Ingreso usuario:', this.userRegister);
+
+    console.log(`Ingreso usuario: nombre:${this.nombre} | apellido:${this.apellido} | telefono:${this.telefono} | dniPersona:${this.dniPersona} | userLoginEmail:${this.email} | userLoginPassword:${this.password}`);
+    console.log(`objeto user datos login: email:${this.email} | password:${this.password}`);
+    console.log(`objeto userLogin: ${userLogin}`);
     console.log(this.userRegister);
 
     this.registerService.createUser(this.userRegister).subscribe(data => {
-      //console.log(`email:${this.email} | password:${this.password}`);
-      //console.log(data);
-
+      console.log(data);
 
       this.toastrService.success(data.response, 'Se registró correctamente. Ahora puedes logearte', {
         timeOut: 3000, positionClass: 'toast-top-right'
-        // if(!data.access_token) {
-        //   this.toastrService.error(data.response.message, 'Fallo en sistema',{
-        //     timeOut: 3000, positionClass:'toast-top-right'
       });
-      // } else {
-      //   this.tokenService.setToken(data.access_token);
-      //   this.toastrService.success(data.response, 'Ingresó correctamente',{
-      //     timeOut: 3000, positionClass:'toast-top-right'
-      //   });    
-      // }
     },
       err => {
         this.toastrService.error(err.error.message, 'Datos incorrectos de registro', {

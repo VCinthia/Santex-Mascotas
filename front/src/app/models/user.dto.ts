@@ -5,7 +5,11 @@ export class UserDTO {
     apellido: string;
     telefono: string;
     dniPersona: number;
-    userLogin : LoginUserDTO;
+    userLogin : {
+        email: string;
+        password: string;
+    };
+    
     // userLogin: {
     //     email: string;
     //     password : string;
@@ -14,12 +18,12 @@ export class UserDTO {
     // password: string;
     //secret: string;
 
-    constructor(nombre: string, apellido: string, telefono: string, dniPersona: number, userLogin : LoginUserDTO,/* userLogin : any, email: string, password: string/*, secret: string,*/) {
+    constructor(nombre: string, apellido: string, telefono: string, dniPersona: number, userLogin : {email: string, password: string},/* userLogin : any, email: string, password: string/*, secret: string,*/) {
         this.nombre = nombre;
         this.apellido = apellido;
         this.telefono = telefono;
         this.dniPersona = dniPersona;
-        this.userLogin = userLogin;
+        this.userLogin = userLogin 
         // this.userLogin = {
         //     email : email,
         //     password : password
