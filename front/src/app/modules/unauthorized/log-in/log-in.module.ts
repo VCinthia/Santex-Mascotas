@@ -9,7 +9,9 @@ import { HttpClientModule } from '@angular/common/http';
 import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
-  declarations: [LogInComponent, LogInFormComponent],
+  declarations: [
+    LogInComponent,
+    LogInFormComponent],
   imports: [
     HttpClientModule,
     FormsModule,

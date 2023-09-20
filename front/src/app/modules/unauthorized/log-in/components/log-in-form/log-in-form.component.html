@@ -3,10 +3,8 @@
 <div class="contenedor-login " id="contenedor-login">
   <div class="main-container">
     <form #formularioLogin="ngForm" action="#" id="contenedor-form-login" method="post">
-      <!-- <div class="form-group"> -->
         <label for="emailLogin">Correo Electronico</label>
         <input type="email" id="emailLogin" placeholder="Ingresa tu correo" autocomplete="on" required [(ngModel)]="emailLogin" name="emailLogin"/>
-      <!-- </div> -->
       
       <label for="passwordLogin">Contraseña</label>
       <input type="password" name="passwordLogin" id="passwordLogin" placeholder="Ingresa tu contraseña" required [(ngModel)]="passwordLogin" name="passwordLogin"/>

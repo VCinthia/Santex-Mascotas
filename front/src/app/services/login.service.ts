@@ -9,11 +9,11 @@ import { Observable } from 'rxjs';
 })
 export class LoginService {
 
-   loginURL = environment.loginURL;
+  loginURL = environment.loginURL;
 
   constructor(private httpClient: HttpClient) { }
 
-   login(loginDTO: LoginUserDTO): Observable<any> {
-     return this.httpClient.post<any>(this.loginURL + 'login', loginDTO);
-   }
+  login(loginDTO: LoginUserDTO): Observable<any> {
+    return this.httpClient.post<any>(this.loginURL + 'login', loginDTO);
+  }
 }
