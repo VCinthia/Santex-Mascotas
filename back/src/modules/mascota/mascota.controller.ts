@@ -24,7 +24,7 @@ export class MascotaController {
   @Post('/createMascota')
   @UseInterceptors(FileInterceptor('file'))
   createMascota(
-    @UploadedFile() file: Express.Multer.File,
+    @UploadedFile() file: Express.Multer.File | undefined,
     @Body() createMascotaDto: MascotaDto,
   ) {
     return this.mascotaService.createMascota(file, createMascotaDto);
@@ -46,14 +46,14 @@ export class MascotaController {
   @Put('/updateMascota/:id')
   @UseInterceptors(FileInterceptor('file'))
   updateMascota(
-    @UploadedFile() file: Express.Multer.File,
+    @UploadedFile() file: Express.Multer.File | undefined,
     @Param('id') id: string,
     @Body() mascotaDto: MascotaDto,
   ) {
     return this.mascotaService.updateMascota(+id, file, mascotaDto);
   }
 
-  @UseGuards(JwtAuthGuard)
+  @Public()
   @Delete('/deleteMascota/:id')
   deleteMascota(@Param('id') id: string) {
     return this.mascotaService.deleteMascotaById(+id);

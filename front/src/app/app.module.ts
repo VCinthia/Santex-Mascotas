@@ -6,9 +6,11 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NavComponent } from './components/nav/nav.component';
 import { FooterComponent } from './components/footer/footer.component';
+
 import { FormsModule } from '@angular/forms';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [AppComponent, NavComponent],
@@ -18,6 +20,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     FormsModule,
     BrowserModule,
     AppRoutingModule, // lo cambie de declarations a imports,
+    RouterModule,
     FooterComponent, // lo cambie de declarations a imports,
     ToastrModule.forRoot({
       timeOut: 3000, // Duración predeterminada de las notificaciones en milisegundos

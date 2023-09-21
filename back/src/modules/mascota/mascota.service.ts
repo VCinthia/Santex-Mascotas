@@ -2,11 +2,18 @@ import { Injectable, HttpException, HttpStatus } from '@nestjs/common';
 import { MascotaDto } from './dto/create-mascota.dto';
 import { InjectModel } from '@nestjs/sequelize/dist/common';
 import { Mascota } from './entities/mascota.entity';
-import { FindOptions, Op } from 'sequelize';
+import { FindOptions } from 'sequelize';
 import { MascotaEntity } from './entities/mascota.class';
 import { Especie } from '../especie/entities/especie.entity';
-import { Ciudad } from '../ciudad/entities/ciudad.entity';
 import { FilterMascota } from './dto/filterMascota.dto';
+import { Barrio } from '../barrio/entities/barrio.entity';
+import {
+  EspecieMascota,
+  FiltroMascotaDto,
+  UbicacionMascota,
+  UsuarioMascota,
+} from './dto/filtroMascota.dto';
+import { Usuario } from '../usuario/entities/usuario.entity';
 
 @Injectable()
 export class MascotaService {
@@ -23,15 +30,22 @@ export class MascotaService {
     try {
       if (createMascotaDto) {
         const condition: FindOptions = {
-          where: { idUsuario: createMascotaDto.idUsuario },
+          where: {
+            idUsuario: createMascotaDto.idUsuario,
+            idEspecie: createMascotaDto.idEspecie,
+            idUbicacion: createMascotaDto.idUbicacion,
+            color: createMascotaDto.color,
+            tamanio: createMascotaDto.tamanio,
+          },
         };
         const mascotaExist = await this.mascotaModel.findOne(condition);
+        const bufferImg: Buffer = file && file.buffer ? file.buffer : null;
         if (!mascotaExist) {
           const mascota: MascotaEntity = new MascotaEntity(
-            createMascotaDto.color,
-            createMascotaDto.tamanio,
+            createMascotaDto.color.toLowerCase(),
+            createMascotaDto.tamanio.toLowerCase(),
             createMascotaDto.fechaCarga,
-            file.buffer,
+            bufferImg,
             createMascotaDto.descripcion,
             createMascotaDto.estado,
             createMascotaDto.activo,
@@ -103,10 +117,11 @@ export class MascotaService {
       if (!mascota) {
         throw new HttpException(this.petNotFound, HttpStatus.BAD_REQUEST);
       } else {
-        mascota.setColor(mascotaDto.color);
-        mascota.setTamanio(mascotaDto.tamanio);
+        const bufferImg = file && file.buffer ? file.buffer : null;
+        mascota.setColor(mascotaDto.color.toLowerCase());
+        mascota.setTamanio(mascotaDto.tamanio.toLowerCase());
         mascota.setFechaCarga(mascotaDto.fechaCarga);
-        mascota.setFoto(file.buffer);
+        mascota.setFoto(bufferImg);
         mascota.setDescripcion(mascotaDto.descripcion);
         mascota.setEstado(mascotaDto.estado);
         mascota.setActivo(mascotaDto.activo);
@@ -138,35 +153,81 @@ export class MascotaService {
     }
   }
 
-  public async buscarMascotas(mascota: FilterMascota): Promise<any> {
+  public async buscarMascotas(filtro: FilterMascota) {
     try {
-      const condition: FindOptions = {
-        where: {
-          [Op.or]: [
-            { tipo: { [Op.iLike]: `%${mascota.tipo}%` } },
-            { color: { [Op.iLike]: `%${mascota.color}%` } },
-            { tamanio: { [Op.iLike]: `%${mascota.tamanio}%` } },
-            { '$Especie.nombre$': { [Op.iLike]: `%${mascota.raza}%` } },
-            { '$Ciudad.nombre$': { [Op.iLike]: `%${mascota.zona}%` } },
-          ],
-        },
-        include: [
-          {
-            model: Especie,
-            attributes: [],
-          },
-          {
-            model: Ciudad,
-            attributes: [],
-          },
-        ],
-      };
+      const whereClause: any = {};
 
-      const mascotas = await Mascota.findAll(condition);
+      if (filtro.especie && filtro.especie.length > 0) {
+        const especie = await Especie.findOne({
+          where: { especie: filtro.especie.toLowerCase() },
+        });
 
-      return mascotas;
+        if (especie) {
+          whereClause.idEspecie = especie.getIdEspecie();
+        }
+      }
+      if (filtro.color && filtro.color.length > 0) {
+        whereClause.color = filtro.color.toLowerCase();
+      }
+      if (filtro.tamanio && filtro.tamanio.length > 0) {
+        whereClause.tamanio = filtro.tamanio.toLowerCase();
+      }
+      if (filtro.zona && filtro.zona.length > 0) {
+        const barrio = await Barrio.findOne({
+          where: { barrio: filtro.zona.toLowerCase() },
+        });
+        if (barrio) {
+          whereClause.idUbicacion = barrio.getIdUbicacion();
+        }
+      }
+
+      const mascotas = await Mascota.findAll({
+        where: whereClause,
+        include: { all: true },
+      });
+      const mascotaFiltro: FiltroMascotaDto[] = [];
+      if (mascotas && mascotas.length > 0) {
+        for (let i = 0; i < mascotas.length; ++i) {
+          const mascota: FiltroMascotaDto = new FiltroMascotaDto();
+          const usuarioMascota: UsuarioMascota = new UsuarioMascota();
+          const especieMascota: EspecieMascota = new EspecieMascota();
+          const ubicacionMascota: UbicacionMascota = new UbicacionMascota();
+
+          const mascotaAux = mascotas[i];
+          const usuarioAux = await Usuario.findOne({
+            where: { idUsuario: mascotaAux.getIdUsuario() },
+          });
+
+          const especieAux = await Especie.findOne({
+            where: { idEspecie: mascotaAux.getIdEspecie() },
+          });
+          const ubicacionAux = await Barrio.findOne({
+            where: { idUbicacion: mascotaAux.getIdUbicacion() },
+          });
+          mascota.color = mascotaAux.getColor();
+          mascota.tamanio = mascotaAux.getTamanio();
+          mascota.fechaCarga = mascotaAux.getFechaCarga();
+          mascota.foto = mascotaAux.getFoto() ? mascotaAux.getFoto() : null;
+          mascota.descripcion = mascotaAux.getDescripcion();
+          mascota.estado = mascotaAux.getEstado();
+          mascota.activo = mascotaAux.getActivo();
+          usuarioMascota.usuarioId = usuarioAux.getIdUsuario();
+          usuarioMascota.nombre = usuarioAux.getNombre();
+          usuarioMascota.apellido = usuarioAux.getApellido();
+          usuarioMascota.telefono = usuarioAux.getTelefono();
+          mascota.usuario = usuarioMascota;
+          ubicacionMascota.idUbicacion = ubicacionAux.getIdUbicacion();
+          ubicacionMascota.nombre = ubicacionAux.getBarrio();
+          mascota.ubicacion = ubicacionMascota;
+          especieMascota.idEspecie = especieAux.getIdEspecie();
+          especieMascota.nombre = especieAux.getEspecie();
+          mascota.especie = especieMascota;
+
+          mascotaFiltro.push(mascota);
+        }
+      }
+      return mascotaFiltro;
     } catch (error) {
-      console.error('Error al buscar mascotas:', error);
       throw error;
     }
   }

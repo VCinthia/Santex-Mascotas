@@ -29,7 +29,10 @@ export class Mascota extends Model<Mascota> {
   @Column
   private fechaCarga: Date;
 
-  @Column(DataType.BLOB('long'))
+  @Column({
+    type: DataType.BLOB('long'),
+    allowNull: true,
+  })
   private foto: Buffer;
 
   @Column
@@ -75,7 +78,7 @@ export class Mascota extends Model<Mascota> {
   public setFechaCarga(fechaCarga: Date): void {
     this.fechaCarga = fechaCarga;
   }
-  public getFoto(): Buffer {
+  public getFoto(): Buffer | undefined {
     return this.foto;
   }
   public setFoto(foto: Buffer): void {

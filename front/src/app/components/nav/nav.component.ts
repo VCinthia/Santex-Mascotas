@@ -8,12 +8,11 @@ import { TokenService } from 'src/app/services/token.service';
   templateUrl: './nav.component.html',
   styleUrls: ['./nav.component.css'],
 })
+
 export class NavComponent implements OnInit{
 
   isLogged : boolean = false //boolean | any ;
-
   
-
   constructor(
     private tokenService : TokenService,
     private router : Router,
@@ -38,14 +37,21 @@ export class NavComponent implements OnInit{
   // scrollToSection(sectionId: string) {
   //   this.scrollService.scrollToSection(sectionId);
   // }
-
-  scrollToSection(sectionId: string, event: Event) {
-    event.preventDefault(); //Evita que la página se actualice
-    this.scrollService.scrollToSection(sectionId);
-  }
+  
+  //ESTA ES LA QUE FUNCIONABA EN CINTHIA
+  //scrollToSection(sectionId: string, event: Event) {
+    //event.preventDefault(); //Evita que la página se actualice
+    //this.scrollService.scrollToSection(sectionId);
+  //}
   
   // scrollToSection(sectionId: string) {
   //   this.scrollService.scrollToSection(sectionId);
   // }
   
+
+export class NavComponent {
+  closeMenu(checkbox: HTMLInputElement) {
+    checkbox.checked = false;
+  }
+
 }

@@ -18,7 +18,7 @@ export class Usuario extends Model<Usuario> {
   @PrimaryKey
   @AutoIncrement
   @Column
-  private idUsuario: number;
+  public idUsuario: number;
 
   @Column
   private dniPersona: number;
