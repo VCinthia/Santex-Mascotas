@@ -17,6 +17,11 @@ const routes: Routes = [
     loadChildren: () =>
       import('./modules').then((m) => m.ReportarPerdidaModule),
   },
+  // {
+  //   path: 'tus-mascotas',
+  //   loadChildren: () =>
+  //     import('./modules').then((m) => m.MascotasUser),
+  // },
   {
     path: 'log-in',
     loadChildren: () => import('./modules').then((m) => m.LogInModule),

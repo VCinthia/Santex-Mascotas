@@ -50,15 +50,7 @@ nav ul li a {
   font-size: var(--font-size-sm);
 }
 
-.registrarse {
-  background-color: var(--color-tertiary);
-  padding: var(--padding-xxs);
-  border-radius: var(--border-xs);
-}
 
-.links--hide {
-  display: none;
-}
 
 /*PORTADA*/
 .portada {

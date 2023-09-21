@@ -1,3 +1,4 @@
+import { NgIf } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
@@ -13,6 +14,8 @@ import { TokenService } from 'src/app/services/token.service';
 })
 export class LogInFormComponent implements OnInit {
 
+  nombre : string | null;
+
   user: LoginUserDTO | null = null;
   emailLogin: string;
   passwordLogin: string;
@@ -23,13 +26,12 @@ export class LogInFormComponent implements OnInit {
     private toastrService: ToastrService,
     private router: Router
   ) {
+    this.nombre = this.tokenService.getNombreUsuario();
     this.emailLogin = '';
     this.passwordLogin = '';
   }
 
-  ngOnInit(): void {
-
-  }
+  ngOnInit(): void {  }
 
   onLogin(): void {
     this.user = new LoginUserDTO(this.emailLogin, this.passwordLogin);
@@ -41,10 +43,13 @@ export class LogInFormComponent implements OnInit {
         });
       } else {
         this.tokenService.setToken(data.access_token);
-        this.toastrService.success(data.response, 'Ingresó correctamente',{
-          timeOut: 3000, positionClass:'toast-top-right'
+        this.nombre = this.tokenService.getNombreUsuario();
+        this.toastrService.success(data.response, `Bienvenido ${this.nombre}`, {
+          timeOut: 3000, positionClass: 'toast-top-right'
         });
-        this.router.navigate(['/']);  
+        
+        this.router.navigate(['/']);
+        
       }
     },
     err => {
