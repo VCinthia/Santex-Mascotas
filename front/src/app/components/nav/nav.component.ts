@@ -49,7 +49,7 @@ export class NavComponent implements OnInit{
   // }
   
 
-export class NavComponent {
+//export class NavComponent {
   closeMenu(checkbox: HTMLInputElement) {
     checkbox.checked = false;
   }
