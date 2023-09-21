@@ -13,11 +13,15 @@ import { RegisterService } from 'src/app/services/register.service';
 })
 export class RegisterFormComponent implements OnInit {
 
+  //TODO: PARA MOSTRAR PHASE ONE O TWO EN FORM Y DESPUES ENVIAR TODO A FUNCION:
+  mostrarFaseUno = true;
+  mostrarFaseDos = false;
+
   userRegister: UserDTO | null = null;
   nombre: string;
   apellido: string;
   telefono: string;
-  dniPersona: number;
+  dniPersona: number | null;
 
   //user: LoginUserDTO | null = null;
   email: string;
@@ -35,7 +39,7 @@ export class RegisterFormComponent implements OnInit {
     this.nombre = '';
     this.apellido = '';
     this.telefono = '';
-    this.dniPersona = 0;
+    this.dniPersona = null;
     //this.user = null;
     // this.userLogin?.email = '';
     // this.userLogin?.password = '';
@@ -49,22 +53,24 @@ export class RegisterFormComponent implements OnInit {
 
   }
 
-  //TODO: HACER FUNCION PARA MOSTRAR PHASE ONE O TWO EN FORM Y DESPUES ENVIAR TODO A FUNCION:
+  
 
+
+  //TODO: funcion para crear usuario ok -> ver que identifica por dni pero no por mail
   onCreate(): void {
     //this.user = new LoginUserDTO(this.email, this.password);
     const user: LoginUserDTO = { email: this.email, password: this.password, };
 
-    console.log(`Ingreso login: email:${this.email} | password:${this.password}`);
+    //console.log(`Ingreso login: email:${this.email} | password:${this.password}`);
 
-    this.userRegister = new UserDTO(this.nombre, this.apellido, this.telefono, this.dniPersona, user /*this.email, this.password, this.secret*/);
+    this.userRegister = new UserDTO(this.nombre, this.apellido, this.telefono, this.dniPersona!, user /*this.email, this.password, this.secret*/);
 
-    console.log('Ingreso usuario:', this.userRegister);
+    //console.log('Ingreso usuario:', this.userRegister);
 
-    console.log(`Ingreso usuario: nombre:${this.nombre} | apellido:${this.apellido} | telefono:${this.telefono} | dniPersona:${this.dniPersona} | userLoginEmail:${this.email} | userLoginPassword:${this.password}`);
-    console.log(`objeto user datos login: email:${this.email} | password:${this.password}`);
-    console.log(`objeto userLogin: ${user}`);
-    console.log(this.userRegister);
+    // console.log(`Ingreso usuario: nombre:${this.nombre} | apellido:${this.apellido} | telefono:${this.telefono} | dniPersona:${this.dniPersona} | userLoginEmail:${this.email} | userLoginPassword:${this.password}`);
+    // console.log(`objeto user datos login: email:${this.email} | password:${this.password}`);
+    // console.log(`objeto userLogin: ${user}`);
+    // console.log(this.userRegister);
 
     this.registerService.createUser(this.userRegister).subscribe(data => {
       console.log(data);
@@ -72,6 +78,8 @@ export class RegisterFormComponent implements OnInit {
       this.toastrService.success(data.response, 'Se registró correctamente. Ahora puedes logearte', {
         timeOut: 3000, positionClass: 'toast-top-right'
       });
+
+      this.router.navigate(['/log-in'])
     },
       err => {
         this.toastrService.error(err.error.message, 'Datos incorrectos de registro', {

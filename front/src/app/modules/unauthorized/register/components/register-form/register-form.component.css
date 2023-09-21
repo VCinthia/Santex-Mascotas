@@ -42,3 +42,28 @@ button {
   box-shadow: -3px -3px var(--color-tertiary);
 }
 
+.option {
+  display: flex;
+  justify-content: flex-end;
+  /* align-items: flex-end; */
+
+  font-weight: 10; 
+  font-weight: bold;
+  cursor: pointer;
+  color: var(--color-secondary);  
+}
+
+.option:nth-child(5) {/*cambiar a 6 cuando este pregunta secreta*/
+  color: var(--color-pink);
+  justify-content: flex-start;
+}
+
+.option .fa-arrow-right{
+  padding: 0  0  0 20px;
+  /* color: var(--color-secondary); */
+}
+
+.option .fa-arrow-left{
+  padding: 0  20px 0  0 ;
+  /* color: var(--color-pink); */
+}

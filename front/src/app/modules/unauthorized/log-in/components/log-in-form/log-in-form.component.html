@@ -2,14 +2,14 @@
 
 <div class="contenedor-login " id="contenedor-login">
   <div class="main-container">
-    <form #formularioLogin="ngForm" action="#" id="contenedor-form-login" method="post">
+    <form #formularioLogin="ngForm" action="#" id="contenedor-form-login" novalidate (ngSubmit)="onLogin()">
         <label for="emailLogin">Correo Electronico</label>
         <input type="email" id="emailLogin" placeholder="Ingresa tu correo" autocomplete="on" required [(ngModel)]="emailLogin" name="emailLogin"/>
       
       <label for="passwordLogin">Contraseña</label>
       <input type="password" name="passwordLogin" id="passwordLogin" placeholder="Ingresa tu contraseña" required [(ngModel)]="passwordLogin" name="passwordLogin"/>
     
-      <button type="submit" name="btnIngresar" id="btnIngresar" (click)="onLogin()">Ingresar</button>
+      <button type="submit" name="btnIngresar" id="btnIngresar" >Ingresar</button> <!--(click)="onLogin()"-->
     </form>
   </div>
 </div>
