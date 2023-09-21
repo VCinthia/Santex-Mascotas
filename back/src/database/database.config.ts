@@ -3,5 +3,5 @@ export const dataBaseConfig: SequelizeModuleOptions = {
   dialect: 'sqlite',
   storage: './src/database/mascotasDB.sqlite3',
   autoLoadModels: true,
-  synchronize: true, //TODO pasar a false
+  synchronize: false, //TODO pasar a false
 };

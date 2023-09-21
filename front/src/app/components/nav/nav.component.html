@@ -39,10 +39,10 @@
           id="reportar-perdida"
           routerLink="/reportar-perdida"
           (click)="closeMenu(chkboxes)"
-          >Reportar Perdida</a
+          *ngIf="isLogged" >Reportar Perdida</a
         >
       </li>
-      <li><a href="#" class="cards-dni links--hide">Tus mascotas</a></li>
+      <li><a href="#" class="cards-dni" *ngIf="isLogged">Tus mascotas</a></li>
 
       <li>
         <a
@@ -50,7 +50,7 @@
           routerLink="/log-in"
           id="abrir-login"
           (click)="closeMenu(chkboxes)"
-          >Inicia Sesion</a
+          *ngIf="!isLogged" >Inicia Sesion</a
         >
       </li>
 
@@ -60,12 +60,12 @@
           routerLink="/register"
           id="abrir-register"
           (click)="closeMenu(chkboxes)"
-          >Registrarse</a
+          *ngIf="!isLogged" >Registrarse</a
         >
       </li>
       <li>
-        <a class="logout links--hide show--inline" href="#" id="logout"
-          >Cerrar Sesion</a
+        <a class="logout" href="#" id="logout"
+          *ngIf="isLogged" (click)="logOut()">Cerrar Sesion</a
         >
       </li>
 
@@ -76,5 +76,6 @@
     <label for="check" class="open-menu"
       ><i class="fa-solid fa-bars"></i
     ></label>
+
   </ul>
 </nav>

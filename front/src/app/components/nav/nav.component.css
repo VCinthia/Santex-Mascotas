@@ -98,6 +98,19 @@
   .menu li a {
     padding: 10px;
   }
+  
+  .registrarse-btn {
+    background-color: var(--color-tertiary);
+    padding: var(--padding-xxs);
+    border-radius: var(--border-xs);
+  }
+
+  .logout-btn {
+    background-color: var(--color-tertiary);
+    padding: var(--padding-xxs);
+    border-radius: var(--border-xs);
+  }
+  
   .open-menu,
   .close-menu {
     display: block;
@@ -106,3 +119,4 @@
     right: 0;
   }
 }
+
