@@ -1,37 +1,44 @@
 <!-- NAVBAR -->
-<nav>
+<nav id="inicio">
   <div class="logo">
-    <a href="./index.html">
-      <img
-        src="../../../assets/resources/img/imagenes-web/huella.png"
-        alt="Huella"
-      />
+    <a href="#inicio">
+      <img src="../../../assets/resources/img/imagenes-web/huella.png" alt="Huella" />
     </a>
     <p class="logo-text">SANTEX</p>
   </div>
   <ul class="links">
-    <li><a id="inicio" routerLink="/home">Inicio</a></li>
-    <li><a href="#" id="sobre-nosotros">Integrantes</a></li>
-    <li><a href="#" id="consejos">Consejos</a></li>
+
+    <!-- <li><a (click)="scrollToSection('inicio')" href="#inicio" id="inicio-btn" >Inicio</a></li>
+    <li><a (click)="scrollToSection('integrantes')" href="#integrantes" id="integrantes-btn">Integrantes</a></li>
+    <li><a (click)="scrollToSection('dudas')" href="#dudas" id="dudas-btn">Tienes dudas?</a></li> -->
+
+    <li><a  href="#inicio" id="inicio-btn">Inicio</a></li> <!--(click)="scrollToSection('inicio', $event)"-->
+    <li><a (click)="scrollToSection('integrantes', $event)" href="#integrantes" id="integrantes-btn">Integrantes</a>
+    </li>
+    <li><a (click)="scrollToSection('dudas', $event)" href="#dudas" id="dudas-btn">Tienes dudas?</a></li>
+
+    <!-- <li><a href="#portada" id="portada-btn">Inicio</a></li>
+    <li><a href="#integrantes" id="integrantes-btn">Integrantes</a></li>
+    <li><a href="#dudas" id="dudas-btn">Tienes dudas?</a></li> -->
+
+
     <li><a id="buscar-ahora" routerLink="/buscar-ahora">Busca ahora!</a></li>
     <li>
-      <a id="reportar-perdida" routerLink="/reportar-perdida" *ngIf="isLogged"
-        >Reportar Perdida</a
-      >
+      <a id="reportar-perdida" routerLink="/reportar-perdida" *ngIf="isLogged">Reportar Perdida</a>
     </li>
-    
-    <li><a href="#" class="cards-dni" routerLink="/home"*ngIf="isLogged">Tus mascotas</a></li>
+
+    <li><a href="#" class="cards-dni" routerLink="/home" *ngIf="isLogged">Tus mascotas</a></li>
 
     <li>
       <a class="login" routerLink="/log-in" id="abrir-login" *ngIf="!isLogged">Inicia Sesion</a>
     </li>
-    
+
     <li>
-      <a class="registrarse-btn" routerLink="/register" id="abrir-register" *ngIf="!isLogged" >Registrarse</a>
+      <a class="registrarse-btn" routerLink="/register" id="abrir-register" *ngIf="!isLogged">Registrarse</a>
     </li>
-    
+
     <li>
-      <a class="registrarse-btn" href="#" id="logout" *ngIf="isLogged" (click)="logOut()" >Cerrar Sesion</a >
+      <a class="registrarse-btn" href="#" id="logout" *ngIf="isLogged" (click)="logOut()">Cerrar Sesion</a>
     </li>
   </ul>
 </nav>

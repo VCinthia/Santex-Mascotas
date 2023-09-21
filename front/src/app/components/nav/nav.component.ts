@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { ScrollService } from 'src/app/services/scroll.service';
 import { TokenService } from 'src/app/services/token.service';
 @Component({
 
@@ -15,7 +16,8 @@ export class NavComponent implements OnInit{
 
   constructor(
     private tokenService : TokenService,
-    private router : Router
+    private router : Router,
+    private scrollService: ScrollService
     ){
     
   }
@@ -32,4 +34,18 @@ export class NavComponent implements OnInit{
     this.tokenService.logOut();
     this.router.navigate(['/']);
   }
+
+  // scrollToSection(sectionId: string) {
+  //   this.scrollService.scrollToSection(sectionId);
+  // }
+
+  scrollToSection(sectionId: string, event: Event) {
+    event.preventDefault(); //Evita que la página se actualice
+    this.scrollService.scrollToSection(sectionId);
+  }
+  
+  // scrollToSection(sectionId: string) {
+  //   this.scrollService.scrollToSection(sectionId);
+  // }
+  
 }
