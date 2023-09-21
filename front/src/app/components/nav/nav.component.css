@@ -41,7 +41,7 @@
   transition: 0.15s ease-in-out;
 } */
 
-.registrarse {
+.registrarse , .logout{
   background-color: var(--color-tertiary);
   padding: var(--padding-xxs);
   border-radius: var(--border-xs);
