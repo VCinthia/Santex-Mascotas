@@ -64,4 +64,10 @@ export class MascotaController {
   buscarMascotas(@Body() mascota: FilterMascota) {
     return this.mascotaService.buscarMascotas(mascota);
   }
+
+  @Public()
+  @Get('/getMascotaByDni/:dni')
+  getMascotaByDni(@Param('dni') dni: number) {
+    return this.mascotaService.getMascotaByDniUsuario(+dni);
+  }
 }

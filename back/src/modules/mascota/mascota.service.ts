@@ -231,4 +231,61 @@ export class MascotaService {
       throw error;
     }
   }
+
+  public async getMascotaByDniUsuario(
+    dni: number,
+  ): Promise<FiltroMascotaDto[]> {
+    const conditionDni: FindOptions = { where: { dniPersona: dni } };
+
+    const usuarioAux = await Usuario.findOne(conditionDni);
+    if (usuarioAux) {
+      const conditionM: FindOptions = {
+        where: { idUsuario: usuarioAux.getIdUsuario() },
+      };
+      const mascotas = await Mascota.findAll(conditionM);
+      const mascotaFiltro: FiltroMascotaDto[] = [];
+      if (mascotas.length > 0) {
+        for (let i = 0; i < mascotas.length; ++i) {
+          const mascota: FiltroMascotaDto = new FiltroMascotaDto();
+          const usuarioMascota: UsuarioMascota = new UsuarioMascota();
+          const especieMascota: EspecieMascota = new EspecieMascota();
+          const ubicacionMascota: UbicacionMascota = new UbicacionMascota();
+
+          const mascotaAux = mascotas[i];
+          const especieAux = await Especie.findOne({
+            where: { idEspecie: mascotaAux.getIdEspecie() },
+          });
+          const ubicacionAux = await Barrio.findOne({
+            where: { idUbicacion: mascotaAux.getIdUbicacion() },
+          });
+          mascota.color = mascotaAux.getColor();
+          mascota.tamanio = mascotaAux.getTamanio();
+          mascota.fechaCarga = mascotaAux.getFechaCarga();
+          mascota.foto = mascotaAux.getFoto() ? mascotaAux.getFoto() : null;
+          mascota.descripcion = mascotaAux.getDescripcion();
+          mascota.estado = mascotaAux.getEstado();
+          mascota.activo = mascotaAux.getActivo();
+          usuarioMascota.usuarioId = usuarioAux.getIdUsuario();
+          usuarioMascota.nombre = usuarioAux.getNombre();
+          usuarioMascota.apellido = usuarioAux.getApellido();
+          usuarioMascota.telefono = usuarioAux.getTelefono();
+          mascota.usuario = usuarioMascota;
+          ubicacionMascota.idUbicacion = ubicacionAux.getIdUbicacion();
+          ubicacionMascota.nombre = ubicacionAux.getBarrio();
+          mascota.ubicacion = ubicacionMascota;
+          especieMascota.idEspecie = especieAux.getIdEspecie();
+          especieMascota.nombre = especieAux.getEspecie();
+          mascota.especie = especieMascota;
+
+          mascotaFiltro.push(mascota);
+        }
+      }
+      return mascotaFiltro;
+    } else {
+      throw new HttpException(
+        `No se encontro el usuario con el dni: ${dni}`,
+        HttpStatus.BAD_REQUEST,
+      );
+    }
+  }
 }
