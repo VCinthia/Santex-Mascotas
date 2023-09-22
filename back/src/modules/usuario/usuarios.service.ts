@@ -26,35 +26,49 @@ export class UsuariosService {
         const usuario = await this.userModel.findOne(condition);
         if (usuario && usuario.getActivo()) {
           throw new HttpException(
-            `El usuario con dni ${usuarioDTO.dniPersona} y email ${usuarioDTO.user.email} ya se encuentra registrado.`,
-            HttpStatus.BAD_REQUEST,
-          );
-        } else {
-          const passwordHash = await this.loginService.hashPassword(
-            usuarioDTO.user.password,
-          );
-          const login: LoginEntity = new LoginEntity(
-            usuarioDTO.user.email,
-            passwordHash,
-          );
-          const loginCreate = await this.loginService.createLogin(login);
-          if (loginCreate) {
-            const usuario: UsuarioEntity = new UsuarioEntity(
-              usuarioDTO.dniPersona,
-              usuarioDTO.nombre,
-              usuarioDTO.apellido,
-              usuarioDTO.telefono,
-              true,
-              loginCreate.getIdLogin(),
-            );
-            const newUsuario = await this.userModel.create(usuario);
-            return newUsuario;
-          }
-          throw new HttpException(
-            'No se puedo crear al usuario.',
+            `El usuario con dni ${usuarioDTO.dniPersona} se encuentra registrado.`,
             HttpStatus.BAD_REQUEST,
           );
         }
+        const loginExist = await this.loginService.getLoginByEmail(
+          usuarioDTO.user.email,
+        );
+        if (loginExist) {
+          const condition: FindOptions = {
+            where: { idLogin: loginExist.getIdLogin() },
+          };
+          const usuarioAux = await this.userModel.findOne(condition);
+          if (usuarioAux && usuarioAux.getActivo()) {
+            throw new HttpException(
+              `El usuario con el email ${usuarioDTO.user.email} se encuentra registrado.`,
+              HttpStatus.BAD_REQUEST,
+            );
+          }
+        }
+        const passwordHash = await this.loginService.hashPassword(
+          usuarioDTO.user.password,
+        );
+        const login: LoginEntity = new LoginEntity(
+          usuarioDTO.user.email,
+          passwordHash,
+        );
+        const loginCreate = await this.loginService.createLogin(login);
+        if (loginCreate) {
+          const usuario: UsuarioEntity = new UsuarioEntity(
+            usuarioDTO.dniPersona,
+            usuarioDTO.nombre,
+            usuarioDTO.apellido,
+            usuarioDTO.telefono,
+            true,
+            loginCreate.getIdLogin(),
+          );
+          const newUsuario = await this.userModel.create(usuario);
+          return newUsuario;
+        }
+        throw new HttpException(
+          'No se puedo crear al usuario.',
+          HttpStatus.BAD_REQUEST,
+        );
       } else {
         throw new HttpException(
           'Los datos para crear al usuario no son válidos.',

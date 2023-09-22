@@ -42,6 +42,19 @@ export class LoginService {
       throw new HttpException(error.message, HttpStatus.INTERNAL_SERVER_ERROR);
     }
   }
+  public async getLoginByEmail(email: string): Promise<Login> {
+    try {
+      const condition: FindOptions = { where: { email: email } };
+      const login: Login = await this.loginModel.findOne(condition);
+      if (login) {
+        return login;
+      } else {
+        return null;
+      }
+    } catch (error) {
+      throw new HttpException(error.message, HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+  }
 
   public async updateLogin(
     idLogin: number,
