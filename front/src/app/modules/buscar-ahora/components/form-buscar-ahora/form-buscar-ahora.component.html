@@ -1,8 +1,9 @@
 <h2>Busca Ahora</h2>
 
-<form action="#" id="contenedor-form-buscar">
-  <label for="">¿Que buscas?</label>
-  <select id="especiesCargar"></select>
+<form #formularioBusquedaMascota="ngForm" action="#" id="contenedor-form-buscar" novalidate>
+  <label for="especieMascota">¿Que buscas?</label>
+  <select id="especiesCargar"required [(ngModel)]="especieMascota" name="especieMascota"></select>
+
   <label for="">Color</label>
   <select id="color" required>
     <option value="BLANCO" id="blanco">BLANCO</option>
