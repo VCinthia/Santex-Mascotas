@@ -6,12 +6,14 @@ import { BuscarAhoraRoutingModule } from './buscar-ahora-routing.module';
 import { CarouselModule } from '../carousel/carousel.module';
 import { FormsModule } from '@angular/forms';
 import { ToastrModule } from 'ngx-toastr';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
     FormBuscarAhoraComponent,
     BuscarAhoraComponent],
   imports: [
+    HttpClientModule,
     FormsModule,
     CommonModule,
     BuscarAhoraRoutingModule,

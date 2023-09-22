@@ -1,8 +1,10 @@
 <h2>Busca Ahora</h2>
 
-<form #formularioBusquedaMascota="ngForm" action="#" id="contenedor-form-buscar" novalidate>
+<form #formularioBusquedaMascota="ngForm" action="#" id="contenedor-form-buscar" novalidate >
   <label for="especieMascota">¿Que buscas?</label>
-  <select id="especiesCargar"required [(ngModel)]="especieMascota" name="especieMascota"></select>
+  <select id="especiesCargar"required >
+    <option *ngFor="let especie of especies" value="{{especie.id}}" id="{{especie.especie}}">{{especie.especie}}</option>
+  </select> <!--TRAE ESPECIE OK-->
 
   <label for="">Color</label>
   <select id="color" required>
@@ -16,6 +18,7 @@
     <option value="CREMA" id="crema">CREMA</option>
     <option value="TODOS" id="color-todos">TODOS</option>
   </select>
+
   <label for="">Tamaño</label>
   <select id="tamanio" required>
     <option value="PEQUEÑO" id="pequeño">PEQUEÑO</option>
@@ -23,14 +26,18 @@
     <option value="GRANDE" id="grande">GRANDE</option>
     <option value="TODOS" id="tamanio-todos">TODOS</option>
   </select>
+
   <label class="label" for="">Ciudad</label>
   <select id="ciudadesCargar" required></select>
+
   <label for="">Barrio</label>
   <select id="ubicacionesCargar" required></select>
+
   <label for="">Tipo</label>
   <select id="estado" required>
     <option value="ADOPCION" id="adopcion">ADOPCION</option>
     <option value="PERDIDO" id="perdido">PERDIDO</option>
   </select>
+
   <button id="carga-buscar">Busca ahora</button>
 </form>

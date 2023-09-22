@@ -1,7 +1,9 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { EspecieDTO } from 'src/app/models/especie.dto';
 import { MascotasDTO } from 'src/app/models/mascotas.dto';
+import { EspecieService } from 'src/app/services/especie.service';
 import { MascotaService } from 'src/app/services/mascota.service';
 import { TokenService } from 'src/app/services/token.service';
 
@@ -14,19 +16,34 @@ import { TokenService } from 'src/app/services/token.service';
 })
 export class FormBuscarAhoraComponent implements OnInit{
   
-  especieMascota: string;
+  //especie: string;
+  especieDTO: EspecieDTO | any = null;
+  especies:EspecieDTO[] = [];
 
   constructor (
+    private especieService : EspecieService,
     private mascotaService : MascotaService,
     private tokenService: TokenService,
     private toastrService: ToastrService,
     private router: Router
   ){
-
-    this.especieMascota = '';
+    //this.especie = '';
   }
 
-  ngOnInit(): void {  }
+  ngOnInit(): void { 
+    this.cargarEspecies();
+   }
 
-  
+  cargarEspecies(): void {
+    this.especieService.getListaEspecies().subscribe(
+      data => {
+        this.especies = data;
+      },
+      err => {
+        this.toastrService.error(err.error.message, 'Desconexión: Error en carga de especies',{
+          timeOut: 3000, positionClass:'toast-top-right'
+        });
+      }
+    );
+  }
 }
