@@ -5,5 +5,6 @@ export class UsuarioLoginDTO {
   apellido: string;
   telefono: string;
   activo: boolean;
+  respuesta: string;
   email: string;
 }

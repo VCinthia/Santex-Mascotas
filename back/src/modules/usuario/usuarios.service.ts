@@ -45,6 +45,7 @@ export class UsuariosService {
               usuarioDTO.apellido,
               usuarioDTO.telefono,
               true,
+              usuarioDTO.respuesta,
               loginCreate.getIdLogin(),
             );
             const newUsuario = await this.userModel.create(usuario);
@@ -87,6 +88,7 @@ export class UsuariosService {
         usuarioLogin.nombre = persona.getNombre();
         usuarioLogin.telefono = persona.getTelefono();
         usuarioLogin.activo = persona.getActivo();
+        usuarioLogin.respuesta = persona.getRespuesta();
         return usuarioLogin;
       } else {
         throw new HttpException(this.userNotFound, HttpStatus.BAD_REQUEST);
@@ -115,6 +117,7 @@ export class UsuariosService {
         usuario.setNombre(personaDTO.nombre);
         usuario.setApellido(personaDTO.apellido);
         usuario.setTelefono(personaDTO.telefono);
+        usuario.setRespuesta(personaDTO.respuesta);;
         usuario.setUpdateAt(new Date());
         await usuario.save();
       }

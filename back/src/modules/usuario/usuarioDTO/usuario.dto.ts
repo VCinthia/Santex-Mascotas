@@ -4,6 +4,7 @@ export class UsuarioDTO {
   readonly apellido: string;
   readonly telefono: string;
   readonly activo: boolean;
+  readonly respuesta: string;
   readonly user: {
     email: string;
     password: string;
