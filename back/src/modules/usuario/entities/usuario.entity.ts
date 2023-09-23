@@ -35,6 +35,9 @@ export class Usuario extends Model<Usuario> {
   @Column
   private activo: boolean;
 
+  @Column
+  private respuesta: string;
+
   @ForeignKey(() => Login)
   @Column
   private idLogin: number;
@@ -78,6 +81,12 @@ export class Usuario extends Model<Usuario> {
   }
   public setActivo(activo: boolean): void {
     this.activo = activo;
+  }
+   public getRespuesta(): string {
+    return this.respuesta;
+  }
+  public setRespuesta(respuesta: string): void {
+    this.respuesta = respuesta;
   }
   public getIdLogin(): number {
     return this.idLogin;
