@@ -131,7 +131,7 @@ export class UsuariosService {
         usuario.setNombre(personaDTO.nombre);
         usuario.setApellido(personaDTO.apellido);
         usuario.setTelefono(personaDTO.telefono);
-        usuario.setRespuesta(personaDTO.respuesta);
+        usuario.setRespuesta(personaDTO.respuesta.toUpperCase());
         usuario.setUpdateAt(new Date());
         await usuario.save();
       }
