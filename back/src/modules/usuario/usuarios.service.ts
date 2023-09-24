@@ -45,7 +45,7 @@ export class UsuariosService {
               usuarioDTO.apellido,
               usuarioDTO.telefono,
               true,
-              usuarioDTO.respuesta,
+              usuarioDTO.respuesta.toUpperCase(),
               loginCreate.getIdLogin(),
             );
             const newUsuario = await this.userModel.create(usuario);
@@ -117,7 +117,7 @@ export class UsuariosService {
         usuario.setNombre(personaDTO.nombre);
         usuario.setApellido(personaDTO.apellido);
         usuario.setTelefono(personaDTO.telefono);
-        usuario.setRespuesta(personaDTO.respuesta);;
+        usuario.setRespuesta(personaDTO.respuesta.toUpperCase());
         usuario.setUpdateAt(new Date());
         await usuario.save();
       }
