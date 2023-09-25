@@ -1,13 +1,13 @@
 <h2>Busca Ahora</h2>
 
 <form #formularioBusquedaMascota="ngForm" action="#" id="contenedor-form-buscar" novalidate >
-  <label for="especieMascota">¿Que buscas?</label>
+  <label class="label" for="especieMascota">¿Que buscas?</label>
   <select id="especiesCargar"required >
     <option *ngFor="let especie of especies" value="{{especie.id}}" id="{{especie.especie}}">{{especie.especie}}</option>
   </select> <!--TRAE ESPECIE OK-->
 
-  <label for="">Color</label>
-  <select id="color" required>
+  <label class="label"  for="colorMascota">Color</label>
+  <select id="colorMascotaBuscar" required>
     <option value="BLANCO" id="blanco">BLANCO</option>
     <option value="NEGRO" id="negro">NEGRO</option>
     <option value="NARANJA" id="naranja">NARANJA</option>
@@ -17,23 +17,28 @@
     <option value="ATIGRADO" id="atigrado">ATIGRADO</option>
     <option value="CREMA" id="crema">CREMA</option>
     <option value="TODOS" id="color-todos">TODOS</option>
-  </select>
+  </select> <!--ESPERO QUE FUNCIONE(?)-->
 
-  <label for="">Tamaño</label>
-  <select id="tamanio" required>
+  <label for="tamanioMascota">Tamaño</label>
+  <select id="tamanioMascotaBuscar" required>
     <option value="PEQUEÑO" id="pequeño">PEQUEÑO</option>
     <option value="MEDIANO" id="mediano">MEDIANO</option>
     <option value="GRANDE" id="grande">GRANDE</option>
     <option value="TODOS" id="tamanio-todos">TODOS</option>
-  </select>
+  </select> <!--ESPERO QUE FUNCIONE(?)-->
 
-  <label class="label" for="">Ciudad</label>
-  <select id="ciudadesCargar" required></select>
+  <label class="label" for="ciudadMascota">Ciudad</label>
+<select id="ciudadesMascotaBuscar" required (change)="onCiudadChange($event)">
+  <option *ngFor="let ciudad of ciudades" value="{{ciudad.idCiudad}}" id="{{ciudad.idCiudad}}">{{ciudad.nombre}}</option>
+</select> <!--TRAE CIUDADES OK-->
 
-  <label for="">Barrio</label>
-  <select id="ubicacionesCargar" required></select>
+  <label class="label" for="barrioMascota">Barrio</label>
+  <select id="barriosMascotaBuscar" required >
+    <option *ngFor="let barrio of barrios " value="{{barrio.idUbicacion}}" id="{{barrio.idUbicacion}}">{{barrio.barrio}}</option>
+  </select> <!-- -->
 
-  <label for="">Tipo</label>
+
+  <label class="label"  for="tipoMascota">Tipo</label>
   <select id="estado" required>
     <option value="ADOPCION" id="adopcion">ADOPCION</option>
     <option value="PERDIDO" id="perdido">PERDIDO</option>

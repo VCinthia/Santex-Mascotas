@@ -26,6 +26,20 @@ export class BarrioService {
       throw new HttpException(error.message, HttpStatus.INTERNAL_SERVER_ERROR);
     }
   }
+  //Traer barrios por ciudad OK
+  public async getBarrioByIdCiudad(id: number): Promise<Barrio[]> {
+    try {
+      const condition: FindOptions = { where: { idCiudad: id } };
+      const barrioList: Barrio[] = await this.barrioEntity.findAll(condition);
+      if (barrioList) {
+        return barrioList;
+      } else {
+        throw new HttpException(this.barrioNotFound, HttpStatus.BAD_REQUEST);
+      }
+    } catch (error) {
+      throw new HttpException(error.message, HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+  }
 
   public async createBarrio(barrioDTO: CreateBarrioDto): Promise<Barrio> {
     try {
