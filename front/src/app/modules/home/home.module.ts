@@ -9,9 +9,10 @@ import { SComoLogramosComponent } from './components/s-como-logramos/s-como-logr
 import { SIntegrantesComponent } from './components/s-integrantes/s-integrantes.component';
 import { STienesDudasComponent } from './components/s-tienes-dudas/s-tienes-dudas.component';
 import { CarouselModule } from '../carousel/carousel.module';
+import { ScrollToTopComponent } from './components/scroll-to-top/scroll-to-top.component';
 
 @NgModule({
-  declarations: [HomeComponent],
+  declarations: [HomeComponent, ScrollToTopComponent],
   imports: [
     CommonModule,
     HomeRoutingModule,
