@@ -4,6 +4,7 @@ export * from './components/s-podemos-ayudarte';
 export * from './components/s-portada';
 export * from './components/s-que-hacemos';
 export * from './components/s-tienes-dudas';
+export * from './components/scroll-to-top';
 export * from './home-routing.module';
 export * from './home.component';
 export * from './home.module';
