@@ -38,4 +38,26 @@ export class UsuariosController {
   deleteUsuario(@Param('id') id: number) {
     return this.usuariosService.deleteUsuario(id);
   }
+
+  @Public()
+  @Put('/actualizarContrasenia')
+  uupdatePassword(
+    @Body() newPassword: { idUsuario: number; password: string },
+  ) {
+    return this.usuariosService.updatePassword(
+      newPassword['id'],
+      newPassword['password'],
+    );
+  }
+
+  @Public()
+  @Get('/comprobarRespuestas')
+  comprobarRespuestas(
+    @Body() newPassword: { idUsuario: number; respuesta: string },
+  ) {
+    return this.usuariosService.comprobarRespuestas(
+      newPassword['id'],
+      newPassword['respuesta'],
+    );
+  }
 }

@@ -5,7 +5,7 @@ export class UsuarioEntity {
   apellido: string;
   telefono: string;
   activo: boolean;
-  respuesta:string;
+  respuesta: string;
   idLogin: number;
   constructor(
     dniPersona: number,
@@ -13,7 +13,7 @@ export class UsuarioEntity {
     apellido: string,
     telefono: string,
     activo: boolean,
-    respuesta:string,
+    respuesta: string,
     idLogin: number,
   ) {
     this.dniPersona = dniPersona;

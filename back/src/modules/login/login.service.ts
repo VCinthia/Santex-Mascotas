@@ -97,4 +97,24 @@ export class LoginService {
     const saltRounds = 10;
     return bcrypt.hash(password, saltRounds);
   }
+
+  public async updatePassword(
+    idLogin: number,
+    password: string,
+  ): Promise<Login> {
+    try {
+      const condition: FindOptions = { where: { idLogin: idLogin } };
+      const loginExist: Login = await this.loginModel.findOne(condition);
+      if (!loginExist) {
+        throw new HttpException(this.userNotFound, HttpStatus.BAD_REQUEST);
+      } else {
+        const hashPassword = await this.hashPassword(password);
+        loginExist.setPassword(hashPassword);
+        await loginExist.save();
+        return loginExist;
+      }
+    } catch (error) {
+      throw new HttpException(error.message, HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+  }
 }

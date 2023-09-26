@@ -102,7 +102,6 @@ export class UsuariosService {
         usuarioLogin.nombre = persona.getNombre();
         usuarioLogin.telefono = persona.getTelefono();
         usuarioLogin.activo = persona.getActivo();
-        usuarioLogin.respuesta = persona.getRespuesta();
         return usuarioLogin;
       } else {
         throw new HttpException(this.userNotFound, HttpStatus.BAD_REQUEST);
@@ -151,6 +150,41 @@ export class UsuariosService {
         persona.setActivo(false);
         await persona.save();
         return true;
+      }
+    } catch (error) {
+      throw new HttpException(error.message, HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+  }
+
+  public async updatePassword(id: number, password: string): Promise<boolean> {
+    try {
+      const condition: FindOptions = { where: { idUsuario: id } };
+      const usuario: Usuario = await this.userModel.findOne(condition);
+      if (!usuario) {
+        throw new HttpException(this.userNotFound, HttpStatus.BAD_REQUEST);
+      } else {
+        await this.loginService.updatePassword(usuario.getIdLogin(), password);
+        return true;
+      }
+    } catch (error) {
+      throw new HttpException(error.message, HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+  }
+
+  public async comprobarRespuestas(
+    id: number,
+    respuesta: string,
+  ): Promise<boolean> {
+    try {
+      const condition: FindOptions = { where: { idUsuario: id } };
+      const usuario: Usuario = await this.userModel.findOne(condition);
+      if (!usuario) {
+        throw new HttpException(this.userNotFound, HttpStatus.BAD_REQUEST);
+      } else {
+        if (usuario.getRespuesta().toLowerCase() === respuesta.toLowerCase()) {
+          return true;
+        }
+        return false;
       }
     } catch (error) {
       throw new HttpException(error.message, HttpStatus.INTERNAL_SERVER_ERROR);

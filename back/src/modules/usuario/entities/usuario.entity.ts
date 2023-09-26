@@ -82,7 +82,7 @@ export class Usuario extends Model<Usuario> {
   public setActivo(activo: boolean): void {
     this.activo = activo;
   }
-   public getRespuesta(): string {
+  public getRespuesta(): string {
     return this.respuesta;
   }
   public setRespuesta(respuesta: string): void {
