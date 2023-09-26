@@ -11,10 +11,12 @@ import { FormsModule } from '@angular/forms';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router';
+import { CardComponent } from './components/card/card.component';
 
 @NgModule({
   declarations: [AppComponent, NavComponent],
   imports: [
+    CardComponent,
     BrowserAnimationsModule,
     HttpClientModule,
     FormsModule,

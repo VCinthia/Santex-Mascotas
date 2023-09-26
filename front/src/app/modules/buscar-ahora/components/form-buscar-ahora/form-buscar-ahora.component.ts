@@ -19,8 +19,7 @@ import { UbicacionService } from 'src/app/services/ubicacion.service';
   styleUrls: ['./form-buscar-ahora.component.css'],
 })
 export class FormBuscarAhoraComponent implements OnInit {
-
-  //especie: string;
+  
   especieDTO: EspecieDTO | any = null;
   especies: EspecieDTO[] = [];
 
@@ -31,6 +30,18 @@ export class FormBuscarAhoraComponent implements OnInit {
 
   barrioDTO: BarrioDTO | any = null;
   barrios: BarrioDTO[] = [];
+
+  mascotaDTO : MascotasDTO | any = null;
+  mascotas : MascotasDTO[] = [];
+
+  filtro: any = {
+    especie: '', // Inicializar con valores por defecto
+    color :'',
+    tamanio: '',
+    ciudad: '',
+    barrio: '',
+    tipo: '',
+  };
 
   constructor(
     private especieService: EspecieService,
@@ -110,6 +121,27 @@ export class FormBuscarAhoraComponent implements OnInit {
         this.toastrService.error(err.error.message, 'Desconexión: Error en carga de barrios', {
           timeOut: 3000, positionClass: 'toast-top-right'
         });
+      }
+    );
+  }
+
+  onBuscar(): void {
+    // Llamada al servicio de búsqueda con el objeto de filtro
+    this.mascotaService.getListaFiltroMascotas(this.filtro).subscribe(
+      (data) => {
+        this.mascotas = data;
+        console.log(data);
+        
+        // Realiza acciones adicionales según lo necesario
+      },
+      err => {
+        this.toastrService.error(err.error.message, 
+          'Ocurrió un error al buscar mascotas.',
+          {
+            timeOut: 3000,
+            positionClass: 'toast-top-right',
+          }
+        );
       }
     );
   }
