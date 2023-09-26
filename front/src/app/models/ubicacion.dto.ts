@@ -1,11 +1,12 @@
 import { CiudadDTO } from "./ciudad.dto";
 
 export class BarrioDTO {
+    idUbicacion?: number;
     barrio : string;
-    ciudad : CiudadDTO;
+    idCiudad : CiudadDTO;
     
-    constructor(barrio : string, ciudad : CiudadDTO){
+    constructor(barrio : string, idCiudad : CiudadDTO){
         this.barrio = barrio;
-        this.ciudad = ciudad;
+        this.idCiudad = idCiudad;
     }
 }

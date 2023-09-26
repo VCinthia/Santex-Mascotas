@@ -3,6 +3,7 @@ import { BarrioDTO } from "./ubicacion.dto";
 import { UserDTO } from "./user.dto";
 
 export class MascotasDTO {
+  idMascota?: number;
   color: string;
   tamanio: string;
   fechaCarga: Date;

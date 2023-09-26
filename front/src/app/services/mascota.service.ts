@@ -35,4 +35,12 @@ export class MascotaService {
     return this.httpClient.delete<any>(`${this.mascotasURL}deleteMascota/${id}`)
   }
 
+  //filtro mascotas:
+  public getListaFiltroMascotas(filtro: any): Observable<MascotasDTO[]> {
+    return this.httpClient.get<MascotasDTO[]>(
+      `${this.mascotasURL}buscarMascotas`,
+      { params: filtro } // Asegúrate de ajustar el objeto 'filtro' según tu necesidad
+    );
+  }
+
 }

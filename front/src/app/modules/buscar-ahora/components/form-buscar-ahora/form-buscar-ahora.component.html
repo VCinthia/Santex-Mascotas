@@ -1,11 +1,16 @@
 <h2>Busca Ahora</h2>
 
-<form #formularioBusquedaMascota="ngForm" action="#" id="contenedor-form-buscar" novalidate>
-  <label for="especieMascota">¿Que buscas?</label>
-  <select id="especiesCargar"required [(ngModel)]="especieMascota" name="especieMascota"></select>
+<form #formularioBusquedaMascota="ngForm" action="#" id="contenedor-form-buscar" novalidate (ngSubmit)="onBuscar()"><!---->
 
-  <label for="">Color</label>
-  <select id="color" required>
+  <label class="label" for="especieMascota">¿Que buscas?</label>
+  <select id="especieMascota"required [(ngModel)]="filtro.especie" name="especie">
+    <!--[ngModelOptions]="{standalone: true}"-->
+    <option *ngFor="let especie of especies" value="{{especie.id}}" id="{{especie.id}}">{{especie.especie}}</option>
+  </select> <!--TRAE ESPECIE OK-->
+
+  <label class="label"  for="colorMascota">Color</label>
+  <select id="colorMascota" required [(ngModel)]="filtro.color" name="color">
+    <!--[ngModelOptions]="{standalone: true}"-->
     <option value="BLANCO" id="blanco">BLANCO</option>
     <option value="NEGRO" id="negro">NEGRO</option>
     <option value="NARANJA" id="naranja">NARANJA</option>
@@ -15,22 +20,49 @@
     <option value="ATIGRADO" id="atigrado">ATIGRADO</option>
     <option value="CREMA" id="crema">CREMA</option>
     <option value="TODOS" id="color-todos">TODOS</option>
-  </select>
-  <label for="">Tamaño</label>
-  <select id="tamanio" required>
+  </select> <!--ESPERO QUE FUNCIONE(?)-->
+
+  <label for="tamanioMascota">Tamaño</label>
+  <select id="tamanioMascota" required [(ngModel)]="filtro.tamanio" name="tamanio">
+    <!--[ngModelOptions]="{standalone: true}"-->
     <option value="PEQUEÑO" id="pequeño">PEQUEÑO</option>
     <option value="MEDIANO" id="mediano">MEDIANO</option>
     <option value="GRANDE" id="grande">GRANDE</option>
     <option value="TODOS" id="tamanio-todos">TODOS</option>
-  </select>
-  <label class="label" for="">Ciudad</label>
-  <select id="ciudadesCargar" required></select>
-  <label for="">Barrio</label>
-  <select id="ubicacionesCargar" required></select>
-  <label for="">Tipo</label>
-  <select id="estado" required>
+  </select> <!--ESPERO QUE FUNCIONE(?)-->
+
+  <label class="label" for="ciudadMascota">Ciudad</label>
+<select id="ciudadMascota" required (change)="onCiudadChange($event)" [(ngModel)]="filtro.ciudad" name="ciudad" >
+  <!--[ngModelOptions]="{standalone: true}"-->
+  <option *ngFor="let ciudad of ciudades" value="{{ciudad.idCiudad}}" id="{{ciudad.idCiudad}}">{{ciudad.nombre}}</option>
+</select> <!--TRAE CIUDADES OK-->
+
+  <label class="label" for="barrioMascota">Barrio</label>
+  <select id="barrioMascota" required [(ngModel)]="filtro.barrio" name="barrio">
+    <!--[ngModelOptions]="{standalone: true}"-->
+    <option *ngFor="let barrio of barrios " value="{{barrio.idUbicacion}}" id="{{barrio.idUbicacion}}">{{barrio.barrio}}</option>
+  </select> <!--TRAE BARRIOS OK -->
+
+
+  <label class="label"  for="tipoMascota">Tipo</label>
+  <select id="tipoMascota" required [(ngModel)]="filtro.tipo" name="tipo">
+    <!--[ngModelOptions]="{standalone: true}"-->
     <option value="ADOPCION" id="adopcion">ADOPCION</option>
     <option value="PERDIDO" id="perdido">PERDIDO</option>
   </select>
-  <button id="carga-buscar">Busca ahora</button>
+
+  <button type="submit" name="btnBuscar" id="btnBuscar">Busca ahora</button>
 </form>
+
+<div class="contenedor-cards-mascotas">
+  <div class="card-mascota" *ngFor="let mascota of mascotas" id="{{mascota.idMascota}}" >
+    <div class="image">
+        <img src="https://i.pinimg.com/564x/31/62/9a/31629a9de3e471a18a83f68b7652646a.jpg" alt="">
+    </div>
+    <div class="descripcion">            
+      <p>{{mascota.ubicacion.barrio}}</p>
+      <p>{{mascota.descripcion}}</p>
+      <a href="https://api.whatsapp.com//send?phone=549${{mascota.usuario.telefono}}" target="_blank">Contactar</a>
+    </div>
+  </div>
+</div>

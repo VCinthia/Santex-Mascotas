@@ -1,4 +1,5 @@
 export class CiudadDTO {
+    idCiudad ?: number;
     nombre : string;
     
     constructor(nombre : string){

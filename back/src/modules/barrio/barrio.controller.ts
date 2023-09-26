@@ -32,6 +32,13 @@ export class BarrioController {
   findOne(@Param('id') id: number) {
     return this.barrioService.getBarrioById(id);
   }
+  
+  //byIdCiudad OK
+  @Public()
+  @Get('/getBarriosByCiudad/:idCiudad')
+  find(@Param('idCiudad') idCiudad: number) {
+    return this.barrioService.getBarrioByIdCiudad(idCiudad);
+  }
 
   @Public()
   @Put('/updateBarrio/:id')
