@@ -1,0 +1,42 @@
+.tus-mascotas-contenedor {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    padding: var(--padding-md);
+    background: #fff;
+}
+
+h2 {
+    font-family: var(--font-bodoni-moda);
+    font-size: var(--font-size-xl);
+    margin-bottom: 2rem;
+}
+
+form label {
+    margin:1rem auto 1rem;
+    color: var(--color-white1);
+}
+
+form select {
+    border: none;
+    padding: var(--padding-xxs);
+    border-radius: var(--border-xs);
+    margin: 0 1rem ;
+    border: 2px solid var(--color-tertiary);
+    outline: none;
+}
+
+button {
+    font-family: var(--font-advent-pro);
+    font-size: var(--font-size-sm);
+    background-color: var(--color-tertiary);
+    border-radius: var(--border-xs);
+    border: 0;
+    color: var(--color-black);
+    width: 7rem;
+    padding: 0.7rem;
+    margin: 2rem auto 2rem;
+    cursor: pointer;
+    box-shadow: -3px -3px var(--color-white1);
+}

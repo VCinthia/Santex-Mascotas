@@ -24,11 +24,11 @@ const routes: Routes = [
     loadChildren: () =>
       import('./modules').then((m) => m.ReportarPerdidaModule),
   },
-  // {
-  //   path: 'tus-mascotas',
-  //   loadChildren: () =>
-  //     import('./modules').then((m) => m.MascotasUser),
-  // },
+  {
+    path: 'tus-mascotas',
+    loadChildren: () =>
+      import('./modules').then((m) => m.TusMascotasModule),
+  },
   {
     path: 'log-in',
     loadChildren: () => import('./modules').then((m) => m.LogInModule),
@@ -43,4 +43,4 @@ const routes: Routes = [
   imports: [CommonModule, RouterModule.forRoot(routes, routerOptions)],
   exports: [RouterModule],
 })
-export class AppRoutingModule {}
+export class AppRoutingModule { }

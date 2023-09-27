@@ -14,6 +14,7 @@ export * from './home';
 export * from './reportar-perdida/components/form-reportar';
 export * from './reportar-perdida/components';
 export * from './reportar-perdida';
+export * from './tus-mascotas';
 export * from './unauthorized';
 export * from './unauthorized/log-in/components';
 export * from './unauthorized/log-in/components/log-in-form';
