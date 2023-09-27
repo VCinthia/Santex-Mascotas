@@ -60,7 +60,8 @@ export class MascotaController {
   }
 
   @Public()
-  @Get('/buscarMascotas')
+  // @Get('/buscarMascotas')
+  @Post('/buscarMascotas')
   buscarMascotas(@Body() mascota: FilterMascota) {
     return this.mascotaService.buscarMascotas(mascota);
   }

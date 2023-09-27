@@ -3,4 +3,6 @@ export class FilterMascota {
   readonly color: string;
   readonly tamanio: string;
   readonly zona: string;
+  //agrego campos para filtro:
+  readonly estado: string;
 }

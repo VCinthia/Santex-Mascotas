@@ -107,6 +107,7 @@ body {
   border: 2px solid var(--color-secondary);
   background-color: var(--color-secondary);
   display: flex;
+  margin: 10px;
   flex-direction: column;
   margin-bottom: 3rem;
   border-radius: 2rem;

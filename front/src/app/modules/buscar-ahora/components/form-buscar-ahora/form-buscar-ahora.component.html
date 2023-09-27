@@ -5,7 +5,7 @@
   <label class="label" for="especieMascota">¿Que buscas?</label>
   <select id="especieMascota"required [(ngModel)]="filtro.especie" name="especie">
     <!--[ngModelOptions]="{standalone: true}"-->
-    <option *ngFor="let especie of especies" value="{{especie.id}}" id="{{especie.id}}">{{especie.especie}}</option>
+    <option *ngFor="let especie of especies" value="{{especie.especie}}" id="{{especie.id}}">{{especie.especie}}</option>
   </select> <!--TRAE ESPECIE OK-->
 
   <label class="label"  for="colorMascota">Color</label>
@@ -19,8 +19,8 @@
     <option value="MANCHADO" id="manchado">MANCHADO</option>
     <option value="ATIGRADO" id="atigrado">ATIGRADO</option>
     <option value="CREMA" id="crema">CREMA</option>
-    <option value="TODOS" id="color-todos">TODOS</option>
-  </select> <!--ESPERO QUE FUNCIONE(?)-->
+    <option value="" id="color-todos">TODOS</option>
+  </select> <!--FUNCIONA OK-->
 
   <label for="tamanioMascota">Tamaño</label>
   <select id="tamanioMascota" required [(ngModel)]="filtro.tamanio" name="tamanio">
@@ -28,36 +28,38 @@
     <option value="PEQUEÑO" id="pequeño">PEQUEÑO</option>
     <option value="MEDIANO" id="mediano">MEDIANO</option>
     <option value="GRANDE" id="grande">GRANDE</option>
-    <option value="TODOS" id="tamanio-todos">TODOS</option>
-  </select> <!--ESPERO QUE FUNCIONE(?)-->
+    <option value="" id="tamanio-todos">TODOS</option>
+  </select> <!--FUNCIONA OK-->
 
   <label class="label" for="ciudadMascota">Ciudad</label>
-<select id="ciudadMascota" required (change)="onCiudadChange($event)" [(ngModel)]="filtro.ciudad" name="ciudad" >
+<select id="ciudadMascota" required (change)="onCiudadChange($event)"  [(ngModel)]="selectedCiudadId" name="ciudad"><!--[(ngModel)]="filtro.ciudad" name="ciudad"-->
   <!--[ngModelOptions]="{standalone: true}"-->
-  <option *ngFor="let ciudad of ciudades" value="{{ciudad.idCiudad}}" id="{{ciudad.idCiudad}}">{{ciudad.nombre}}</option>
+  <option *ngFor="let ciudad of ciudades" value="{{ciudad.idCiudad}}" id="{{ciudad.idCiudad}}">{{ciudad.nombre}}</option>  
 </select> <!--TRAE CIUDADES OK-->
 
   <label class="label" for="barrioMascota">Barrio</label>
-  <select id="barrioMascota" required [(ngModel)]="filtro.barrio" name="barrio">
+  <select id="barrioMascota" required [(ngModel)]="filtro.zona" name="zona">
     <!--[ngModelOptions]="{standalone: true}"-->
-    <option *ngFor="let barrio of barrios " value="{{barrio.idUbicacion}}" id="{{barrio.idUbicacion}}">{{barrio.barrio}}</option>
-  </select> <!--TRAE BARRIOS OK -->
+    <option *ngFor="let barrio of barrios " value="{{barrio.barrio}}" id="{{barrio.idUbicacion}}">{{barrio.barrio}}</option>
+    <option value="" id="barrios-todos">TODOS</option>
+  </select> <!--FUNCIONA OK -->
 
 
   <label class="label"  for="tipoMascota">Tipo</label>
-  <select id="tipoMascota" required [(ngModel)]="filtro.tipo" name="tipo">
+  <select id="tipoMascota" required [(ngModel)]="filtro.estado" name="estado">
     <!--[ngModelOptions]="{standalone: true}"-->
-    <option value="ADOPCION" id="adopcion">ADOPCION</option>
+    <option value="ADOPTABLE" id="adoptable">ADOPTABLE</option>
     <option value="PERDIDO" id="perdido">PERDIDO</option>
-  </select>
+  </select><!--FUNCIONA OK -->
 
   <button type="submit" name="btnBuscar" id="btnBuscar">Busca ahora</button>
-</form>
+</form><!--FUNCIONA OK -->
 
 <div class="contenedor-cards-mascotas">
-  <div class="card-mascota" *ngFor="let mascota of mascotas" id="{{mascota.idMascota}}" >
+  <div class="card-mascota" *ngFor="let mascota of mascotasFiltroDTO" id="{{mascota.idMascota}}" >
     <div class="image">
         <img src="https://i.pinimg.com/564x/31/62/9a/31629a9de3e471a18a83f68b7652646a.jpg" alt="">
+        <!-- <img src="{{mascota.foto}}"> -->
     </div>
     <div class="descripcion">            
       <p>{{mascota.ubicacion.barrio}}</p>
@@ -65,4 +67,4 @@
       <a href="https://api.whatsapp.com//send?phone=549${{mascota.usuario.telefono}}" target="_blank">Contactar</a>
     </div>
   </div>
-</div>
+</div><!--FUNCIONA OK -->

@@ -180,6 +180,9 @@ export class MascotaService {
           whereClause.idUbicacion = barrio.getIdUbicacion();
         }
       }
+      if (filtro.estado && filtro.estado.length > 0) {
+        whereClause.estado = filtro.estado.toUpperCase();
+      }
 
       const mascotas = await Mascota.findAll({
         where: whereClause,
@@ -207,7 +210,7 @@ export class MascotaService {
           mascota.color = mascotaAux.getColor();
           mascota.tamanio = mascotaAux.getTamanio();
           mascota.fechaCarga = mascotaAux.getFechaCarga();
-          mascota.foto = mascotaAux.getFoto() ? mascotaAux.getFoto() : null;
+          //mascota.foto = mascotaAux.getFoto() ? mascotaAux.getFoto() : null;
           mascota.descripcion = mascotaAux.getDescripcion();
           mascota.estado = mascotaAux.getEstado();
           mascota.activo = mascotaAux.getActivo();
@@ -226,6 +229,7 @@ export class MascotaService {
           mascotaFiltro.push(mascota);
         }
       }
+      console.log(mascotaFiltro)
       return mascotaFiltro;
     } catch (error) {
       throw error;

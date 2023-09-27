@@ -2,7 +2,7 @@ import { EspecieDTO } from "./especie.dto";
 import { BarrioDTO } from "./ubicacion.dto";
 import { UserDTO } from "./user.dto";
 
-export class MascotasDTO {
+export class FiltroMascotaDto {
   idMascota?: number;
   color: string;
   tamanio: string;
@@ -38,4 +38,6 @@ export class MascotasDTO {
     this.ubicacion= ubicacion,
     this.especie= especie
   }
-}
+  }
+  
+  
