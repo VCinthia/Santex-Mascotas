@@ -1,55 +1,100 @@
 /*PORTADA*/
 /*VER IMAGENES SE DESBORDAN*/
 .portada {
-    height: 50rem;
+  height: 55rem;
+}
+
+.encuentra-div,
+.tu-mascota-div {
+  font-size: var(--font-size-xxl);
+  font-family: var(--font-bodoni-moda);
+}
+
+.encuentra-div {
+  position: absolute;
+  top: 40%;
+  left: 8%;
+  z-index: 1;
+}
+
+.tu-mascota-div {
+  position: absolute;
+  top: 70%;
+  left: 45%;
+  z-index: 1;
+}
+
+.rectangle-icon,
+.rectangle-icon1,
+.rectangle-icon2 {
+  max-width: 100%;
+  min-width: 30%;
+  height: auto;
+  width: 300px;
+}
+
+.rectangle-icon {
+  position: absolute;
+  top: 20%;
+  left: 50%;
+}
+
+.rectangle-icon1 {
+  position: absolute;
+  top: 55%;
+  left: 15%;
+}
+
+.rectangle-icon2 {
+  position: absolute;
+  top: 90%;
+  left: 60%;
+}
+
+.flecha-hacia-abajo {
+  position: absolute;
+  top: 130%;
+  left: 30%;
+}
+
+@media (max-width: 1000px) {
+  .portada {
+    height: 100%;
   }
-  
-  .encuentra-div,
-  .tu-mascota-div {
-    font-size: var(--font-size-xxl);
-    font-family: var(--font-bodoni-moda);
+
+  .title {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 2rem;
+    margin-bottom: 3rem;
   }
-  
-  .encuentra-div {
-    position: absolute;
-    top: 40%;
-    left: 8%;
-    z-index: 1;
+
+  .image-container {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    margin: 1rem;
   }
-  
-  .tu-mascota-div {
-    position: absolute;
-    top: 70%;
-    left: 45%;
-    z-index: 1;
-  }
-  
+
   .rectangle-icon,
   .rectangle-icon1,
   .rectangle-icon2 {
-    width: 20rem;
+    position: relative;
+    top: 0;
+    left: 0;
+    gap: 1rem;
   }
-  
-  .rectangle-icon {
-    position: absolute;
-    top: 20%;
-    left: 45%;
+
+  .encuentra-div,
+  .tu-mascota-div {
+    position: relative;
+    top: 0;
+    left: 0;
+    font-size: clamp(2rem, 15vw, 8rem);
   }
-  
-  .rectangle-icon1 {
-    position: absolute;
-    top: 55%;
-    left: 15%;
-  }
-  
-  .rectangle-icon2 {
-    position: absolute;
-    top: 85%;
-    left: 56%;
-  }
-  
+
   .flecha-hacia-abajo {
-    position: absolute;
-    top: 115%;
-    left: 30%;
+    display: none;
   }
+}
