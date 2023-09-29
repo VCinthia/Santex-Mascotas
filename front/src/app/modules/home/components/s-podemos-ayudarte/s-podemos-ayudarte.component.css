@@ -1,6 +1,7 @@
 /*PODEMOS AYUDARTE*/
 .contenedor-textos-ayuda {
-  width: 30rem;
+  width: 80%;
+  margin: 0 auto;
 }
 
 .contenedor-textos-ayuda h2 {
@@ -11,4 +12,16 @@
 
 .contenedor-textos-ayuda p {
   font-size: 1.3125em;
+}
+
+@media (max-width: 1100px) {
+  .contenedor-textos-ayuda {
+    width: 100%;
+  }
+  .contenedor-textos-ayuda h2 {
+    text-align: center;
+  }
+  .contenedor-textos-ayuda p {
+    text-align: center;
+  }
 }
