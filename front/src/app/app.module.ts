@@ -14,7 +14,7 @@ import { RouterModule } from '@angular/router';
 import { CardComponent } from './components/card/card.component';
 
 @NgModule({
-  declarations: [AppComponent, NavComponent],
+  declarations: [AppComponent, NavComponent, FooterComponent],
   imports: [
     CardComponent,
     BrowserAnimationsModule,
@@ -23,13 +23,11 @@ import { CardComponent } from './components/card/card.component';
     BrowserModule,
     AppRoutingModule, // lo cambie de declarations a imports,
     RouterModule,
-    FooterComponent, // lo cambie de declarations a imports,
     ToastrModule.forRoot({
       timeOut: 3000, // Duración predeterminada de las notificaciones en milisegundos
       positionClass: 'toast-top-right', // Posición predeterminada de las notificaciones
       // preventDuplicates: true, // Evitar que se muestren notificaciones duplicadas
     }),
-    
   ],
   providers: [],
   bootstrap: [AppComponent],
