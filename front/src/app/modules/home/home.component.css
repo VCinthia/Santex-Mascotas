@@ -7,3 +7,10 @@
   margin-top: 5rem;
   height: 30rem;
 }
+
+@media (max-width: 1100px) {
+  .podemos-ayudarte {
+    display: flex;
+    justify-content: center;
+  }
+}
