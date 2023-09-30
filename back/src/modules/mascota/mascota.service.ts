@@ -21,10 +21,10 @@ export class MascotaService {
   constructor(
     @InjectModel(Mascota)
     private readonly mascotaModel: typeof Mascota,
-  ) {}
+  ) { }
 
   public async createMascota(
-    file: Express.Multer.File,
+    file: Express.Multer.File | undefined,
     createMascotaDto: MascotaDto,
   ): Promise<Mascota> {
     try {

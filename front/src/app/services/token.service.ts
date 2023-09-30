@@ -18,7 +18,6 @@ export class TokenService {
       return true;
     }
     return false
-    //return !!this.getToken();
   }
 
   setToken(access_token: string): void {
@@ -30,7 +29,7 @@ export class TokenService {
     return localStorage.getItem('access_token');
   }
 
-  getEmailUsuario(): string | null {
+  getDniUsuario(): string | null {
     if (!this.isLogged()) {
       return null;
     }    
@@ -41,9 +40,9 @@ export class TokenService {
     //console.log(`values: ${values}`);
     const valueJSON = JSON.parse(values);
     //console.log(`valueJSON: ${valueJSON}`);
-    const email = valueJSON.user.email;
-    console.log(`nombre: ${email}`);
-    return email;
+    const dniPersona = valueJSON.user.dniPersona;
+    console.log(`nombre: ${dniPersona}`);
+    return dniPersona;
   }
 
   getNombreUsuario(): string | null {
@@ -60,6 +59,22 @@ export class TokenService {
     const nombre = valueJSON.user.nombre;
     console.log(`nombre: ${nombre}`);
     return nombre;
+  }
+
+  getIdUsuario(): number | null {
+    if (!this.isLogged()) {
+      return null;
+    }    
+    const access_token = this.getToken();    
+    const payload : any = access_token?.split('.')[1];
+    //console.log(`payload: ${payload}`);
+    const values = atob(payload);
+    //console.log(`values: ${values}`);
+    const valueJSON = JSON.parse(values);
+    //console.log(`valueJSON: ${valueJSON}`);
+    const idUsuario = valueJSON.user.idUsuario;
+    console.log(`idUsuario: ${idUsuario}`);
+    return idUsuario;
   }
 
   logOut() : void {

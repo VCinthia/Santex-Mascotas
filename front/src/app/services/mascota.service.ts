@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { MascotasDTO } from '../models/mascotas.dto';
 import { Observable } from 'rxjs';
-import { FilterMascotaDto} from '../models/filtermascota.dto';
+import { FilterMascotaDto } from '../models/filtermascota.dto';
 import { FiltroMascotaDto } from '../models/filtromascotas.dto';
 
 @Injectable({
@@ -15,25 +15,27 @@ export class MascotaService {
 
   constructor(private httpClient: HttpClient) { }
 
-  public getListaMascotas() : Observable<MascotasDTO[]> {
+  public getListaMascotas(): Observable<MascotasDTO[]> {
     return this.httpClient.get<MascotasDTO[]>(`${this.mascotasURL}getListMascota`);//ver
   }
 
-  public getMascota(id : number) : Observable<MascotasDTO> {
+  public getMascota(id: number): Observable<MascotasDTO> {
     return this.httpClient.get<MascotasDTO>(`${this.mascotasURL}getMascotaById/${id}`);
-    // return this.httpClient.get<MascotasDTO>(`${this.mascotasURL}`+'getMascotaById/'+ `${id}`)
   }
 
-  public createMascota(mascota : MascotasDTO) : Observable<any> {
-    return this.httpClient.post<any>(`${this.mascotasURL}createMascota`, mascota);
-    // return this.httpClient.post<any>(this.mascotasURL+'createMascota', mascota);
+  // public createMascota(file : File, mascota : MascotasDTO) : Observable<any> {
+  //   return this.httpClient.post<any>(`${this.mascotasURL}createMascota`, {file, mascota});
+  // }
+  public createMascota(file: File | any, formData: FormData): Observable<any> {
+    return this.httpClient.post<any>(`${this.mascotasURL}createMascota`, formData);
   }
 
-  public updateMascota(id : number, mascota : MascotasDTO) : Observable<any> {
+
+  public updateMascota(id: number, mascota: MascotasDTO): Observable<any> {
     return this.httpClient.put<any>(`${this.mascotasURL}updateMascota/${id}`, mascota);
   }
-  
-  public delete(id:number) : Observable<any> {
+
+  public delete(id: number): Observable<any> {
     return this.httpClient.delete<any>(`${this.mascotasURL}deleteMascota/${id}`)
   }
 

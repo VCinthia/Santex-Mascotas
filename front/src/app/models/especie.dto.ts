@@ -1,8 +1,9 @@
 export class EspecieDTO {
-    id?: number;
+    idEspecie?: number;
     especie : string;
     
     constructor(especie : string){
         this.especie = especie;
     }
+
 }

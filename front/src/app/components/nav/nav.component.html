@@ -42,7 +42,10 @@
           *ngIf="isLogged" >Reportar Perdida</a
         >
       </li>
-      <li><a href="#" class="cards-dni" *ngIf="isLogged">Tus mascotas</a></li>
+      <li><a id="tus-mascotas"
+        routerLink="/tus-mascotas"
+        (click)="closeMenu(chkboxes)"
+        *ngIf="isLogged">Tus mascotas</a></li>
 
       <li>
         <a
