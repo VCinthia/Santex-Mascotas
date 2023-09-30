@@ -6,4 +6,5 @@ export const environment = {
     ubicacionURL: "http://localhost:3000/barrio/",
     especieURL: "http://localhost:3000/especie/",
     mascotasURL: "http://localhost:3000/mascota/",
+    
 };

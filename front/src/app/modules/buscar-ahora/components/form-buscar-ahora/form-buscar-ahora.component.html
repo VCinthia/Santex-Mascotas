@@ -5,7 +5,7 @@
   <label class="label" for="especieMascota">¿Que buscas?</label>
   <select id="especieMascota"required [(ngModel)]="filtro.especie" name="especie">
     <!--[ngModelOptions]="{standalone: true}"-->
-    <option *ngFor="let especie of especies" value="{{especie.especie}}" id="{{especie.id}}">{{especie.especie}}</option>
+    <option *ngFor="let especie of especies" value="{{especie.especie}}" id="{{especie.idEspecie}}">{{especie.especie}}</option>
   </select> <!--TRAE ESPECIE OK-->
 
   <label class="label"  for="colorMascota">Color</label>

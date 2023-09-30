@@ -10,6 +10,9 @@ import { EspecieService } from './especie.service';
 import { MascotaService } from './mascota.service';
 import { TokenService } from './token.service';
 import { UbicacionService } from './ubicacion.service';
+import { LoginService } from './login.service';
+import { UserDTO } from '../models/user.dto';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -27,18 +30,36 @@ export class DatosformService {
   barrioDTO: BarrioDTO | any = null;
   barrios: BarrioDTO[] = [];
 
-  // mascotaDTO : MascotasDTO | any = null;
-  // mascotas : MascotasDTO[] = [];
+  mascotaDTO: MascotasDTO | any = null;
+  mascotas: MascotasDTO[] = [];
+
+  //mascota: MascotasDTO = new MascotasDTO();
+
+  usuarioDTO: UserDTO | any = null;
+
+  dniPersona : number | any = null;
+  
 
   constructor(
     private especieService: EspecieService,
     private ciudadService: CiudadService,
     private barrioService: UbicacionService,
-    //private mascotaService: MascotaService,
-    //private tokenService: TokenService,
-    private toastrService: ToastrService,
-    //private router: Router
-  ) { };
+    public mascotaService: MascotaService,
+    public tokenService: TokenService,
+    public toastrService: ToastrService,
+    public loginService : LoginService,
+    private router: Router
+  ) { 
+    
+    this.dniPersona = this.tokenService.getIdUsuario();
+    console.log(this.getUsuario());  
+  };
+
+  public getUsuario(): Observable<any> {
+    return this.loginService.usuarioById(this.dniPersona);
+  }
+  
+  
 
   public cargarEspecies(): void {
     this.especieService.getListaEspecies().subscribe(
@@ -78,11 +99,11 @@ export class DatosformService {
       });
     }
   }
-  
+
   public cargarBarriosByCiudad(ciudadId: number): void {
     this.barrioService.getListaUbicacionByCiudad(ciudadId).subscribe(
       data => {
-        this.barrios = data;        
+        this.barrios = data;
         if (this.barrios.length === 0) {
           this.toastrService.warning('No hay barrios para esa ciudad.', 'Advertencia', {
             timeOut: 3000, positionClass: 'toast-top-right'

@@ -1,71 +1,14 @@
 <!-- FORM -->
 
 <h2>Reportar<br> perdida</h2>
-<form action="" method="post">
+<form #formularioReportarMascota="ngForm" action="#" id="contenedor-form-reportar" novalidate (ngSubmit)="onReportar()">
 
-    <label class="label" for="">Especie</label>
-    <select id="especiesCargar" required>
-        <!-- logica get -->
-    </select>
-    <label class="label" for="">Color</label>
-    <select id="color" required>
-        <option value="BLANCO" id="blanco">BLANCO</option>
-        <option value="NEGRO" id="negro">NEGRO</option>
-        <option value="NARANJA" id="naranja">NARANJA</option>
-        <option value="GRIS" id="gris">GRIS</option>
-        <option value="MARRÓN" id="marron">MARRÓN</option>
-        <option value="MANCHADO" id="manchado">MANCHADO</option>
-        <option value="ATIGRADO" id="atigrado">ATIGRADO</option>
-    </select>
-    <label class="label" for="">Tamaño</label>
-    <select id="tamanio" required>
-        <option value="PEQUEÑO" id="pequeño">PEQUEÑO</option>
-        <option value="MEDIANO" id="mediano">MEDIANO</option>
-        <option value="GRANDE" id="grande">GRANDE</option>
-    </select>
-    <label class="label" for="">Tipo</label>
-    <select id="tipoMascota" required>
-        <option value="ADOPCION" id="adopcion">ADOPCION</option>
-        <option value="PERDIDO" id="perdido">PERDIDO</option>
-    </select>
-    <label class="label" for="">Ciudad</label>
-    <select id="ciudadesCargar" required>
-        <!-- logica get -->
-    </select>
-    <label for="">Barrio</label>
-    <select id="ubicacionesCargar" required>
-        <!--cargar ubicacion con bdd-->
-    </select>
+  <label class="label" for="especieMascota">Especie</label>
+  <select id="especieMascota" required [(ngModel)]="mascota.especie" name="especie">
+    <option *ngFor="let especie of datosForm.especies" [value]="especie.idEspecie">{{ especie.especie }}{{ especie.idEspecie }}</option>
+  </select>
 
-    <!-- <label class="label" for="" >DNI</label>
-        <input type="number" id="dniMascota" placeholder="Ingrese DNI" required> -->
-    <label for="">Descripción</label>
-    <input type="text" placeholder="Zona especifica u otros datos que quieras aportar" id="descripcion" required>
-
-    <!-- <label for="">Fecha de carga</label>
-        <input type="date" placeholder="Fecha de carga" id="fecha" required> -->
-
-    <label for="">Imagen</label>
-    <!-- <input type="file" placeholder="Imagen" id="fotouno" > -->
-    <div class="file">
-        <!-- <label for="foto">Cargar imagen</label> -->
-        <input type="file" placeholder="Imagen" id="foto" required>
-    </div>
-    <!-- <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d210147.3970706412!2d-58.573384362124024!3d-34.615461118227664!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x95bcca3b4ef90cbd%3A0xa0b3812e88e88e87!2sBuenos%20Aires%2C%20CABA!5e0!3m2!1ses!2sar!4v1674747325831!5m2!1ses!2sar" width="325" height="200" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe> -->
-    <button id="cargar-perdida">Carga ahora</button>
-</form>
-
-<!--ADAPTACIÓN
-
-<h2>Reportar perdida</h2>
-
-<form #formularioReportarMascota="ngForm" action="#" id="contenedor-form-buscar" novalidate (ngSubmit)="onReportar()">
-
-  <label class="label" for="especieMascota">¿Que buscas?</label>
-  <select id="especieMascota"required [(ngModel)]="mascota.especie" name="especie">
-    <option *ngFor="let especie of especies" value="{{especie.especie}}" id="{{especie.id}}">{{especie.especie}}</option>
-  </select> 
-  <label class="label"  for="colorMascota">Color</label>
+  <label class="label" for="colorMascota">Color</label>
   <select id="colorMascota" required [(ngModel)]="mascota.color" name="color">
     <option value="BLANCO" id="blanco">BLANCO</option>
     <option value="NEGRO" id="negro">NEGRO</option>
@@ -77,46 +20,42 @@
     <option value="CREMA" id="crema">CREMA</option>
     <option value="" id="color-todos">TODOS</option>
   </select> 
+
   <label for="tamanioMascota">Tamaño</label>
-  <select id="tamanioMascota" required [(ngModel)]="mascota.tamanio" name="tamanio">
+  <select id="tamanioMascota" required name="tamanio" [(ngModel)]="mascota.tamanio">
     <option value="PEQUEÑO" id="pequeño">PEQUEÑO</option>
     <option value="MEDIANO" id="mediano">MEDIANO</option>
     <option value="GRANDE" id="grande">GRANDE</option>
     <option value="" id="tamanio-todos">TODOS</option>
   </select>
 
-  <label class="label" for="ciudadMascota">Ciudad</label>
-<select id="ciudadMascota" required (change)="onCiudadChange($event)"  [(ngModel)]="selectedCiudadId" name="ciudad">
-  <option *ngFor="let ciudad of ciudades" value="{{ciudad.idCiudad}}" id="{{ciudad.idCiudad}}">{{ciudad.nombre}}</option>  
-</select>
-
-  <label class="label" for="barrioMascota">Barrio</label>
-  <select id="barrioMascota" required [(ngModel)]="mascota.zona" name="zona">
-    <option *ngFor="let barrio of barrios " value="{{barrio.barrio}}" id="{{barrio.idUbicacion}}">{{barrio.barrio}}</option>
-    <option value="" id="barrios-todos">TODOS</option>
-  </select>
-
-
-  <label class="label"  for="tipoMascota">Tipo</label>
-  <select id="tipoMascota" required [(ngModel)]="mascota.estado" name="estado">
+  <label class="label" for="tipoMascota">Tipo</label>
+  <select id="tipoMascota" required name="estado" [(ngModel)]="mascota.estado">
     <option value="ADOPTABLE" id="adoptable">ADOPTABLE</option>
     <option value="PERDIDO" id="perdido">PERDIDO</option>
   </select>
 
-  <button type="submit" name="btnBuscar" id="btnBuscar">Busca ahora</button>
-</form>
+  <label class="label" for="ciudadMascota">Ciudad</label>
+  <select id="ciudadMascota" required (change)="this.datosForm.onCiudadChange($event)" [(ngModel)]="selectedCiudadId"
+    name="ciudad">
+    <option *ngFor="let ciudad of datosForm.ciudades" value="{{ciudad.idCiudad}}" id="{{ciudad.idCiudad}}">
+      {{ciudad.nombre}}</option>
+  </select>
 
-<div class="contenedor-cards-mascotas">
-  <div class="card-mascota" *ngFor="let mascota of mascotas" id="{{mascota.idMascota}}" >
-    <div class="image">
-        <img src="https://i.pinimg.com/564x/31/62/9a/31629a9de3e471a18a83f68b7652646a.jpg" alt="">
-    </div>
-    <div class="descripcion">            
-      <p>{{mascota.ubicacion.barrio}}</p>
-      <p>{{mascota.descripcion}}</p>
-      <a href="https://api.whatsapp.com//send?phone=549${{mascota.usuario.telefono}}" target="_blank">Contactar</a>
-    </div>
+  <label class="label" for="barrioMascota">Barrio</label>
+  <select id="barrioMascota" required [(ngModel)]="mascota.ubicacion" name="zona">
+    <option *ngFor="let barrio of datosForm.barrios " value="{{barrio.idUbicacion}}" id="{{barrio.idUbicacion}}">
+      {{barrio.barrio}}{{barrio.idUbicacion}}</option>
+    <option value="" id="barrios-todos">TODOS</option>
+  </select>
+
+  <label for="descripcionMascota">Descripción</label>
+  <input id="descripcionMascota" type="text" placeholder="Zona especifica u otros datos que quieras aportar"
+    name="descripcion" required [(ngModel)]="mascota.descripcion">
+
+  <label for="foto">Imagen</label>
+  <div class="file">
+    <input type="file" placeholder="Imagen" id="foto" required (change)="onFileSelected($event)">
   </div>
-</div>
-
--->
+  <button id="cargar-perdida">Carga ahora</button>
+</form>

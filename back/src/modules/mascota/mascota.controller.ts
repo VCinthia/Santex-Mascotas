@@ -9,6 +9,8 @@ import {
   UploadedFile,
   Put,
   UseGuards,
+  HttpException,
+  HttpStatus,
 } from '@nestjs/common';
 import { MascotaService } from './mascota.service';
 import { MascotaDto } from './dto/create-mascota.dto';
@@ -23,11 +25,28 @@ export class MascotaController {
   @Public()
   @Post('/createMascota')
   @UseInterceptors(FileInterceptor('file'))
-  createMascota(
+  async createMascota(
     @UploadedFile() file: Express.Multer.File | undefined,
     @Body() createMascotaDto: MascotaDto,
   ) {
-    return this.mascotaService.createMascota(file, createMascotaDto);
+    try {
+      // Verifica que el campo idUsuario esté presente en createMascotaDto
+      if (!createMascotaDto.idUsuario) {
+        throw new HttpException('El campo idUsuario es requerido', HttpStatus.BAD_REQUEST);
+      }
+  
+      // Procesa el objeto file y otros campos de createMascotaDto
+      // ...
+  
+      // Crea y guarda la mascota en la base de datos
+      const newMascota = await this.mascotaService.createMascota(file, createMascotaDto);
+  
+      // Devuelve la nueva mascota como respuesta
+      return newMascota;
+    } catch (error) {
+      // Maneja errores y devuelve una respuesta apropiada
+      throw new HttpException(error.message, HttpStatus.INTERNAL_SERVER_ERROR);
+    }
   }
 
   @Public()

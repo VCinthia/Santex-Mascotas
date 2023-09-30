@@ -9,4 +9,5 @@ export class BarrioDTO {
         this.barrio = barrio;
         this.idCiudad = idCiudad;
     }
+
 }
