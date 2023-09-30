@@ -5,7 +5,7 @@
 
   <label class="label" for="especieMascota">Especie</label>
   <select id="especieMascota" required [(ngModel)]="mascota.especie" name="especie">
-    <option *ngFor="let especie of datosForm.especies" [value]="especie.idEspecie">{{ especie.especie }}{{ especie.idEspecie }}</option>
+    <option *ngFor="let especie of datosForm.especies" [value]="especie.idEspecie">{{ especie.especie }}</option>
   </select>
 
   <label class="label" for="colorMascota">Color</label>
@@ -18,7 +18,6 @@
     <option value="MANCHADO" id="manchado">MANCHADO</option>
     <option value="ATIGRADO" id="atigrado">ATIGRADO</option>
     <option value="CREMA" id="crema">CREMA</option>
-    <option value="" id="color-todos">TODOS</option>
   </select> 
 
   <label for="tamanioMascota">Tamaño</label>
@@ -26,7 +25,6 @@
     <option value="PEQUEÑO" id="pequeño">PEQUEÑO</option>
     <option value="MEDIANO" id="mediano">MEDIANO</option>
     <option value="GRANDE" id="grande">GRANDE</option>
-    <option value="" id="tamanio-todos">TODOS</option>
   </select>
 
   <label class="label" for="tipoMascota">Tipo</label>
@@ -45,8 +43,7 @@
   <label class="label" for="barrioMascota">Barrio</label>
   <select id="barrioMascota" required [(ngModel)]="mascota.ubicacion" name="zona">
     <option *ngFor="let barrio of datosForm.barrios " value="{{barrio.idUbicacion}}" id="{{barrio.idUbicacion}}">
-      {{barrio.barrio}}{{barrio.idUbicacion}}</option>
-    <option value="" id="barrios-todos">TODOS</option>
+      {{barrio.barrio}}</option>
   </select>
 
   <label for="descripcionMascota">Descripción</label>
