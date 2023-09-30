@@ -21,7 +21,7 @@ export class MascotaService {
   constructor(
     @InjectModel(Mascota)
     private readonly mascotaModel: typeof Mascota,
-  ) { }
+  ) {}
 
   public async createMascota(
     file: Express.Multer.File | undefined,
@@ -29,37 +29,21 @@ export class MascotaService {
   ): Promise<Mascota> {
     try {
       if (createMascotaDto) {
-        const condition: FindOptions = {
-          where: {
-            idUsuario: createMascotaDto.idUsuario,
-            idEspecie: createMascotaDto.idEspecie,
-            idUbicacion: createMascotaDto.idUbicacion,
-            color: createMascotaDto.color,
-            tamanio: createMascotaDto.tamanio,
-          },
-        };
-        const mascotaExist = await this.mascotaModel.findOne(condition);
         const bufferImg: Buffer = file && file.buffer ? file.buffer : null;
-        if (!mascotaExist) {
-          const mascota: MascotaEntity = new MascotaEntity(
-            createMascotaDto.color.toUpperCase(),
-            createMascotaDto.tamanio.toUpperCase(),
-            createMascotaDto.fechaCarga,
-            bufferImg,
-            createMascotaDto.descripcion,
-            createMascotaDto.estado,
-            createMascotaDto.activo,
-            createMascotaDto.idEspecie,
-            createMascotaDto.idUsuario,
-            createMascotaDto.idUbicacion,
-          );
-          const newmascota = await this.mascotaModel.create(mascota);
-          return newmascota;
-        }
-        throw new HttpException(
-          'La mascota ya se encuentra registrado.',
-          HttpStatus.BAD_REQUEST,
+        const mascota: MascotaEntity = new MascotaEntity(
+          createMascotaDto.color.toUpperCase(),
+          createMascotaDto.tamanio.toUpperCase(),
+          createMascotaDto.fechaCarga,
+          bufferImg,
+          createMascotaDto.descripcion,
+          createMascotaDto.estado,
+          createMascotaDto.activo,
+          createMascotaDto.idEspecie,
+          createMascotaDto.idUsuario,
+          createMascotaDto.idUbicacion,
         );
+        const newmascota = await this.mascotaModel.create(mascota);
+        return newmascota;
       } else {
         throw new HttpException(
           'Los datos para crear a la mascota no son válidos.',
@@ -229,7 +213,6 @@ export class MascotaService {
           mascotaFiltro.push(mascota);
         }
       }
-      console.log(mascotaFiltro)
       return mascotaFiltro;
     } catch (error) {
       throw error;

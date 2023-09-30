@@ -8,14 +8,12 @@ import {
   UseInterceptors,
   UploadedFile,
   Put,
-  UseGuards,
   HttpException,
   HttpStatus,
 } from '@nestjs/common';
 import { MascotaService } from './mascota.service';
 import { MascotaDto } from './dto/create-mascota.dto';
 import { FileInterceptor } from '@nestjs/platform-express';
-import { JwtAuthGuard } from '../auth/jwt/auth.guard';
 import { FilterMascota } from './dto/filterMascota.dto';
 import { Public } from './../auth/decorators/public.decorator';
 @Controller('mascota')
@@ -32,15 +30,21 @@ export class MascotaController {
     try {
       // Verifica que el campo idUsuario esté presente en createMascotaDto
       if (!createMascotaDto.idUsuario) {
-        throw new HttpException('El campo idUsuario es requerido', HttpStatus.BAD_REQUEST);
+        throw new HttpException(
+          'El campo idUsuario es requerido',
+          HttpStatus.BAD_REQUEST,
+        );
       }
-  
+
       // Procesa el objeto file y otros campos de createMascotaDto
       // ...
-  
+
       // Crea y guarda la mascota en la base de datos
-      const newMascota = await this.mascotaService.createMascota(file, createMascotaDto);
-  
+      const newMascota = await this.mascotaService.createMascota(
+        file,
+        createMascotaDto,
+      );
+
       // Devuelve la nueva mascota como respuesta
       return newMascota;
     } catch (error) {
