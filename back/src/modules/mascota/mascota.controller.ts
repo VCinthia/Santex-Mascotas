@@ -28,27 +28,18 @@ export class MascotaController {
     @Body() createMascotaDto: MascotaDto,
   ) {
     try {
-      // Verifica que el campo idUsuario esté presente en createMascotaDto
       if (!createMascotaDto.idUsuario) {
         throw new HttpException(
           'El campo idUsuario es requerido',
           HttpStatus.BAD_REQUEST,
         );
       }
-
-      // Procesa el objeto file y otros campos de createMascotaDto
-      // ...
-
-      // Crea y guarda la mascota en la base de datos
       const newMascota = await this.mascotaService.createMascota(
         file,
         createMascotaDto,
       );
-
-      // Devuelve la nueva mascota como respuesta
       return newMascota;
     } catch (error) {
-      // Maneja errores y devuelve una respuesta apropiada
       throw new HttpException(error.message, HttpStatus.INTERNAL_SERVER_ERROR);
     }
   }

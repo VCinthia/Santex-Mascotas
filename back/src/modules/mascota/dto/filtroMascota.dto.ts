@@ -2,7 +2,7 @@ export class FiltroMascotaDto {
   color: string;
   tamanio: string;
   fechaCarga: Date;
-  foto: Buffer | undefined;
+  foto: string | undefined;
   descripcion: string;
   estado: string;
   activo: boolean;

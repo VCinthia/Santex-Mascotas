@@ -29,7 +29,9 @@ export class MascotaService {
   ): Promise<Mascota> {
     try {
       if (createMascotaDto) {
-        const bufferImg: Buffer = file && file.buffer ? file.buffer : null;
+        const bufferImg: string = file
+          ? await this.convertFileBase64(file)
+          : null;
         const mascota: MascotaEntity = new MascotaEntity(
           createMascotaDto.color.toUpperCase(),
           createMascotaDto.tamanio.toUpperCase(),
@@ -53,6 +55,11 @@ export class MascotaService {
     } catch (error) {
       throw new HttpException(error.message, HttpStatus.INTERNAL_SERVER_ERROR);
     }
+  }
+
+  private async convertFileBase64(file: Express.Multer.File): Promise<string> {
+    const base64Data = file.buffer.toString('base64');
+    return base64Data;
   }
 
   public async getListMascotas(): Promise<Mascota[]> {
@@ -101,7 +108,9 @@ export class MascotaService {
       if (!mascota) {
         throw new HttpException(this.petNotFound, HttpStatus.BAD_REQUEST);
       } else {
-        const bufferImg = file && file.buffer ? file.buffer : null;
+        const bufferImg: string = file
+          ? await this.convertFileBase64(file)
+          : mascota.getFoto();
         mascota.setColor(mascotaDto.color.toUpperCase());
         mascota.setTamanio(mascotaDto.tamanio.toUpperCase());
         mascota.setFechaCarga(mascotaDto.fechaCarga);
