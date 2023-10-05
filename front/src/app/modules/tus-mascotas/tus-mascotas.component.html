@@ -1,27 +1,37 @@
 <div class="tus-mascotas-contenedor">
-    <h2>Tus Mascotas</h2>
+  <h2>Tus Mascotas</h2>
 
-    <div class="contenedor-cards-mascotas">
-        <form #formularioEditarEstado="ngForm" action="#" id="contenedor-form-buscar" novalidate
-            (ngSubmit)="onEditar()">
-            <div class="card-mascota">
-                <div class="image">
-                    <img src="https://i.pinimg.com/564x/31/62/9a/31629a9de3e471a18a83f68b7652646a.jpg" alt="">
-                </div>
-                <div class="descripcion">
-                    <!-- <p><b>ID de Mascota</b></p> -->
-                    <p class="visibilidad">Estado</p>
-                    <p>Descripción</p>
-                </div>
-                <label class="estadoMascota"  for="estadoMascota"><b>Editar estado</b></label>
-                <select id="estadoMascota">
-                    <option value="0" type='text' name="" id="no-visible">NO VISIBLE</option>
-                    <option value="1" type='text' name="" id="visible">VISIBLE</option>
-                </select>
+  <div class="contenedor-cards-mascotas">
+    <form
+      #formularioEditarEstado="ngForm"
+      action="#"
+      id="contenedor-form-buscar"
+      novalidate
+      (ngSubmit)="onEditar()"
+    >
+      <div class="card-mascota" *ngFor="let mascota of mascotas">
+        <div class="image">
+          <img src="data:image/png;base64,{{ mascota.foto }}" alt="img" />
+        </div>
+        <div class="descripcion">
+          <!-- <p><b>ID de Mascota</b></p> -->
+          <p class="visibilidad">{{ mascota.estado }}</p>
+          <p>{{ mascota.descripcion }}</p>
+        </div>
+        <label class="estadoMascota" for="estadoMascota"
+          ><b>{{ mascota.estado }} </b></label
+        >
+        <select id="estadoMascota">
+          <option value="0" type="text" name="" id="no-visible">
+            NO VISIBLE
+          </option>
+          <option value="1" type="text" name="" id="visible">VISIBLE</option>
+        </select>
 
-                <button type="submit" name="btnEditarEstado" id="btnEditarEstado">Guardar</button>
-            </div>
-        </form>
-    </div>
-
+        <button type="submit" name="btnEditarEstado" id="btnEditarEstado">
+          Guardar
+        </button>
+      </div>
+    </form>
+  </div>
 </div>
