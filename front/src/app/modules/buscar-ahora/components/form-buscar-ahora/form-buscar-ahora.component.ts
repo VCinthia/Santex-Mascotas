@@ -130,6 +130,8 @@ export class FormBuscarAhoraComponent implements OnInit {
           );
         }
         this.mascotasFiltroDTO = data;
+          console.log('foto', this.mascotaFiltroDTO.foto);
+          console.log('data', data);
           //console.log('filtro despues de igualar a data',this.filtro);
           //console.log('mascotasFiltroDTO despues de igualar a data',this.mascotasFiltroDTO);
         },
