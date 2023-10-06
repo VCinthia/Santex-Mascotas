@@ -4,6 +4,7 @@ export class FilterMascotaDto {
     tamanio: string;
     zona: string;
     estado: string;
+    
 
    constructor(
      )
@@ -13,5 +14,6 @@ export class FilterMascotaDto {
       this.tamanio = '';
       this.zona = '';
       this.estado = '';
+      
    }
 }

@@ -117,10 +117,11 @@ export class FormBuscarAhoraComponent implements OnInit {
   }
 
   onBuscar(): void {
+    
       this.mascotaService.getListaFiltroMascotas(this.filtro).subscribe(
         (data) => {
-        if (data.length === 0) {
-          this.toastrService.info(
+          if (data.length === 0) {
+            this.toastrService.info(
             'No se encontraron mascotas que coincidan con los parámetros de búsqueda.',
             'Sin coincidencias',
             {
@@ -129,9 +130,11 @@ export class FormBuscarAhoraComponent implements OnInit {
             }
           );
         }
+        // console.log('foto', this.mascotaFiltroDTO.foto);
+        // console.log('data', this.mascotaFiltroDTO);
         this.mascotasFiltroDTO = data;
-          console.log('foto', this.mascotaFiltroDTO.foto);
-          console.log('data', data);
+          //console.log('foto', this.mascotaFiltroDTO.foto);
+          //console.log('data', data);
           //console.log('filtro despues de igualar a data',this.filtro);
           //console.log('mascotasFiltroDTO despues de igualar a data',this.mascotasFiltroDTO);
         },

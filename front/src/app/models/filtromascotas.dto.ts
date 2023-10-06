@@ -7,7 +7,7 @@ export class FiltroMascotaDto {
   color: string;
   tamanio: string;
   fechaCarga: Date;
-  foto: File;//Buffer | undefined;//
+  foto: File | undefined;//string | undefined;//Buffer | undefined;//
   descripcion: string;
   estado: string;
   activo: boolean;
@@ -19,7 +19,7 @@ export class FiltroMascotaDto {
     color: string,
     tamanio: string,
     fechaCarga: Date,
-    foto: File,//Buffer | undefined,//
+    foto: File | undefined,//string,//Buffer | undefined,//
     descripcion: string,
     estado: string,
     activo: boolean,
