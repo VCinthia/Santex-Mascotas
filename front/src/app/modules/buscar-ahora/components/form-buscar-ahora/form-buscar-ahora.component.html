@@ -52,6 +52,8 @@
     <option value="PERDIDO" id="perdido">PERDIDO</option>
   </select><!--FUNCIONA OK -->
 
+  
+
   <button type="submit" name="btnBuscar" id="btnBuscar">Busca ahora</button>
 </form><!--FUNCIONA OK -->
 
@@ -59,7 +61,9 @@
   <div class="card-mascota" *ngFor="let mascota of mascotasFiltroDTO" id="{{mascota.idMascota}}" >
     <div class="image">
         <!-- <img src="https://i.pinimg.com/564x/31/62/9a/31629a9de3e471a18a83f68b7652646a.jpg" alt=""> -->
-        <img src="data:image/png;base64,{{mascota.foto}}" alt="img" />
+        <!-- <img [src]="'data:image/png;base64,' + mascota.foto" alt="Imagen de la mascota"> -->
+        
+        <img src="data:image/jpg;base64,{{mascota.foto}}"alt="img"/>
     </div>
     <div class="descripcion">            
       <p>{{mascota.ubicacion.barrio}}</p>
@@ -67,4 +71,4 @@
       <a href="https://api.whatsapp.com//send?phone=549${{mascota.usuario.telefono}}" target="_blank">Contactar</a>
     </div>
   </div>
-</div><!--FUNCIONA OK -->
+</div><!--FUNCIONABA OK -->

@@ -12,6 +12,7 @@ import { EspecieService } from 'src/app/services/especie.service';
 import { MascotaService } from 'src/app/services/mascota.service';
 import { TokenService } from 'src/app/services/token.service';
 import { UbicacionService } from 'src/app/services/ubicacion.service';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   // standalone: true,
@@ -42,6 +43,7 @@ export class FormBuscarAhoraComponent implements OnInit {
   filtro: FilterMascotaDto = new FilterMascotaDto();
   
   constructor(
+    public sanitizer: DomSanitizer,
     private especieService: EspecieService,
     private ciudadService: CiudadService,
     private barrioService: UbicacionService,
@@ -134,7 +136,7 @@ export class FormBuscarAhoraComponent implements OnInit {
         // console.log('data', this.mascotaFiltroDTO);
         this.mascotasFiltroDTO = data;
           //console.log('foto', this.mascotaFiltroDTO.foto);
-          //console.log('data', data);
+          console.log('data', data);
           //console.log('filtro despues de igualar a data',this.filtro);
           //console.log('mascotasFiltroDTO despues de igualar a data',this.mascotasFiltroDTO);
         },
