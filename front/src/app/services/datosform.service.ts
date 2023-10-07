@@ -19,26 +19,24 @@ import { Observable } from 'rxjs';
 })
 
 export class DatosformService {
-  especieDTO: EspecieDTO | any = null;
+  especieDTO: EspecieDTO | null = null;
   especies: EspecieDTO[] = [];
 
-  ciudadDTO: CiudadDTO | any = null;
+  ciudadDTO: CiudadDTO | null = null;
   ciudades: CiudadDTO[] = [];
 
   selectedCiudadId: number | null = null;
 
-  barrioDTO: BarrioDTO | any = null;
+  barrioDTO: BarrioDTO | null = null;
   barrios: BarrioDTO[] = [];
 
-  mascotaDTO: MascotasDTO | any = null;
+  mascotaDTO: MascotasDTO | null = null;
   mascotas: MascotasDTO[] = [];
 
-  //mascota: MascotasDTO = new MascotasDTO();
+  usuarioDTO: UserDTO | null = null;
 
-  usuarioDTO: UserDTO | any = null;
+  dniPersona: number | null = null;
 
-  dniPersona : number | any = null;
-  
 
   constructor(
     private especieService: EspecieService,
@@ -47,49 +45,49 @@ export class DatosformService {
     public mascotaService: MascotaService,
     public tokenService: TokenService,
     public toastrService: ToastrService,
-    public loginService : LoginService,
+    public loginService: LoginService,
     private router: Router
-  ) { 
-    
+  ) {
+
     this.dniPersona = this.tokenService.getIdUsuario();
-    console.log(this.getUsuario());  
+    console.log(this.getUsuario());
   };
 
-  public getUsuario(): Observable<any> {
-    return this.loginService.usuarioById(this.dniPersona);
+  public getUsuario(): Observable<UserDTO> {
+    return this.loginService.usuarioById(Number(this.dniPersona));
   }
-  
-  
 
   public cargarEspecies(): void {
-    this.especieService.getListaEspecies().subscribe(
-      data => {
+    this.especieService.getListaEspecies().subscribe({
+      next: (data) => {
         this.especies = data;
       },
-      err => {
+      error: (err) => {
         this.toastrService.error(err.error.message, 'Desconexión: Error en carga de especies', {
           timeOut: 3000, positionClass: 'toast-top-right'
         });
       }
+    }
     );
   }
 
   public cargarCiudades(): void {
-    this.ciudadService.getListaCiudad().subscribe(
-      data => {
+    this.ciudadService.getListaCiudad().subscribe({
+      next: (data) => {
         this.ciudades = data;
       },
-      err => {
+      error: (err) => {
         this.toastrService.error(err.error.message, 'Desconexión: Error en carga de ciudades', {
           timeOut: 3000, positionClass: 'toast-top-right'
         });
       }
+    }
     );
   }
 
   public onCiudadChange(event: Event): void {
     const target = event.target as HTMLSelectElement;
-    const selectedCiudadId = parseInt(target.value, 10); // Convierte el valor a número  
+    const selectedCiudadId = parseInt(target.value, 10);
     try {
       this.cargarBarriosByCiudad(selectedCiudadId);
     } catch (error) {
@@ -101,8 +99,8 @@ export class DatosformService {
   }
 
   public cargarBarriosByCiudad(ciudadId: number): void {
-    this.barrioService.getListaUbicacionByCiudad(ciudadId).subscribe(
-      data => {
+    this.barrioService.getListaUbicacionByCiudad(ciudadId).subscribe({
+      next: (data) => {
         this.barrios = data;
         if (this.barrios.length === 0) {
           this.toastrService.warning('No hay barrios para esa ciudad.', 'Advertencia', {
@@ -110,12 +108,12 @@ export class DatosformService {
           });
         }
       },
-      err => {
+      error: (err) => {
         this.toastrService.error(err.error.message, 'Desconexión: Error en carga de barrios', {
           timeOut: 3000, positionClass: 'toast-top-right'
         });
       }
+    }
     );
   }
-
 }

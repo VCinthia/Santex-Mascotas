@@ -12,36 +12,33 @@ import { EspecieService } from 'src/app/services/especie.service';
 import { MascotaService } from 'src/app/services/mascota.service';
 import { TokenService } from 'src/app/services/token.service';
 import { UbicacionService } from 'src/app/services/ubicacion.service';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
-  // standalone: true,
-
   selector: 'app-form-buscar-ahora',
   templateUrl: './form-buscar-ahora.component.html',
   styleUrls: ['./form-buscar-ahora.component.css'],
 })
 export class FormBuscarAhoraComponent implements OnInit {
-  
-  especieDTO: EspecieDTO | any = null;
+
+  especieDTO: EspecieDTO | null = null;
   especies: EspecieDTO[] = [];
 
-  ciudadDTO: CiudadDTO | any = null;
+  ciudadDTO: CiudadDTO | null = null;
   ciudades: CiudadDTO[] = [];
 
   selectedCiudadId: number | null = null;
 
-  barrioDTO: BarrioDTO | any = null;
+  barrioDTO: BarrioDTO | null = null;
   barrios: BarrioDTO[] = [];
 
-  mascotaDTO : MascotasDTO | any = null;
-  mascotas : MascotasDTO[] = [];
+  mascotaFiltroDTO: FiltroMascotaDto | null = null;
+  mascotasFiltroDTO: FiltroMascotaDto[] = []
 
-  mascotaFiltroDTO : FiltroMascotaDto | any = null;
-  mascotasFiltroDTO : FiltroMascotaDto[] = []
-  
   filtro: FilterMascotaDto = new FilterMascotaDto();
-  
+
   constructor(
+    public sanitizer: DomSanitizer,
     private especieService: EspecieService,
     private ciudadService: CiudadService,
     private barrioService: UbicacionService,
@@ -49,45 +46,47 @@ export class FormBuscarAhoraComponent implements OnInit {
     private tokenService: TokenService,
     private toastrService: ToastrService,
     private router: Router
-  ) {  };
+  ) { };
 
   ngOnInit(): void {
     this.cargarEspecies();
     this.cargarCiudades();
     if (this.ciudadDTO) {
-      this.cargarBarriosByCiudad(this.ciudadDTO.idCiudad);
+      this.cargarBarriosByCiudad(Number(this.ciudadDTO.idCiudad));
     }
   }
 
   cargarEspecies(): void {
-    this.especieService.getListaEspecies().subscribe(
-      data => {
+    this.especieService.getListaEspecies().subscribe({
+      next: (data: EspecieDTO[]) => {
         this.especies = data;
       },
-      err => {
+      error: (err) => {
         this.toastrService.error(err.error.message, 'Desconexión: Error en carga de especies', {
           timeOut: 3000, positionClass: 'toast-top-right'
         });
       }
+    }
     );
   }
 
   cargarCiudades(): void {
-    this.ciudadService.getListaCiudad().subscribe(
-      data => {
+    this.ciudadService.getListaCiudad().subscribe({
+      next: (data: CiudadDTO[]) => {
         this.ciudades = data;
       },
-      err => {
+      error: (err) => {
         this.toastrService.error(err.error.message, 'Desconexión: Error en carga de ciudades', {
           timeOut: 3000, positionClass: 'toast-top-right'
         });
       }
+    }
     );
   }
 
   onCiudadChange(event: Event): void {
     const target = event.target as HTMLSelectElement;
-    const selectedCiudadId = parseInt(target.value, 10); // Convierte el valor a número  
+    const selectedCiudadId = parseInt(target.value, 10);
     try {
       this.cargarBarriosByCiudad(selectedCiudadId);
     } catch (error) {
@@ -97,28 +96,29 @@ export class FormBuscarAhoraComponent implements OnInit {
       });
     }
   }
-  
+
   cargarBarriosByCiudad(ciudadId: number): void {
-    this.barrioService.getListaUbicacionByCiudad(ciudadId).subscribe(
-      data => {
-        this.barrios = data;        
+    this.barrioService.getListaUbicacionByCiudad(ciudadId).subscribe({
+      next: (data: BarrioDTO[]) => {
+        this.barrios = data;
         if (this.barrios.length === 0) {
           this.toastrService.warning('No hay barrios para esa ciudad.', 'Advertencia', {
             timeOut: 3000, positionClass: 'toast-top-right'
           });
         }
       },
-      err => {
+      error: (err) => {
         this.toastrService.error(err.error.message, 'Desconexión: Error en carga de barrios', {
           timeOut: 3000, positionClass: 'toast-top-right'
         });
       }
+    }
     );
   }
 
   onBuscar(): void {
-      this.mascotaService.getListaFiltroMascotas(this.filtro).subscribe(
-        (data) => {
+    this.mascotaService.getListaFiltroMascotas(this.filtro).subscribe({
+      next: (data: FiltroMascotaDto[]) => {
         if (data.length === 0) {
           this.toastrService.info(
             'No se encontraron mascotas que coincidan con los parámetros de búsqueda.',
@@ -130,20 +130,19 @@ export class FormBuscarAhoraComponent implements OnInit {
           );
         }
         this.mascotasFiltroDTO = data;
-          //console.log('filtro despues de igualar a data',this.filtro);
-          //console.log('mascotasFiltroDTO despues de igualar a data',this.mascotasFiltroDTO);
-        },
-        err => {
-          this.toastrService.error(
-            err.error.message,
-            'Ocurrió un error al buscar mascotas.',
-            {
-              timeOut: 3000,
-              positionClass: 'toast-top-right',
-            }
-          );
-        }
-      );
-  }  
-  
+        console.log('data', data);
+      },
+      error: (err) => {
+        this.toastrService.error(
+          err.error.message,
+          'Ocurrió un error al buscar mascotas.',
+          {
+            timeOut: 3000,
+            positionClass: 'toast-top-right',
+          }
+        );
+      }
+    }
+    );
+  }
 }

@@ -16,11 +16,4 @@ export class RegisterService {
   createUser(userDTO: UserDTO): Observable<any> {
     return this.httpClient.post<any>(this.userURL+'createUsuario', userDTO);
   }
-  //createUser(userDTO: UserDTO): Observable<any> {
-  //const headers = new HttpHeaders({
-  //  'Content-Type': 'application/json'
-  //});
-
-  //return this.httpClient.post<any>(this.userURL + 'createUsuario', JSON.stringify(userDTO), { headers });
-  // }
 }

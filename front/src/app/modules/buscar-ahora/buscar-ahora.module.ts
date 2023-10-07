@@ -18,13 +18,9 @@ import { CardComponent } from 'src/app/components';
     HttpClientModule,
     FormsModule,
     CommonModule,
-    BuscarAhoraRoutingModule,
-    
+    BuscarAhoraRoutingModule,    
     CarouselModule,
     ToastrModule.forRoot({
-      // timeOut: 3000, // Duración predeterminada de las notificaciones en milisegundos
-      // positionClass: 'toast-top-right', // Posición predeterminada de las notificaciones
-      // preventDuplicates: true, // Evitar que se muestren notificaciones duplicadas
     }),
   ],
   exports : [FormBuscarAhoraComponent]

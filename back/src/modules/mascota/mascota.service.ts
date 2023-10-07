@@ -203,7 +203,7 @@ export class MascotaService {
           mascota.color = mascotaAux.getColor();
           mascota.tamanio = mascotaAux.getTamanio();
           mascota.fechaCarga = mascotaAux.getFechaCarga();
-          //mascota.foto = mascotaAux.getFoto() ? mascotaAux.getFoto() : null;
+          mascota.foto = mascotaAux.getFoto() ? mascotaAux.getFoto() : null;
           mascota.descripcion = mascotaAux.getDescripcion();
           mascota.estado = mascotaAux.getEstado();
           mascota.activo = mascotaAux.getActivo();

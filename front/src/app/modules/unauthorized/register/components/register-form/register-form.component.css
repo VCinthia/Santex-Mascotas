@@ -53,7 +53,7 @@ button {
   color: var(--color-secondary);  
 }
 
-.option:nth-child(5) {/*cambiar a 6 cuando este pregunta secreta*/
+.option:nth-child(7) {/*cambiar a 6 cuando este pregunta secreta*/
   color: var(--color-pink);
   justify-content: flex-start;
 }
