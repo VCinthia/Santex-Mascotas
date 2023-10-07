@@ -16,7 +16,7 @@ export class UbicacionService {
   public getListaUbicacion() : Observable<BarrioDTO[]> {
     return this.httpClient.get<BarrioDTO[]>(`${this.ubicacionURL}getListaBarrios`);
   }
-  //byCiudad:
+  
   public getListaUbicacionByCiudad(id : number) : Observable<BarrioDTO[]> {
     return this.httpClient.get<BarrioDTO[]>(`${this.ubicacionURL}getBarriosByCiudad/${id}`);
   }

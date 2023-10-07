@@ -7,15 +7,13 @@ import { LoginService } from 'src/app/services/login.service';
 import { TokenService } from 'src/app/services/token.service';
 
 @Component({
-  // standalone: true,
   selector: 'app-log-in-form',
   templateUrl: './log-in-form.component.html',
   styleUrls: ['./log-in-form.component.css'],
 })
 export class LogInFormComponent implements OnInit {
 
-  nombre : string | null;
-
+  nombre: string | null;
   user: LoginUserDTO | null = null;
   emailLogin: string;
   passwordLogin: string;
@@ -31,31 +29,31 @@ export class LogInFormComponent implements OnInit {
     this.passwordLogin = '';
   }
 
-  ngOnInit(): void {  }
+  ngOnInit(): void { }
 
   onLogin(): void {
     this.user = new LoginUserDTO(this.emailLogin, this.passwordLogin);
-    this.loginService.login(this.user).subscribe(data => {
-      //console.log(data);
-      if(!data.access_token) {
-        this.toastrService.error(data.response.message, 'Fallo en sistema',{
-          timeOut: 3000, positionClass:'toast-top-right'
-        });
-      } else {
-        this.tokenService.setToken(data.access_token);
-        this.nombre = this.tokenService.getNombreUsuario();
-        this.toastrService.success(data.response, `Bienvenido ${this.nombre}`, {
+    this.loginService.login(this.user).subscribe({
+      next: (data) => {
+        if (!data.access_token) {
+          this.toastrService.error(data.response.message, 'Fallo en sistema', {
+            timeOut: 3000, positionClass: 'toast-top-right'
+          });
+        } else {
+          this.tokenService.setToken(data.access_token);
+          this.nombre = this.tokenService.getNombreUsuario();
+          this.toastrService.success(data.response, `Bienvenido ${this.nombre}`, {
+            timeOut: 3000, positionClass: 'toast-top-right'
+          });
+          this.router.navigate(['/']);
+        }
+      },
+      error: (err) => {
+        this.toastrService.error(err.error.message, 'Datos incorrectos', {
           timeOut: 3000, positionClass: 'toast-top-right'
         });
-        
-        this.router.navigate(['/']);
-        
       }
-    },
-    err => {
-      this.toastrService.error(err.error.message, 'Datos incorrectos',{
-        timeOut: 3000, positionClass:'toast-top-right'
-      });
-    })
+    }
+    )
   }
 }

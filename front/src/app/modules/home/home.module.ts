@@ -16,7 +16,7 @@ import { ScrollToTopComponent } from './components/scroll-to-top/scroll-to-top.c
   imports: [
     CommonModule,
     HomeRoutingModule,
-    SPortadaComponent, //lo saque de declarations y lo importe
+    SPortadaComponent,
     SPodemosAyudarteComponent,
     SQueHacemosComponent,
     SComoLogramosComponent,

@@ -22,7 +22,7 @@ export class CiudadService {
   }
 
   public createCiudad(nombre : string, ciudad : CiudadDTO) : Observable<any> {
-    return this.httpClient.post<any>(`${this.ciudadURL}createCiudad/${nombre}`, ciudad);//no necesita body desde el back pero si para el post del front
+    return this.httpClient.post<any>(`${this.ciudadURL}createCiudad/${nombre}`, ciudad);
   }
 
   public updateCiudad(id : number, ciudad : CiudadDTO) : Observable<any> {

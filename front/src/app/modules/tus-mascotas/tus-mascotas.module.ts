@@ -20,9 +20,6 @@ import { TusMascotasRoutingModule } from './tus-mascotas-routing.module';
     CarouselModule,
     TusMascotasRoutingModule,
     ToastrModule.forRoot({
-      // timeOut: 3000, // Duración predeterminada de las notificaciones en milisegundos
-      // positionClass: 'toast-top-right', // Posición predeterminada de las notificaciones
-      // preventDuplicates: true, // Evitar que se muestren notificaciones duplicadas
     }),
   ],
   exports : [TusMascotasComponent]

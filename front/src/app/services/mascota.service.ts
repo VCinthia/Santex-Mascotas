@@ -3,7 +3,6 @@ import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { MascotasDTO } from '../models/mascotas.dto';
 import { Observable } from 'rxjs';
-import { FilterMascotaDto } from '../models/filtermascota.dto';
 import { FiltroMascotaDto } from '../models/filtromascotas.dto';
 
 @Injectable({
@@ -17,7 +16,7 @@ export class MascotaService {
   public getListaMascotas(): Observable<MascotasDTO[]> {
     return this.httpClient.get<MascotasDTO[]>(
       `${this.mascotasURL}getListMascota`
-    ); //ver
+    );
   }
 
   public getMascota(id: number): Observable<MascotasDTO> {
@@ -26,9 +25,6 @@ export class MascotaService {
     );
   }
 
-  // public createMascota(file : File, mascota : MascotasDTO) : Observable<any> {
-  //   return this.httpClient.post<any>(`${this.mascotasURL}createMascota`, {file, mascota});
-  // }
   public createMascota(file: File | any, formData: FormData): Observable<any> {
     return this.httpClient.post<any>(
       `${this.mascotasURL}createMascota`,
@@ -49,7 +45,6 @@ export class MascotaService {
     );
   }
 
-  //filtro mascotas:
   public getListaFiltroMascotas(filtro: any): Observable<FiltroMascotaDto[]> {
     return this.httpClient.post<FiltroMascotaDto[]>(
       `${this.mascotasURL}buscarMascotas/`,

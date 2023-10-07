@@ -1,6 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { ScrollService } from 'src/app/services/scroll.service';
 
 @Component({
   selector: 'app-home',
@@ -9,17 +8,11 @@ import { ScrollService } from 'src/app/services/scroll.service';
 })
 
 export class HomeComponent implements OnInit, OnDestroy {
-  private scrollToSectionSubscription?: Subscription;// | undefined;
+  private scrollToSectionSubscription?: Subscription;
 
-  constructor(private scrollService: ScrollService) {}
+  constructor() {}
 
-  ngOnInit() {
-    // this.scrollToSectionSubscription = this.scrollService.scrollToSection$.subscribe(
-    //   (sectionId: string) => {
-    //     this.scrollToSection(sectionId);
-    //   }
-    // );
-  }
+  ngOnInit() {  }
 
   ngOnDestroy() {
     if (this.scrollToSectionSubscription) {

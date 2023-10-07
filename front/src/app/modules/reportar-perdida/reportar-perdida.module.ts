@@ -19,14 +19,8 @@ import { CarouselModule } from '../carousel/carousel.module';
     FormsModule,
     CommonModule,    
     ReportarPerdidaRoutingModule,
-
     CarouselModule,
-    ToastrModule.forRoot({
-      // timeOut: 3000, // Duración predeterminada de las notificaciones en milisegundos
-      // positionClass: 'toast-top-right', // Posición predeterminada de las notificaciones
-      // preventDuplicates: true, // Evitar que se muestren notificaciones duplicadas
-    }),
-    
+    ToastrModule.forRoot({}),    
   ],
   exports : [FormReportarComponent]
 })

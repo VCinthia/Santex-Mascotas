@@ -1,16 +1,14 @@
 <h2>Busca Ahora</h2>
 
-<form #formularioBusquedaMascota="ngForm" action="#" id="contenedor-form-buscar" novalidate (ngSubmit)="onBuscar()"><!---->
-
+<form #formularioBusquedaMascota="ngForm" action="#" id="contenedor-form-buscar" novalidate (ngSubmit)="onBuscar()">
   <label class="label" for="especieMascota">¿Que buscas?</label>
-  <select id="especieMascota"required [(ngModel)]="filtro.especie" name="especie">
-    <!--[ngModelOptions]="{standalone: true}"-->
-    <option *ngFor="let especie of especies" value="{{especie.especie}}" id="{{especie.idEspecie}}">{{especie.especie}}</option>
-  </select> <!--TRAE ESPECIE OK-->
+  <select id="especieMascota" required [(ngModel)]="filtro.especie" name="especie">
+    <option *ngFor="let especie of especies" value="{{especie.especie}}" id="{{especie.idEspecie}}">{{especie.especie}}
+    </option>
+  </select>
 
-  <label class="label"  for="colorMascota">Color</label>
+  <label class="label" for="colorMascota">Color</label>
   <select id="colorMascota" required [(ngModel)]="filtro.color" name="color">
-    <!--[ngModelOptions]="{standalone: true}"-->
     <option value="BLANCO" id="blanco">BLANCO</option>
     <option value="NEGRO" id="negro">NEGRO</option>
     <option value="NARANJA" id="naranja">NARANJA</option>
@@ -20,55 +18,47 @@
     <option value="ATIGRADO" id="atigrado">ATIGRADO</option>
     <option value="CREMA" id="crema">CREMA</option>
     <option value="" id="color-todos">TODOS</option>
-  </select> <!--FUNCIONA OK-->
+  </select>
 
   <label for="tamanioMascota">Tamaño</label>
   <select id="tamanioMascota" required [(ngModel)]="filtro.tamanio" name="tamanio">
-    <!--[ngModelOptions]="{standalone: true}"-->
     <option value="PEQUEÑO" id="pequeño">PEQUEÑO</option>
     <option value="MEDIANO" id="mediano">MEDIANO</option>
     <option value="GRANDE" id="grande">GRANDE</option>
     <option value="" id="tamanio-todos">TODOS</option>
-  </select> <!--FUNCIONA OK-->
+  </select>
 
   <label class="label" for="ciudadMascota">Ciudad</label>
-<select id="ciudadMascota" required (change)="onCiudadChange($event)"  [(ngModel)]="selectedCiudadId" name="ciudad"><!--[(ngModel)]="filtro.ciudad" name="ciudad"-->
-  <!--[ngModelOptions]="{standalone: true}"-->
-  <option *ngFor="let ciudad of ciudades" value="{{ciudad.idCiudad}}" id="{{ciudad.idCiudad}}">{{ciudad.nombre}}</option>  
-</select> <!--TRAE CIUDADES OK-->
+  <select id="ciudadMascota" required (change)="onCiudadChange($event)" [(ngModel)]="selectedCiudadId" name="ciudad">
+    <option *ngFor="let ciudad of ciudades" value="{{ciudad.idCiudad}}" id="{{ciudad.idCiudad}}">{{ciudad.nombre}}
+    </option>
+  </select>
 
   <label class="label" for="barrioMascota">Barrio</label>
   <select id="barrioMascota" required [(ngModel)]="filtro.zona" name="zona">
-    <!--[ngModelOptions]="{standalone: true}"-->
-    <option *ngFor="let barrio of barrios " value="{{barrio.barrio}}" id="{{barrio.idUbicacion}}">{{barrio.barrio}}</option>
+    <option *ngFor="let barrio of barrios " value="{{barrio.barrio}}" id="{{barrio.idUbicacion}}">{{barrio.barrio}}
+    </option>
     <option value="" id="barrios-todos">TODOS</option>
-  </select> <!--FUNCIONA OK -->
+  </select>
 
-
-  <label class="label"  for="tipoMascota">Tipo</label>
+  <label class="label" for="tipoMascota">Tipo</label>
   <select id="tipoMascota" required [(ngModel)]="filtro.estado" name="estado">
-    <!--[ngModelOptions]="{standalone: true}"-->
     <option value="ADOPTABLE" id="adoptable">ADOPTABLE</option>
     <option value="PERDIDO" id="perdido">PERDIDO</option>
-  </select><!--FUNCIONA OK -->
-
-  
+  </select>
 
   <button type="submit" name="btnBuscar" id="btnBuscar">Busca ahora</button>
-</form><!--FUNCIONA OK -->
+</form>
 
 <div class="contenedor-cards-mascotas">
-  <div class="card-mascota" *ngFor="let mascota of mascotasFiltroDTO" id="{{mascota.idMascota}}" >
+  <div class="card-mascota" *ngFor="let mascota of mascotasFiltroDTO" id="{{mascota.idMascota}}">
     <div class="image">
-        <!-- <img src="https://i.pinimg.com/564x/31/62/9a/31629a9de3e471a18a83f68b7652646a.jpg" alt=""> -->
-        <!-- <img [src]="'data:image/png;base64,' + mascota.foto" alt="Imagen de la mascota"> -->
-        
-        <img src="data:image/jpg;base64,{{mascota.foto}}"alt="img"/>
+      <img src="data:image/jpg;base64,{{mascota.foto}}" alt="img" />
     </div>
-    <div class="descripcion">            
+    <div class="descripcion">
       <p>{{mascota.ubicacion.barrio}}</p>
       <p>{{mascota.descripcion}}</p>
       <a href="https://api.whatsapp.com//send?phone=549${{mascota.usuario.telefono}}" target="_blank">Contactar</a>
     </div>
   </div>
-</div><!--FUNCIONABA OK -->
+</div>

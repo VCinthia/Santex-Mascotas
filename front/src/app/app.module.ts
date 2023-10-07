@@ -6,9 +6,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NavComponent } from './components/nav/nav.component';
 import { FooterComponent } from './components/footer/footer.component';
-
 import { FormsModule } from '@angular/forms';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router';
 import { CardComponent } from './components/card/card.component';
@@ -21,12 +20,11 @@ import { CardComponent } from './components/card/card.component';
     HttpClientModule,
     FormsModule,
     BrowserModule,
-    AppRoutingModule, // lo cambie de declarations a imports,
+    AppRoutingModule,
     RouterModule,
     ToastrModule.forRoot({
-      timeOut: 3000, // Duración predeterminada de las notificaciones en milisegundos
-      positionClass: 'toast-top-right', // Posición predeterminada de las notificaciones
-      // preventDuplicates: true, // Evitar que se muestren notificaciones duplicadas
+      timeOut: 3000,
+      positionClass: 'toast-top-right',
     }),
   ],
   providers: [],

@@ -16,18 +16,18 @@ export class FormReportarComponent implements OnInit {
 
   foto: File | any = null;
 
-  especieDTO: EspecieDTO | any = null;
+  especieDTO: EspecieDTO | null = null;
   especies: EspecieDTO[] = [];
 
-  ciudadDTO: CiudadDTO | any = null;
+  ciudadDTO: CiudadDTO | null = null;
   ciudades: CiudadDTO[] = [];
 
   selectedCiudadId: number | null = null;
 
-  barrioDTO: BarrioDTO | any = null;
+  barrioDTO: BarrioDTO | null = null;
   barrios: BarrioDTO[] = [];
 
-  mascotaDTO: MascotasDTO | any = null;
+  mascotaDTO: MascotasDTO | null = null;
 
   mascota: MascotasDTO = new MascotasDTO();
 
@@ -42,7 +42,7 @@ export class FormReportarComponent implements OnInit {
     this.datosForm.cargarEspecies();
     this.datosForm.cargarCiudades();
     if (this.datosForm.ciudadDTO) {
-      this.datosForm.cargarBarriosByCiudad(this.datosForm.ciudadDTO.idCiudad);
+      this.datosForm.cargarBarriosByCiudad(Number(this.datosForm.ciudadDTO.idCiudad));
     }
 
     this.mascota.usuario = this.datosForm.tokenService.getIdUsuario()!;
@@ -56,8 +56,6 @@ export class FormReportarComponent implements OnInit {
 
 
   onReportar(): void {
-
-    // Crear un FormData y agregar la imagen
     const formData = new FormData();
     formData.append('file', this.foto);
 
@@ -76,10 +74,9 @@ export class FormReportarComponent implements OnInit {
     console.log('mascota inicio funcion', this.mascota);
 
     
-    this.datosForm.mascotaService.createMascota(this.foto, formData).subscribe(
-      (data) => {
+    this.datosForm.mascotaService.createMascota(this.foto, formData).subscribe({
+      next:(data) => {
         if (data.length === 0) {
-          //console.log('mascota compara data.length es === 0', this.mascota);
           this.datosForm.toastrService.info(
             'Hay un error en los parametros de carga.',
             'Verificar datos.',
@@ -93,7 +90,7 @@ export class FormReportarComponent implements OnInit {
         timeOut: 3000, positionClass: 'toast-top-right'
       });
       },
-      err => {
+      error:(err) => {
         this.datosForm.toastrService.error(
           err.error.message,
           'Ocurrió un error al cargar mascota.',
@@ -103,7 +100,7 @@ export class FormReportarComponent implements OnInit {
           }
         );
       }
+    }
     );
   }
-
 }

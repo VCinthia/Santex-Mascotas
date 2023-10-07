@@ -35,11 +35,8 @@ export class TokenService {
     }    
     const access_token = this.getToken();    
     const payload : any = access_token?.split('.')[1];
-    //console.log(`payload: ${payload}`);
     const values = atob(payload);
-    //console.log(`values: ${values}`);
     const valueJSON = JSON.parse(values);
-    //console.log(`valueJSON: ${valueJSON}`);
     const dniPersona = valueJSON.user.dniPersona;
     console.log(`nombre: ${dniPersona}`);
     return dniPersona;
@@ -51,11 +48,8 @@ export class TokenService {
     }    
     const access_token = this.getToken();    
     const payload : any = access_token?.split('.')[1];
-    //console.log(`payload: ${payload}`);
     const values = atob(payload);
-    //console.log(`values: ${values}`);
     const valueJSON = JSON.parse(values);
-    //console.log(`valueJSON: ${valueJSON}`);
     const nombre = valueJSON.user.nombre;
     console.log(`nombre: ${nombre}`);
     return nombre;
@@ -67,11 +61,8 @@ export class TokenService {
     }    
     const access_token = this.getToken();    
     const payload : any = access_token?.split('.')[1];
-    //console.log(`payload: ${payload}`);
     const values = atob(payload);
-    //console.log(`values: ${values}`);
     const valueJSON = JSON.parse(values);
-    //console.log(`valueJSON: ${valueJSON}`);
     const idUsuario = valueJSON.user.idUsuario;
     console.log(`idUsuario: ${idUsuario}`);
     return idUsuario;
