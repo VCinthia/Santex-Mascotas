@@ -15,9 +15,8 @@ import { UserDTO } from '../models/user.dto';
 import { Observable } from 'rxjs';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
-
 export class DatosformService {
   especieDTO: EspecieDTO | null = null;
   especies: EspecieDTO[] = [];
@@ -37,7 +36,6 @@ export class DatosformService {
 
   dniPersona: number | null = null;
 
-
   constructor(
     private especieService: EspecieService,
     private ciudadService: CiudadService,
@@ -48,10 +46,8 @@ export class DatosformService {
     public loginService: LoginService,
     private router: Router
   ) {
-
     this.dniPersona = this.tokenService.getIdUsuario();
-    console.log(this.getUsuario());
-  };
+  }
 
   public getUsuario(): Observable<UserDTO> {
     return this.loginService.usuarioById(Number(this.dniPersona));
@@ -63,12 +59,16 @@ export class DatosformService {
         this.especies = data;
       },
       error: (err) => {
-        this.toastrService.error(err.error.message, 'Desconexión: Error en carga de especies', {
-          timeOut: 3000, positionClass: 'toast-top-right'
-        });
-      }
-    }
-    );
+        this.toastrService.error(
+          err.error.message,
+          'Desconexión: Error en carga de especies',
+          {
+            timeOut: 3000,
+            positionClass: 'toast-top-right',
+          }
+        );
+      },
+    });
   }
 
   public cargarCiudades(): void {
@@ -77,12 +77,16 @@ export class DatosformService {
         this.ciudades = data;
       },
       error: (err) => {
-        this.toastrService.error(err.error.message, 'Desconexión: Error en carga de ciudades', {
-          timeOut: 3000, positionClass: 'toast-top-right'
-        });
-      }
-    }
-    );
+        this.toastrService.error(
+          err.error.message,
+          'Desconexión: Error en carga de ciudades',
+          {
+            timeOut: 3000,
+            positionClass: 'toast-top-right',
+          }
+        );
+      },
+    });
   }
 
   public onCiudadChange(event: Event): void {
@@ -92,9 +96,14 @@ export class DatosformService {
       this.cargarBarriosByCiudad(selectedCiudadId);
     } catch (error) {
       console.error('Error al cargar los barrios:', error);
-      this.toastrService.error('Ocurrió un error al cargar los barrios.', 'Error', {
-        timeOut: 3000, positionClass: 'toast-top-right'
-      });
+      this.toastrService.error(
+        'Ocurrió un error al cargar los barrios.',
+        'Error',
+        {
+          timeOut: 3000,
+          positionClass: 'toast-top-right',
+        }
+      );
     }
   }
 
@@ -103,17 +112,26 @@ export class DatosformService {
       next: (data) => {
         this.barrios = data;
         if (this.barrios.length === 0) {
-          this.toastrService.warning('No hay barrios para esa ciudad.', 'Advertencia', {
-            timeOut: 3000, positionClass: 'toast-top-right'
-          });
+          this.toastrService.warning(
+            'No hay barrios para esa ciudad.',
+            'Advertencia',
+            {
+              timeOut: 3000,
+              positionClass: 'toast-top-right',
+            }
+          );
         }
       },
       error: (err) => {
-        this.toastrService.error(err.error.message, 'Desconexión: Error en carga de barrios', {
-          timeOut: 3000, positionClass: 'toast-top-right'
-        });
-      }
-    }
-    );
+        this.toastrService.error(
+          err.error.message,
+          'Desconexión: Error en carga de barrios',
+          {
+            timeOut: 3000,
+            positionClass: 'toast-top-right',
+          }
+        );
+      },
+    });
   }
 }

@@ -23,14 +23,13 @@ export class TusMascotasComponent implements OnInit {
   ngOnInit(): void {
     this.dniPersona = this.tokenService.getDniUsuario();
     this.mascotasService.getMascotaByDni(Number(this.dniPersona)).subscribe({
-      next:(data) => {
+      next: (data) => {
         this.mascotas = data;
       },
-      error:(err) => {
-        console.log(err);
-      }
-    }
-    );
+      error: (err) => {
+        console.error(err);
+      },
+    });
   }
   onEditar() {}
 }

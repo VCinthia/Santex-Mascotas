@@ -20,7 +20,6 @@ import { DomSanitizer } from '@angular/platform-browser';
   styleUrls: ['./form-buscar-ahora.component.css'],
 })
 export class FormBuscarAhoraComponent implements OnInit {
-
   especieDTO: EspecieDTO | null = null;
   especies: EspecieDTO[] = [];
 
@@ -33,7 +32,7 @@ export class FormBuscarAhoraComponent implements OnInit {
   barrios: BarrioDTO[] = [];
 
   mascotaFiltroDTO: FiltroMascotaDto | null = null;
-  mascotasFiltroDTO: FiltroMascotaDto[] = []
+  mascotasFiltroDTO: FiltroMascotaDto[] = [];
 
   filtro: FilterMascotaDto = new FilterMascotaDto();
 
@@ -46,7 +45,7 @@ export class FormBuscarAhoraComponent implements OnInit {
     private tokenService: TokenService,
     private toastrService: ToastrService,
     private router: Router
-  ) { };
+  ) {}
 
   ngOnInit(): void {
     this.cargarEspecies();
@@ -62,12 +61,16 @@ export class FormBuscarAhoraComponent implements OnInit {
         this.especies = data;
       },
       error: (err) => {
-        this.toastrService.error(err.error.message, 'Desconexión: Error en carga de especies', {
-          timeOut: 3000, positionClass: 'toast-top-right'
-        });
-      }
-    }
-    );
+        this.toastrService.error(
+          err.error.message,
+          'Desconexión: Error en carga de especies',
+          {
+            timeOut: 3000,
+            positionClass: 'toast-top-right',
+          }
+        );
+      },
+    });
   }
 
   cargarCiudades(): void {
@@ -76,12 +79,16 @@ export class FormBuscarAhoraComponent implements OnInit {
         this.ciudades = data;
       },
       error: (err) => {
-        this.toastrService.error(err.error.message, 'Desconexión: Error en carga de ciudades', {
-          timeOut: 3000, positionClass: 'toast-top-right'
-        });
-      }
-    }
-    );
+        this.toastrService.error(
+          err.error.message,
+          'Desconexión: Error en carga de ciudades',
+          {
+            timeOut: 3000,
+            positionClass: 'toast-top-right',
+          }
+        );
+      },
+    });
   }
 
   onCiudadChange(event: Event): void {
@@ -91,9 +98,14 @@ export class FormBuscarAhoraComponent implements OnInit {
       this.cargarBarriosByCiudad(selectedCiudadId);
     } catch (error) {
       console.error('Error al cargar los barrios:', error);
-      this.toastrService.error('Ocurrió un error al cargar los barrios.', 'Error', {
-        timeOut: 3000, positionClass: 'toast-top-right'
-      });
+      this.toastrService.error(
+        'Ocurrió un error al cargar los barrios.',
+        'Error',
+        {
+          timeOut: 3000,
+          positionClass: 'toast-top-right',
+        }
+      );
     }
   }
 
@@ -102,18 +114,27 @@ export class FormBuscarAhoraComponent implements OnInit {
       next: (data: BarrioDTO[]) => {
         this.barrios = data;
         if (this.barrios.length === 0) {
-          this.toastrService.warning('No hay barrios para esa ciudad.', 'Advertencia', {
-            timeOut: 3000, positionClass: 'toast-top-right'
-          });
+          this.toastrService.warning(
+            'No hay barrios para esa ciudad.',
+            'Advertencia',
+            {
+              timeOut: 3000,
+              positionClass: 'toast-top-right',
+            }
+          );
         }
       },
       error: (err) => {
-        this.toastrService.error(err.error.message, 'Desconexión: Error en carga de barrios', {
-          timeOut: 3000, positionClass: 'toast-top-right'
-        });
-      }
-    }
-    );
+        this.toastrService.error(
+          err.error.message,
+          'Desconexión: Error en carga de barrios',
+          {
+            timeOut: 3000,
+            positionClass: 'toast-top-right',
+          }
+        );
+      },
+    });
   }
 
   onBuscar(): void {
@@ -130,7 +151,6 @@ export class FormBuscarAhoraComponent implements OnInit {
           );
         }
         this.mascotasFiltroDTO = data;
-        console.log('data', data);
       },
       error: (err) => {
         this.toastrService.error(
@@ -141,8 +161,7 @@ export class FormBuscarAhoraComponent implements OnInit {
             positionClass: 'toast-top-right',
           }
         );
-      }
-    }
-    );
+      },
+    });
   }
 }
