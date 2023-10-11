@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { CiudadDTO } from 'src/app/models/ciudad.dto';
 import { EspecieDTO } from 'src/app/models/especie.dto';
 import { MascotasDTO } from 'src/app/models/mascotas.dto';
@@ -6,6 +6,8 @@ import { BarrioDTO } from 'src/app/models/ubicacion.dto';
 import { UserDTO } from 'src/app/models/user.dto';
 import { DatosformService } from 'src/app/services/datosform.service';
 import { ToastrService } from 'ngx-toastr';
+import { NgForm } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-form-reportar',
@@ -13,6 +15,7 @@ import { ToastrService } from 'ngx-toastr';
   styleUrls: ['./form-reportar.component.css']
 })
 export class FormReportarComponent implements OnInit {
+  @ViewChild('formularioReportarMascota') formularioReportarMascota?: NgForm;
 
   foto: File | any = null;
 
@@ -31,9 +34,11 @@ export class FormReportarComponent implements OnInit {
 
   mascota: MascotasDTO = new MascotasDTO();
 
+
+
   constructor(
     public datosForm: DatosformService,
-
+    private router: Router
   ) {
 
   };
@@ -47,50 +52,53 @@ export class FormReportarComponent implements OnInit {
 
     this.mascota.usuario = this.datosForm.tokenService.getIdUsuario()!;
     this.mascota.activo = true;
-  }
 
+    if (this.formularioReportarMascota) {
+      this.formularioReportarMascota.resetForm();
+    }
+  }
 
   onFileSelected(event: any) {
     this.foto = event.target.files[0];
   }
 
-
   onReportar(): void {
+    if (this.formularioReportarMascota && this.formularioReportarMascota.invalid || this.foto === null) {
+      this.datosForm.toastrService.warning('Por favor, complete los campos obligatorios.', 'Campos requeridos', {
+        timeOut: 3000,
+        positionClass: 'toast-top-right',
+      });
+      return;
+    }
     const formData = new FormData();
     formData.append('file', this.foto);
 
-
     formData.append('idEspecie', this.mascota.especie.toString());
+
     formData.append('color', this.mascota.color);
     formData.append('tamanio', this.mascota.tamanio);
     formData.append('estado', this.mascota.estado);
     formData.append('activo', this.mascota.activo.toString());
     formData.append('fechaCarga', this.mascota.fechaCarga.toDateString());
-    formData.append('idUbicacion', this.mascota.ubicacion.toString());    
+    formData.append('idUbicacion', this.mascota.ubicacion.toString());
+
     formData.append('descripcion', this.mascota.descripcion);
     formData.append('idUsuario', this.mascota.usuario.toString());
 
     console.log('Foto:', this.foto);
     console.log('mascota inicio funcion', this.mascota);
 
-    
     this.datosForm.mascotaService.createMascota(this.foto, formData).subscribe({
-      next:(data) => {
-        if (data.length === 0) {
-          this.datosForm.toastrService.info(
-            'Hay un error en los parametros de carga.',
-            'Verificar datos.',
-            {
-              timeOut: 3000,
-              positionClass: 'toast-top-right',
-            }
-          );
-        }
+      next: (data) => {
         this.datosForm.toastrService.success(data.response, 'Registraste tu mascota correctamente', {
-        timeOut: 3000, positionClass: 'toast-top-right'
-      });
+          timeOut: 3000, positionClass: 'toast-top-right'
+        });
+        if (this.formularioReportarMascota) {
+          this.formularioReportarMascota.resetForm();
+        }
+        //this.router.navigate(['/tus-mascotas']);
       },
-      error:(err) => {
+      error: (err) => {
         this.datosForm.toastrService.error(
           err.error.message,
           'Ocurrió un error al cargar mascota.',
@@ -100,6 +108,7 @@ export class FormReportarComponent implements OnInit {
           }
         );
       }
+
     }
     );
   }
