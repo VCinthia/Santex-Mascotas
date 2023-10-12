@@ -41,7 +41,8 @@
   transition: 0.15s ease-in-out;
 } */
 
-.registrarse , .logout{
+.registrarse,
+.logout {
   background-color: var(--color-tertiary);
   padding: var(--padding-xxs);
   border-radius: var(--border-xs);
@@ -78,7 +79,7 @@
   display: none;
 }
 
-@media (max-width: 925px) {
+@media (max-width: 990px) {
   .menu {
     flex-direction: column;
     align-items: center;
@@ -98,7 +99,7 @@
   .menu li a {
     padding: 10px;
   }
-  
+
   .registrarse-btn {
     background-color: var(--color-tertiary);
     padding: var(--padding-xxs);
@@ -110,7 +111,7 @@
     padding: var(--padding-xxs);
     border-radius: var(--border-xs);
   }
-  
+
   .open-menu,
   .close-menu {
     display: block;
@@ -119,4 +120,3 @@
     right: 0;
   }
 }
-
