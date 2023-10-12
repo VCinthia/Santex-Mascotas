@@ -7,7 +7,6 @@
       action="#"
       id="contenedor-form-buscar"
       novalidate
-      (ngSubmit)="onEditar()"
     >
       <div class="card-mascota" *ngFor="let mascota of mascotas">
         <div class="image">
@@ -19,16 +18,21 @@
           <p>{{ mascota.descripcion }}</p>
         </div>
         <label class="estadoMascota" for="estadoMascota"
-          ><b>{{ mascota.estado }} </b></label
+          ><b>{{ mascota.estado }}</b></label
         >
-        <select id="estadoMascota">
+        <select id="estado{{ mascota.idMascota }}">
           <option value="0" type="text" name="" id="no-visible">
             NO VISIBLE
           </option>
           <option value="1" type="text" name="" id="visible">VISIBLE</option>
         </select>
 
-        <button type="submit" name="btnEditarEstado" id="btnEditarEstado">
+        <button
+          type="submit"
+          name="btnEditarEstado{{ mascota.idMascota }}"
+          id="btnEditarEstado{{ mascota.idMascota }}"
+          (click)="updateEstado(mascota)"
+        >
           Guardar
         </button>
       </div>
