@@ -10,10 +10,9 @@ import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'app-form-reportar',
   templateUrl: './form-reportar.component.html',
-  styleUrls: ['./form-reportar.component.css']
+  styleUrls: ['./form-reportar.component.css'],
 })
 export class FormReportarComponent implements OnInit {
-
   foto: File | any = null;
 
   especieDTO: EspecieDTO | null = null;
@@ -31,34 +30,28 @@ export class FormReportarComponent implements OnInit {
 
   mascota: MascotasDTO = new MascotasDTO();
 
-  constructor(
-    public datosForm: DatosformService,
-
-  ) {
-
-  };
+  constructor(public datosForm: DatosformService) {}
 
   ngOnInit(): void {
     this.datosForm.cargarEspecies();
     this.datosForm.cargarCiudades();
     if (this.datosForm.ciudadDTO) {
-      this.datosForm.cargarBarriosByCiudad(Number(this.datosForm.ciudadDTO.idCiudad));
+      this.datosForm.cargarBarriosByCiudad(
+        Number(this.datosForm.ciudadDTO.idCiudad)
+      );
     }
 
     this.mascota.usuario = this.datosForm.tokenService.getIdUsuario()!;
     this.mascota.activo = true;
   }
 
-
   onFileSelected(event: any) {
     this.foto = event.target.files[0];
   }
 
-
   onReportar(): void {
     const formData = new FormData();
     formData.append('file', this.foto);
-
 
     formData.append('idEspecie', this.mascota.especie.toString());
     formData.append('color', this.mascota.color);
@@ -66,16 +59,12 @@ export class FormReportarComponent implements OnInit {
     formData.append('estado', this.mascota.estado);
     formData.append('activo', this.mascota.activo.toString());
     formData.append('fechaCarga', this.mascota.fechaCarga.toDateString());
-    formData.append('idUbicacion', this.mascota.ubicacion.toString());    
+    formData.append('idUbicacion', this.mascota.ubicacion.toString());
     formData.append('descripcion', this.mascota.descripcion);
     formData.append('idUsuario', this.mascota.usuario.toString());
 
-    console.log('Foto:', this.foto);
-    console.log('mascota inicio funcion', this.mascota);
-
-    
     this.datosForm.mascotaService.createMascota(this.foto, formData).subscribe({
-      next:(data) => {
+      next: (data) => {
         if (data.length === 0) {
           this.datosForm.toastrService.info(
             'Hay un error en los parametros de carga.',
@@ -86,11 +75,16 @@ export class FormReportarComponent implements OnInit {
             }
           );
         }
-        this.datosForm.toastrService.success(data.response, 'Registraste tu mascota correctamente', {
-        timeOut: 3000, positionClass: 'toast-top-right'
-      });
+        this.datosForm.toastrService.success(
+          data.response,
+          'Registraste tu mascota correctamente',
+          {
+            timeOut: 3000,
+            positionClass: 'toast-top-right',
+          }
+        );
       },
-      error:(err) => {
+      error: (err) => {
         this.datosForm.toastrService.error(
           err.error.message,
           'Ocurrió un error al cargar mascota.',
@@ -99,8 +93,7 @@ export class FormReportarComponent implements OnInit {
             positionClass: 'toast-top-right',
           }
         );
-      }
-    }
-    );
+      },
+    });
   }
 }
