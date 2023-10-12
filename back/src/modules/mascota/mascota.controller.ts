@@ -85,4 +85,10 @@ export class MascotaController {
   getMascotaByDni(@Param('dni') dni: number) {
     return this.mascotaService.getMascotaByDniUsuario(+dni);
   }
+
+  @Public()
+  @Post('/updateVisibilidadMascota/:id/:estado')
+  updateVisibilidad(@Param('id') id: string, @Param('estado') estado: string) {
+    return this.mascotaService.updateVisibilidadMascota(+id, estado);
+  }
 }

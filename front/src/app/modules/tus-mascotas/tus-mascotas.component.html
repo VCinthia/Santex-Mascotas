@@ -20,11 +20,15 @@
         <label class="estadoMascota" for="estadoMascota"
           ><b>{{ mascota.estado }}</b></label
         >
-        <select id="estado{{ mascota.idMascota }}">
-          <option value="0" type="text" name="" id="no-visible">
+        <select
+          id="estado{{ mascota.idMascota }}"
+          [(ngModel)]="mascota.activo"
+          name="estado{{ mascota.idMascota }}"
+        >
+          <option value="false" type="text" name="" id="no-visible">
             NO VISIBLE
           </option>
-          <option value="1" type="text" name="" id="visible">VISIBLE</option>
+          <option value="true" type="text" name="" id="visible">VISIBLE</option>
         </select>
 
         <button

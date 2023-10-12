@@ -3,9 +3,7 @@ import { CiudadDTO } from 'src/app/models/ciudad.dto';
 import { EspecieDTO } from 'src/app/models/especie.dto';
 import { MascotasDTO } from 'src/app/models/mascotas.dto';
 import { BarrioDTO } from 'src/app/models/ubicacion.dto';
-import { UserDTO } from 'src/app/models/user.dto';
 import { DatosformService } from 'src/app/services/datosform.service';
-import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-form-reportar',

@@ -5,7 +5,6 @@ import { CiudadDTO } from 'src/app/models/ciudad.dto';
 import { EspecieDTO } from 'src/app/models/especie.dto';
 import { FilterMascotaDto } from 'src/app/models/filtermascota.dto';
 import { FiltroMascotaDto } from 'src/app/models/filtromascotas.dto';
-import { MascotasDTO } from 'src/app/models/mascotas.dto';
 import { BarrioDTO } from 'src/app/models/ubicacion.dto';
 import { CiudadService } from 'src/app/services/ciudad.service';
 import { EspecieService } from 'src/app/services/especie.service';

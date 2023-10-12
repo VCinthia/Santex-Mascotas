@@ -1,7 +1,3 @@
-import { EspecieDTO } from "./especie.dto";
-import { BarrioDTO } from "./ubicacion.dto";
-import { UserDTO } from "./user.dto";
-
 export class MascotasDTO {
   idMascota?: number;
   color: string;
@@ -15,18 +11,16 @@ export class MascotasDTO {
   ubicacion: number;
   especie: number;
 
-  constructor(
-    )
-    {
-    this.color= '',
-    this.tamanio= '',
-    this.fechaCarga= new Date,
-    this.foto = null!,
-    this.descripcion= '',
-    this.estado= '',
-    this.activo= true,
-    this.usuario = null!,
-    this.ubicacion = null!,
-    this.especie= null!
+  constructor() {
+    (this.color = ''),
+      (this.tamanio = ''),
+      (this.fechaCarga = new Date()),
+      (this.foto = null!),
+      (this.descripcion = ''),
+      (this.estado = ''),
+      (this.activo = true),
+      (this.usuario = null!),
+      (this.ubicacion = null!),
+      (this.especie = null!);
   }
 }
