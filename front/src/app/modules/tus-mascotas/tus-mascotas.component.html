@@ -11,14 +11,14 @@
       <div class="card-mascota" *ngFor="let mascota of mascotas">
         <div class="image">
           <img src="data:image/png;base64,{{ mascota.foto }}" alt="img" />
-        </div>        
-        <label class="estadoMascota" for="estadoMascota">
-          <b>{{ mascota.estado }}</b>
-        </label>
-        <div class="descripcion">
-          <!-- <p class="ciudad">{{ mascota.ubicacion}}</p> -->
-          <p>{{ mascota.descripcion }}</p>
         </div>
+        <div class="descripcion">
+          <p>{{ mascota.descripcion }}</p>
+          <!-- <p class="visibilidad">{{ mascota.estado }}</p> -->
+        </div>
+        <label class="estadoMascota" for="estadoMascota"
+          ><b class="visibilidad">{{ mascota.estado }}</b></label
+        >
         <select
           id="estado{{ mascota.idMascota }}"
           [(ngModel)]="mascota.activo"
