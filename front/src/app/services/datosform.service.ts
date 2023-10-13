@@ -53,6 +53,11 @@ export class DatosformService {
     console.log(this.getUsuario());
   };
 
+  public resetEspeciesYCiudades() {
+    this.especies = [];
+    this.ciudades = [];
+  }
+
   public getUsuario(): Observable<UserDTO> {
     return this.loginService.usuarioById(Number(this.dniPersona));
   }

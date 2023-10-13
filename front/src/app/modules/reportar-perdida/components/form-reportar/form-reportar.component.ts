@@ -3,9 +3,7 @@ import { CiudadDTO } from 'src/app/models/ciudad.dto';
 import { EspecieDTO } from 'src/app/models/especie.dto';
 import { MascotasDTO } from 'src/app/models/mascotas.dto';
 import { BarrioDTO } from 'src/app/models/ubicacion.dto';
-import { UserDTO } from 'src/app/models/user.dto';
 import { DatosformService } from 'src/app/services/datosform.service';
-import { ToastrService } from 'ngx-toastr';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 
@@ -31,19 +29,19 @@ export class FormReportarComponent implements OnInit {
   barrios: BarrioDTO[] = [];
 
   mascotaDTO: MascotasDTO | null = null;
-
   mascota: MascotasDTO = new MascotasDTO();
-
 
 
   constructor(
     public datosForm: DatosformService,
     private router: Router
   ) {
-
+    this.mascota = new MascotasDTO();
   };
 
   ngOnInit(): void {
+    this.datosForm.resetEspeciesYCiudades();
+
     this.datosForm.cargarEspecies();
     this.datosForm.cargarCiudades();
     if (this.datosForm.ciudadDTO) {
@@ -52,10 +50,6 @@ export class FormReportarComponent implements OnInit {
 
     this.mascota.usuario = this.datosForm.tokenService.getIdUsuario()!;
     this.mascota.activo = true;
-
-    if (this.formularioReportarMascota) {
-      this.formularioReportarMascota.resetForm();
-    }
   }
 
   onFileSelected(event: any) {
@@ -63,6 +57,31 @@ export class FormReportarComponent implements OnInit {
   }
 
   onReportar(): void {
+    if (this.formularioReportarMascota) {
+      const form = this.formularioReportarMascota;
+      
+      if (form.invalid) {
+        const missingFields: string[] = [];
+  
+        Object.keys(form.controls).forEach((controlName) => {
+          const controlElement = form.form.get(controlName);
+          
+          if (controlElement && controlElement.invalid){
+            missingFields.push(controlName);
+          }
+        });
+        
+        if (missingFields.length > 0) {
+          const missingFieldsMessage = `Por favor, complete los siguientes campos obligatorios: ${missingFields.join(', ')}`;
+          this.datosForm.toastrService.warning(missingFieldsMessage, 'Campos requeridos', {
+            timeOut: 3000,
+            positionClass: 'toast-top-right',
+          });
+          return;
+        }
+      }
+    }
+    
     if (this.formularioReportarMascota && this.formularioReportarMascota.invalid || this.foto === null) {
       this.datosForm.toastrService.warning('Por favor, complete los campos obligatorios.', 'Campos requeridos', {
         timeOut: 3000,
@@ -70,6 +89,7 @@ export class FormReportarComponent implements OnInit {
       });
       return;
     }
+
     const formData = new FormData();
     formData.append('file', this.foto);
 
@@ -96,7 +116,7 @@ export class FormReportarComponent implements OnInit {
         if (this.formularioReportarMascota) {
           this.formularioReportarMascota.resetForm();
         }
-        //this.router.navigate(['/tus-mascotas']);
+        this.router.navigate(['/tus-mascotas']);
       },
       error: (err) => {
         this.datosForm.toastrService.error(
@@ -108,7 +128,6 @@ export class FormReportarComponent implements OnInit {
           }
         );
       }
-
     }
     );
   }
