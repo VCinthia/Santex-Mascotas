@@ -23,7 +23,6 @@ export class RegisterFormComponent implements OnInit {
   password: string;
   respuesta: string;
 
-
   constructor(
     private registerService: RegisterService,
     private toastrService: ToastrService,
@@ -38,25 +37,40 @@ export class RegisterFormComponent implements OnInit {
     this.password = '';
   }
 
-  ngOnInit(): void { };
+  ngOnInit(): void {}
 
   onCreate(): void {
-    const user: LoginUserDTO = { email: this.email, password: this.password, };
-    this.userRegister = new UserDTO(this.nombre, this.apellido, this.telefono, this.dniPersona!, this.respuesta, user);
+    const user: LoginUserDTO = { email: this.email, password: this.password };
+    this.userRegister = new UserDTO(
+      this.nombre,
+      this.apellido,
+      this.telefono,
+      this.dniPersona!,
+      this.respuesta,
+      user
+    );
     this.registerService.createUser(this.userRegister).subscribe({
       next: (data) => {
-        console.log(data);
-        this.toastrService.success(data.response, 'Se registró correctamente. Ahora puedes logearte', {
-          timeOut: 3000, positionClass: 'toast-top-right'
-        });
-        this.router.navigate(['/log-in'])
+        this.toastrService.success(
+          data.response,
+          'Se registró correctamente. Ahora puedes logearte',
+          {
+            timeOut: 3000,
+            positionClass: 'toast-top-right',
+          }
+        );
+        this.router.navigate(['/log-in']);
       },
       error: (err) => {
-        this.toastrService.error(err.error.message, 'Datos incorrectos de registro', {
-          timeOut: 3000, positionClass: 'toast-top-right'
-        });
-      }
-    }
-    )
+        this.toastrService.error(
+          err.error.message,
+          'Datos incorrectos de registro',
+          {
+            timeOut: 3000,
+            positionClass: 'toast-top-right',
+          }
+        );
+      },
+    });
   }
 }

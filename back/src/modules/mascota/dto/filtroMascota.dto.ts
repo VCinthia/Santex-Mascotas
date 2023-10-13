@@ -1,4 +1,5 @@
 export class FiltroMascotaDto {
+  idMascota: number;
   color: string;
   tamanio: string;
   fechaCarga: Date;
