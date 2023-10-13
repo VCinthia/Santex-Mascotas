@@ -5,7 +5,7 @@ import { ReportarPerdidaRoutingModule } from './reportar-perdida-routing.module'
 import { ReportarPerdidaComponent } from './reportar-perdida.component';
 import { CardComponent } from 'src/app/components';
 import { HttpClientModule } from '@angular/common/http';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ToastrModule } from 'ngx-toastr';
 import { CarouselModule } from '../carousel/carousel.module';
 @NgModule({
@@ -17,6 +17,7 @@ import { CarouselModule } from '../carousel/carousel.module';
     CardComponent,   
     HttpClientModule,
     FormsModule,
+    ReactiveFormsModule,
     CommonModule,    
     ReportarPerdidaRoutingModule,
     CarouselModule,

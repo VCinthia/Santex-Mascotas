@@ -1,16 +1,20 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { CiudadDTO } from 'src/app/models/ciudad.dto';
 import { EspecieDTO } from 'src/app/models/especie.dto';
 import { MascotasDTO } from 'src/app/models/mascotas.dto';
 import { BarrioDTO } from 'src/app/models/ubicacion.dto';
 import { DatosformService } from 'src/app/services/datosform.service';
+import { NgForm } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-form-reportar',
   templateUrl: './form-reportar.component.html',
-  styleUrls: ['./form-reportar.component.css'],
+  styleUrls: ['./form-reportar.component.css']
 })
 export class FormReportarComponent implements OnInit {
+  @ViewChild('formularioReportarMascota') formularioReportarMascota?: NgForm;
+
   foto: File | any = null;
 
   especieDTO: EspecieDTO | null = null;
@@ -25,18 +29,23 @@ export class FormReportarComponent implements OnInit {
   barrios: BarrioDTO[] = [];
 
   mascotaDTO: MascotasDTO | null = null;
-
   mascota: MascotasDTO = new MascotasDTO();
 
-  constructor(public datosForm: DatosformService) {}
+
+  constructor(
+    public datosForm: DatosformService,
+    private router: Router
+  ) {
+    this.mascota = new MascotasDTO();
+  };
 
   ngOnInit(): void {
+    this.datosForm.resetEspeciesYCiudades();
+
     this.datosForm.cargarEspecies();
     this.datosForm.cargarCiudades();
     if (this.datosForm.ciudadDTO) {
-      this.datosForm.cargarBarriosByCiudad(
-        Number(this.datosForm.ciudadDTO.idCiudad)
-      );
+      this.datosForm.cargarBarriosByCiudad(Number(this.datosForm.ciudadDTO.idCiudad));
     }
 
     this.mascota.usuario = this.datosForm.tokenService.getIdUsuario()!;
@@ -48,39 +57,66 @@ export class FormReportarComponent implements OnInit {
   }
 
   onReportar(): void {
+    if (this.formularioReportarMascota) {
+      const form = this.formularioReportarMascota;
+      
+      if (form.invalid) {
+        const missingFields: string[] = [];
+  
+        Object.keys(form.controls).forEach((controlName) => {
+          const controlElement = form.form.get(controlName);
+          
+          if (controlElement && controlElement.invalid){
+            missingFields.push(controlName);
+          }
+        });
+        
+        if (missingFields.length > 0) {
+          const missingFieldsMessage = `Por favor, complete los siguientes campos obligatorios: ${missingFields.join(', ')}`;
+          this.datosForm.toastrService.warning(missingFieldsMessage, 'Campos requeridos', {
+            timeOut: 3000,
+            positionClass: 'toast-top-right',
+          });
+          return;
+        }
+      }
+    }
+    
+    if (this.formularioReportarMascota && this.formularioReportarMascota.invalid || this.foto === null) {
+      this.datosForm.toastrService.warning('Por favor, complete los campos obligatorios.', 'Campos requeridos', {
+        timeOut: 3000,
+        positionClass: 'toast-top-right',
+      });
+      return;
+    }
+
     const formData = new FormData();
     formData.append('file', this.foto);
 
     formData.append('idEspecie', this.mascota.especie.toString());
+
     formData.append('color', this.mascota.color);
     formData.append('tamanio', this.mascota.tamanio);
     formData.append('estado', this.mascota.estado);
     formData.append('activo', this.mascota.activo.toString());
     formData.append('fechaCarga', this.mascota.fechaCarga.toDateString());
     formData.append('idUbicacion', this.mascota.ubicacion.toString());
+
     formData.append('descripcion', this.mascota.descripcion);
     formData.append('idUsuario', this.mascota.usuario.toString());
 
+    console.log('Foto:', this.foto);
+    console.log('mascota inicio funcion', this.mascota);
+
     this.datosForm.mascotaService.createMascota(this.foto, formData).subscribe({
       next: (data) => {
-        if (data.length === 0) {
-          this.datosForm.toastrService.info(
-            'Hay un error en los parametros de carga.',
-            'Verificar datos.',
-            {
-              timeOut: 3000,
-              positionClass: 'toast-top-right',
-            }
-          );
+        this.datosForm.toastrService.success(data.response, 'Registraste tu mascota correctamente', {
+          timeOut: 3000, positionClass: 'toast-top-right'
+        });
+        if (this.formularioReportarMascota) {
+          this.formularioReportarMascota.resetForm();
         }
-        this.datosForm.toastrService.success(
-          data.response,
-          'Registraste tu mascota correctamente',
-          {
-            timeOut: 3000,
-            positionClass: 'toast-top-right',
-          }
-        );
+        this.router.navigate(['/tus-mascotas']);
       },
       error: (err) => {
         this.datosForm.toastrService.error(
@@ -91,7 +127,8 @@ export class FormReportarComponent implements OnInit {
             positionClass: 'toast-top-right',
           }
         );
-      },
-    });
+      }
+    }
+    );
   }
 }

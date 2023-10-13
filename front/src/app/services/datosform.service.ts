@@ -49,6 +49,11 @@ export class DatosformService {
     this.dniPersona = this.tokenService.getIdUsuario();
   }
 
+  public resetEspeciesYCiudades() {
+    this.especies = [];
+    this.ciudades = [];
+  }
+
   public getUsuario(): Observable<UserDTO> {
     return this.loginService.usuarioById(Number(this.dniPersona));
   }

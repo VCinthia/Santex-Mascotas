@@ -1,15 +1,15 @@
-<!-- FORM -->
-
 <h2>Reportar<br> perdida</h2>
 <form #formularioReportarMascota="ngForm" action="#" id="contenedor-form-reportar" novalidate (ngSubmit)="onReportar()">
 
   <label class="label" for="especieMascota">Especie</label>
-  <select id="especieMascota" required [(ngModel)]="mascota.especie" name="especie">
+  <select id="especieMascota" required [(ngModel)]="mascota.especie" name="Especie">
+    <option value="null" disabled selected>Seleccionar</option>
     <option *ngFor="let especie of datosForm.especies" [value]="especie.idEspecie">{{ especie.especie }}</option>
   </select>
 
   <label class="label" for="colorMascota">Color</label>
-  <select id="colorMascota" required [(ngModel)]="mascota.color" name="color">
+  <select id="colorMascota" required [(ngModel)]="mascota.color" name="Color">
+    <option value="" disabled selected>Seleccionar</option>
     <option value="BLANCO" id="blanco">BLANCO</option>
     <option value="NEGRO" id="negro">NEGRO</option>
     <option value="NARANJA" id="naranja">NARANJA</option>
@@ -21,38 +21,42 @@
   </select> 
 
   <label for="tamanioMascota">Tamaño</label>
-  <select id="tamanioMascota" required name="tamanio" [(ngModel)]="mascota.tamanio">
+  <select id="tamanioMascota" required name="Tamaño" [(ngModel)]="mascota.tamanio">
+    <option value="" disabled selected>Seleccionar</option>
     <option value="PEQUEÑO" id="pequeño">PEQUEÑO</option>
     <option value="MEDIANO" id="mediano">MEDIANO</option>
     <option value="GRANDE" id="grande">GRANDE</option>
   </select>
 
   <label class="label" for="tipoMascota">Tipo</label>
-  <select id="tipoMascota" required name="estado" [(ngModel)]="mascota.estado">
+  <select id="tipoMascota" required name="Estado" [(ngModel)]="mascota.estado">
+    <option value="" disabled selected>Seleccionar</option>
     <option value="ADOPTABLE" id="adoptable">ADOPTABLE</option>
     <option value="PERDIDO" id="perdido">PERDIDO</option>
   </select>
 
   <label class="label" for="ciudadMascota">Ciudad</label>
   <select id="ciudadMascota" required (change)="this.datosForm.onCiudadChange($event)" [(ngModel)]="selectedCiudadId"
-    name="ciudad">
+    name="Ciudad">
+    <option value="null" disabled selected>Seleccionar</option>
     <option *ngFor="let ciudad of datosForm.ciudades" value="{{ciudad.idCiudad}}" id="{{ciudad.idCiudad}}">
       {{ciudad.nombre}}</option>
   </select>
 
   <label class="label" for="barrioMascota">Barrio</label>
-  <select id="barrioMascota" required [(ngModel)]="mascota.ubicacion" name="zona">
+  <select id="barrioMascota" required [(ngModel)]="mascota.ubicacion" name="Barrio">
+    <option value="null" disabled selected>Seleccionar</option>
     <option *ngFor="let barrio of datosForm.barrios " value="{{barrio.idUbicacion}}" id="{{barrio.idUbicacion}}">
       {{barrio.barrio}}</option>
   </select>
 
   <label for="descripcionMascota">Descripción</label>
   <input id="descripcionMascota" type="text" placeholder="Zona especifica u otros datos que quieras aportar"
-    name="descripcion" required [(ngModel)]="mascota.descripcion">
+    name="Descripcion" required [(ngModel)]="mascota.descripcion">
 
   <label for="foto">Imagen</label>
   <div class="file">
-    <input type="file" placeholder="Imagen" id="foto" required (change)="onFileSelected($event)">
+    <input type="file" name="Imagen" placeholder="Imagen" [(ngModel)]="mascota.foto" id="foto" required (change)="onFileSelected($event)">
   </div>
   <button id="cargar-perdida">Carga ahora</button>
 </form>
