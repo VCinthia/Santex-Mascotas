@@ -5,4 +5,5 @@ export class FilterMascota {
   readonly zona: string;
   //agrego campos para filtro:
   readonly estado: string;
+  readonly activo: boolean ;
 }

@@ -148,7 +148,7 @@ export class MascotaService {
 
   public async buscarMascotas(filtro: FilterMascota) {
     try {
-      const whereClause: any = {};
+      const whereClause: any = {activo: true};
 
       if (filtro.especie && filtro.especie.length > 0) {
         const especie = await Especie.findOne({
