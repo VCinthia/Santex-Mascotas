@@ -25,7 +25,8 @@ export class FiltroMascotaDto {
     activo: boolean,
     usuario: UserDTO,
     ubicacion: BarrioDTO,
-    especie: EspecieDTO )
+    especie: EspecieDTO
+     )
     {
     this.color= color,
     this.tamanio= tamanio,
@@ -37,6 +38,17 @@ export class FiltroMascotaDto {
     this.usuario= usuario,
     this.ubicacion= ubicacion,
     this.especie= especie
+
+    // this.color= null!,
+    // this.tamanio= null!,
+    // this.fechaCarga= null!,
+    // this.foto= null!,
+    // this.descripcion= null!,
+    // this.estado= null!,
+    // this.activo= null!,
+    // this.usuario= null!,
+    // this.ubicacion= null!,
+    // this.especie= null!
   }
   }
   
