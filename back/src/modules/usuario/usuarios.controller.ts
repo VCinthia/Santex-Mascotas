@@ -23,7 +23,6 @@ export class UsuariosController {
   @Public()
   @Get('/getUsuario/:dni')
   getUserById(@Param('dni') dni: number) {
-    console.log(dni);
     return this.usuariosService.getUserByDNI(dni);
   }
 

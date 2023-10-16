@@ -53,7 +53,7 @@ export class JwtAuthGuard extends AuthGuard('jwt') {
       });
       return payload;
     } catch (error) {
-      console.log('');
+      console.error(error);
     }
   }
 }

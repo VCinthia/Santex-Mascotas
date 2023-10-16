@@ -148,7 +148,7 @@ export class MascotaService {
 
   public async buscarMascotas(filtro: FilterMascota) {
     try {
-      const whereClause: any = {};
+      const whereClause: any = {activo: true};
 
       if (filtro.especie && filtro.especie.length > 0) {
         const especie = await Especie.findOne({
@@ -254,6 +254,7 @@ export class MascotaService {
           const ubicacionAux = await Barrio.findOne({
             where: { idUbicacion: mascotaAux.getIdUbicacion() },
           });
+          mascota.idMascota = mascotaAux.getIdMascota();
           mascota.color = mascotaAux.getColor();
           mascota.tamanio = mascotaAux.getTamanio();
           mascota.fechaCarga = mascotaAux.getFechaCarga();
@@ -272,7 +273,6 @@ export class MascotaService {
           especieMascota.idEspecie = especieAux.getIdEspecie();
           especieMascota.nombre = especieAux.getEspecie();
           mascota.especie = especieMascota;
-
           mascotaFiltro.push(mascota);
         }
       }
@@ -283,5 +283,25 @@ export class MascotaService {
         HttpStatus.BAD_REQUEST,
       );
     }
+  }
+
+  public async updateVisibilidadMascota(
+    idMascota: number,
+    estado: string,
+  ): Promise<Mascota> {
+    try {
+      const condition: FindOptions = {
+        where: { idMascota: idMascota },
+      };
+      const mascota: Mascota = await this.mascotaModel.findOne(condition);
+      if (mascota) {
+        const estadoMascota = estado === 'true' ? true : false;
+        mascota.setActivo(estadoMascota);
+        await mascota.save();
+        return mascota;
+      } else {
+        throw new HttpException(this.petNotFound, HttpStatus.BAD_REQUEST);
+      }
+    } catch (error) {}
   }
 }

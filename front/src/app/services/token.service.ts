@@ -2,12 +2,12 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class TokenService {
   private isLoggedSubject = new BehaviorSubject<boolean>(this.isLogged());
 
-  constructor() { }
+  constructor() {}
 
   getIsLoggedSubject() {
     return this.isLoggedSubject.asObservable();
@@ -17,7 +17,7 @@ export class TokenService {
     if (this.getToken()) {
       return true;
     }
-    return false
+    return false;
   }
 
   setToken(access_token: string): void {
@@ -32,43 +32,40 @@ export class TokenService {
   getDniUsuario(): string | null {
     if (!this.isLogged()) {
       return null;
-    }    
-    const access_token = this.getToken();    
-    const payload : any = access_token?.split('.')[1];
+    }
+    const access_token = this.getToken();
+    const payload: any = access_token?.split('.')[1];
     const values = atob(payload);
     const valueJSON = JSON.parse(values);
     const dniPersona = valueJSON.user.dniPersona;
-    console.log(`nombre: ${dniPersona}`);
     return dniPersona;
   }
 
   getNombreUsuario(): string | null {
     if (!this.isLogged()) {
       return null;
-    }    
-    const access_token = this.getToken();    
-    const payload : any = access_token?.split('.')[1];
+    }
+    const access_token = this.getToken();
+    const payload: any = access_token?.split('.')[1];
     const values = atob(payload);
     const valueJSON = JSON.parse(values);
     const nombre = valueJSON.user.nombre;
-    console.log(`nombre: ${nombre}`);
     return nombre;
   }
 
   getIdUsuario(): number | null {
     if (!this.isLogged()) {
       return null;
-    }    
-    const access_token = this.getToken();    
-    const payload : any = access_token?.split('.')[1];
+    }
+    const access_token = this.getToken();
+    const payload: any = access_token?.split('.')[1];
     const values = atob(payload);
     const valueJSON = JSON.parse(values);
     const idUsuario = valueJSON.user.idUsuario;
-    console.log(`idUsuario: ${idUsuario}`);
     return idUsuario;
   }
 
-  logOut() : void {
+  logOut(): void {
     localStorage.clear();
     this.isLoggedSubject.next(false);
   }

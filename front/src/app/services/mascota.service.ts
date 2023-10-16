@@ -57,4 +57,14 @@ export class MascotaService {
       `${this.mascotasURL}getMascotaByDni/${dni}`
     );
   }
+
+  public updateVisibilidadMascota(
+    idMascota: number,
+    activo: boolean
+  ): Observable<any> {
+    return this.httpClient.post<any>(
+      `${this.mascotasURL}updateVisibilidadMascota/${idMascota}/${activo}`,
+      {}
+    );
+  }
 }
