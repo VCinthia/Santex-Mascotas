@@ -108,7 +108,7 @@
     width: 100%;
   }
   .contenedor-textos-logros h2 {
-    font-size: clamp(1em, 9vw, 3.125em);
+    font-size: clamp(1.9em, 8vw, 3.125em);
   }
   .contenedor-textos-logros p {
     font-size: clamp(0.3em, 10vw, 1.3125em);

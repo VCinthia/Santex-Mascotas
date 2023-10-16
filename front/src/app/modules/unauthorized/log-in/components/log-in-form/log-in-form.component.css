@@ -2,6 +2,8 @@ h2 {
   font-family: var(--font-bodoni-moda);
   font-size: var(--font-size-xl);
   margin-bottom: 2rem;
+  display: flex;
+  justify-content: center;
 }
 
 form {
