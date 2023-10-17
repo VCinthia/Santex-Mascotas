@@ -36,3 +36,9 @@ button {
   cursor: pointer;
   box-shadow: -3px -3px var(--color-tertiary);
 }
+
+@media (max-width: 1150px) {
+  h2 {
+    text-align: center;
+  }
+}

@@ -2,6 +2,8 @@ h2 {
   font-family: var(--font-bodoni-moda);
   font-size: var(--font-size-xl);
   margin-bottom: 2rem;
+  display: flex;
+  justify-content: center;
 }
 
 label p {
@@ -9,7 +11,7 @@ label p {
   /* font-size: var(--font-size-xs); */
 }
 
-form .phase{
+form .phase {
   display: flex;
   flex-direction: column;
   width: 300px;
@@ -47,23 +49,24 @@ button {
   justify-content: flex-end;
   /* align-items: flex-end; */
 
-  font-weight: 10; 
+  font-weight: 10;
   font-weight: bold;
   cursor: pointer;
-  color: var(--color-secondary);  
+  color: var(--color-secondary);
 }
 
-.option:nth-child(7) {/*cambiar a 6 cuando este pregunta secreta*/
+.option:nth-child(7) {
+  /*cambiar a 6 cuando este pregunta secreta*/
   color: var(--color-pink);
   justify-content: flex-start;
 }
 
-.option .fa-arrow-right{
-  padding: 0  0  0 20px;
+.option .fa-arrow-right {
+  padding: 0 0 0 20px;
   /* color: var(--color-secondary); */
 }
 
-.option .fa-arrow-left{
-  padding: 0  20px 0  0 ;
+.option .fa-arrow-left {
+  padding: 0 20px 0 0;
   /* color: var(--color-pink); */
 }

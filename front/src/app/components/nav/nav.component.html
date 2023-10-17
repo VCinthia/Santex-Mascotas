@@ -17,12 +17,21 @@
         >
       </li>
       <li>
-        <a id="sobre-nosotros" routerLink="" fragment="integrantes"
+        <a
+          id="sobre-nosotros"
+          (click)="closeMenu(chkboxes)"
+          routerLink=""
+          fragment="integrantes"
           >Integrantes</a
         >
       </li>
       <li>
-        <a href="#" id="consejos" routerLink="" fragment="dudas"
+        <a
+          href="#"
+          id="consejos"
+          (click)="closeMenu(chkboxes)"
+          routerLink=""
+          fragment="dudas"
           >Tienes dudas?</a
         >
       </li>
@@ -39,13 +48,19 @@
           id="reportar-perdida"
           routerLink="/reportar-perdida"
           (click)="closeMenu(chkboxes)"
-          *ngIf="isLogged" >Reportar Perdida</a
+          *ngIf="isLogged"
+          >Reportar Perdida</a
         >
       </li>
-      <li><a id="tus-mascotas"
-        routerLink="/tus-mascotas"
-        (click)="closeMenu(chkboxes)"
-        *ngIf="isLogged">Tus mascotas</a></li>
+      <li>
+        <a
+          id="tus-mascotas"
+          routerLink="/tus-mascotas"
+          (click)="closeMenu(chkboxes)"
+          *ngIf="isLogged"
+          >Tus mascotas</a
+        >
+      </li>
 
       <li>
         <a
@@ -53,7 +68,8 @@
           routerLink="/log-in"
           id="abrir-login"
           (click)="closeMenu(chkboxes)"
-          *ngIf="!isLogged" >Inicia Sesion</a
+          *ngIf="!isLogged"
+          >Inicia Sesion</a
         >
       </li>
 
@@ -63,12 +79,18 @@
           routerLink="/register"
           id="abrir-register"
           (click)="closeMenu(chkboxes)"
-          *ngIf="!isLogged" >Registrarse</a
+          *ngIf="!isLogged"
+          >Registrarse</a
         >
       </li>
       <li>
-        <a class="logout" href="#" id="logout"
-          *ngIf="isLogged" (click)="logOut()">Cerrar Sesion</a
+        <a
+          class="logout"
+          href="#"
+          id="logout"
+          *ngIf="isLogged"
+          (click)="logOut()"
+          >Cerrar Sesion</a
         >
       </li>
 
@@ -79,6 +101,5 @@
     <label for="check" class="open-menu"
       ><i class="fa-solid fa-bars"></i
     ></label>
-
   </ul>
 </nav>
