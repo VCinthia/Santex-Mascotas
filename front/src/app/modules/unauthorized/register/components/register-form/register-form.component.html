@@ -3,7 +3,6 @@
 <div class="contenedor-register" id="contenedor-register">
   <div class="main-container">
     <form #formularioRegister="ngForm" action="#" id="contenedor-form-register" novalidate (ngSubmit)="onCreate()">
-      <!--method="post"-->
       <div class="phase one" *ngIf="mostrarFaseUno">
         <label for="nombre">Nombre</label>
         <input type="text" id="nombre" placeholder="Ingresa tu nombre" autocomplete="on" required [(ngModel)]="nombre"
@@ -21,7 +20,7 @@
         <input type="number" placeholder="Ingresa tu dni" id="dniPersona" required [(ngModel)]="dniPersona"
           name="dniPersona" />
 
-        <div class="option" (click)="mostrarFaseUno = false; mostrarFaseDos = true;">
+        <div class="option" (click)="onSiguiente()">
           <p>Siguiente<i class="fa fa-arrow-right"></i></p>
         </div>
 
@@ -47,8 +46,7 @@
           <p><i class="fa fa-arrow-left"></i>Anterior</p>
         </div>
 
-        <button type="submit" name="btnRegistrar" id="btnRegistrar"
-          [disabled]="!formularioRegister.valid">Registrarse</button>
+        <button type="submit" name="btnRegistrar" id="btnRegistrar">Registrarse</button>
 
       </div>
 

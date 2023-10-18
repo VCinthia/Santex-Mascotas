@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { LoginUserDTO } from 'src/app/models/login.dto';
@@ -11,8 +12,17 @@ import { RegisterService } from 'src/app/services/register.service';
   styleUrls: ['./register-form.component.css'],
 })
 export class RegisterFormComponent implements OnInit {
+  @ViewChild('formularioRegister') formularioRegister?: NgForm;
+
   mostrarFaseUno = true;
   mostrarFaseDos = false;
+
+  onSiguiente(): void {
+    if (this.validateFase(this.mostrarFaseUno)) {
+      this.mostrarFaseUno = false;
+      this.mostrarFaseDos = true;
+    }
+  }
 
   userRegister: UserDTO | null = null;
   nombre: string;
@@ -40,6 +50,13 @@ export class RegisterFormComponent implements OnInit {
   ngOnInit(): void {}
 
   onCreate(): void {
+    const faseUnoValida = this.validateFase(this.mostrarFaseUno);
+    const faseDosValida = this.validateFase(!this.mostrarFaseUno);
+
+    if (!faseUnoValida || !faseDosValida) {
+      return;
+    }
+
     const user: LoginUserDTO = { email: this.email, password: this.password };
     this.userRegister = new UserDTO(
       this.nombre,
@@ -71,6 +88,28 @@ export class RegisterFormComponent implements OnInit {
           }
         );
       },
+    });
+  }
+
+  validateFase(faseUno: boolean): boolean {
+    if (faseUno) {
+      if (!this.nombre || !this.apellido || !this.telefono || this.dniPersona === null) {
+        this.mostrarAlerta("Fase uno: Debes completar todos los campos.");
+        return false;
+      }
+    } else {
+      if (!this.email || !this.password || !this.respuesta) {
+        this.mostrarAlerta("Fase dos: Debes completar todos los campos.");
+        return false;
+      }
+    }
+    return true;
+  }
+
+  private mostrarAlerta(mensaje: string): void {
+    this.toastrService.warning(mensaje, 'Campos requeridos', {
+      timeOut: 3000,
+      positionClass: 'toast-top-right',
     });
   }
 }

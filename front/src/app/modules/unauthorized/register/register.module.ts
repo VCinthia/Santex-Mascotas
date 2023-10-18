@@ -5,7 +5,7 @@ import { RegisterFormComponent } from './components';
 import { RegisterRoutingModule } from './register-routing.module';
 import { CarouselModule } from '../../carousel/carousel.module';
 import { HttpClientModule } from '@angular/common/http';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
@@ -15,6 +15,7 @@ import { ToastrModule } from 'ngx-toastr';
   imports: [
     HttpClientModule,
     FormsModule,
+    ReactiveFormsModule,
     CommonModule,
     RegisterRoutingModule,
     CarouselModule,
