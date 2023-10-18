@@ -172,19 +172,34 @@ export class UsuariosService {
   }
 
   public async comprobarRespuestas(
-    id: number,
+    email: string,
     respuesta: string,
-  ): Promise<boolean> {
+  ): Promise<UsuarioLoginDTO> {
     try {
-      const condition: FindOptions = { where: { idUsuario: id } };
-      const usuario: Usuario = await this.userModel.findOne(condition);
-      if (!usuario) {
-        throw new HttpException(this.userNotFound, HttpStatus.BAD_REQUEST);
-      } else {
-        if (usuario.getRespuesta().toLowerCase() === respuesta.toLowerCase()) {
-          return true;
+      const login = await this.loginService.getLoginByEmail(email);
+      if (login) {
+        const condition: FindOptions = {
+          where: { idLogin: login.getIdLogin() },
+        };
+        const usuario: Usuario = await this.userModel.findOne(condition);
+        if (!usuario) {
+          throw new HttpException(this.userNotFound, HttpStatus.BAD_REQUEST);
+        } else {
+          if (
+            usuario.getRespuesta().toLowerCase() === respuesta.toLowerCase()
+          ) {
+            const usuarioDto: UsuarioLoginDTO = new UsuarioLoginDTO();
+            usuarioDto.idUsuario = usuario.getIdUsuario();
+            usuarioDto.dniPersona = usuario.getDniPersona();
+            usuarioDto.apellido = usuario.getApellido();
+            usuarioDto.email = email;
+            usuarioDto.nombre = usuario.getNombre();
+            usuarioDto.telefono = usuario.getTelefono();
+            usuarioDto.activo = usuario.getActivo();
+            return usuarioDto;
+          }
+          return null;
         }
-        return false;
       }
     } catch (error) {
       throw new HttpException(error.message, HttpStatus.INTERNAL_SERVER_ERROR);

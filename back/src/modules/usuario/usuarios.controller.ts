@@ -52,10 +52,10 @@ export class UsuariosController {
   @Public()
   @Get('/comprobarRespuestas')
   comprobarRespuestas(
-    @Body() newPassword: { idUsuario: number; respuesta: string },
+    @Body() newPassword: { email: string; respuesta: string },
   ) {
     return this.usuariosService.comprobarRespuestas(
-      newPassword['id'],
+      newPassword['email'],
       newPassword['respuesta'],
     );
   }
