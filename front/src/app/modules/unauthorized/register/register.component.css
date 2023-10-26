@@ -1,0 +1,13 @@
+.register {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  padding: var(--padding-md);
+  background: #fff;
+}
+
+@media (max-width: 1100px) {
+  .carousel {
+    display: none;
+  }
+}

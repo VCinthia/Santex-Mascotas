@@ -8,12 +8,12 @@ import {
   UseInterceptors,
   UploadedFile,
   Put,
-  UseGuards,
+  HttpException,
+  HttpStatus,
 } from '@nestjs/common';
 import { MascotaService } from './mascota.service';
 import { MascotaDto } from './dto/create-mascota.dto';
 import { FileInterceptor } from '@nestjs/platform-express';
-import { JwtAuthGuard } from '../auth/jwt/auth.guard';
 import { FilterMascota } from './dto/filterMascota.dto';
 import { Public } from './../auth/decorators/public.decorator';
 @Controller('mascota')
@@ -23,11 +23,25 @@ export class MascotaController {
   @Public()
   @Post('/createMascota')
   @UseInterceptors(FileInterceptor('file'))
-  createMascota(
-    @UploadedFile() file: Express.Multer.File,
+  async createMascota(
+    @UploadedFile() file: Express.Multer.File | undefined,
     @Body() createMascotaDto: MascotaDto,
   ) {
-    return this.mascotaService.createMascota(file, createMascotaDto);
+    try {
+      if (!createMascotaDto.idUsuario) {
+        throw new HttpException(
+          'El campo idUsuario es requerido',
+          HttpStatus.BAD_REQUEST,
+        );
+      }
+      const newMascota = await this.mascotaService.createMascota(
+        file,
+        createMascotaDto,
+      );
+      return newMascota;
+    } catch (error) {
+      throw new HttpException(error.message, HttpStatus.INTERNAL_SERVER_ERROR);
+    }
   }
 
   @Public()
@@ -46,22 +60,35 @@ export class MascotaController {
   @Put('/updateMascota/:id')
   @UseInterceptors(FileInterceptor('file'))
   updateMascota(
-    @UploadedFile() file: Express.Multer.File,
+    @UploadedFile() file: Express.Multer.File | undefined,
     @Param('id') id: string,
     @Body() mascotaDto: MascotaDto,
   ) {
     return this.mascotaService.updateMascota(+id, file, mascotaDto);
   }
 
-  @UseGuards(JwtAuthGuard)
+  @Public()
   @Delete('/deleteMascota/:id')
   deleteMascota(@Param('id') id: string) {
     return this.mascotaService.deleteMascotaById(+id);
   }
 
   @Public()
-  @Get('/buscarMascotas')
+  // @Get('/buscarMascotas')
+  @Post('/buscarMascotas')
   buscarMascotas(@Body() mascota: FilterMascota) {
     return this.mascotaService.buscarMascotas(mascota);
+  }
+
+  @Public()
+  @Get('/getMascotaByDni/:dni')
+  getMascotaByDni(@Param('dni') dni: number) {
+    return this.mascotaService.getMascotaByDniUsuario(+dni);
+  }
+
+  @Public()
+  @Post('/updateVisibilidadMascota/:id/:estado')
+  updateVisibilidad(@Param('id') id: string, @Param('estado') estado: string) {
+    return this.mascotaService.updateVisibilidadMascota(+id, estado);
   }
 }

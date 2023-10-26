@@ -42,6 +42,19 @@ export class LoginService {
       throw new HttpException(error.message, HttpStatus.INTERNAL_SERVER_ERROR);
     }
   }
+  public async getLoginByEmail(email: string): Promise<Login> {
+    try {
+      const condition: FindOptions = { where: { email: email } };
+      const login: Login = await this.loginModel.findOne(condition);
+      if (login) {
+        return login;
+      } else {
+        return null;
+      }
+    } catch (error) {
+      throw new HttpException(error.message, HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+  }
 
   public async updateLogin(
     idLogin: number,
@@ -83,5 +96,25 @@ export class LoginService {
   async hashPassword(password: string): Promise<string> {
     const saltRounds = 10;
     return bcrypt.hash(password, saltRounds);
+  }
+
+  public async updatePassword(
+    idLogin: number,
+    password: string,
+  ): Promise<Login> {
+    try {
+      const condition: FindOptions = { where: { idLogin: idLogin } };
+      const loginExist: Login = await this.loginModel.findOne(condition);
+      if (!loginExist) {
+        throw new HttpException(this.userNotFound, HttpStatus.BAD_REQUEST);
+      } else {
+        const hashPassword = await this.hashPassword(password);
+        loginExist.setPassword(hashPassword);
+        await loginExist.save();
+        return loginExist;
+      }
+    } catch (error) {
+      throw new HttpException(error.message, HttpStatus.INTERNAL_SERVER_ERROR);
+    }
   }
 }

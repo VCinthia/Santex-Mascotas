@@ -26,35 +26,50 @@ export class UsuariosService {
         const usuario = await this.userModel.findOne(condition);
         if (usuario && usuario.getActivo()) {
           throw new HttpException(
-            `El usuario con dni ${usuarioDTO.dniPersona} y email ${usuarioDTO.user.email} ya se encuentra registrado.`,
-            HttpStatus.BAD_REQUEST,
-          );
-        } else {
-          const passwordHash = await this.loginService.hashPassword(
-            usuarioDTO.user.password,
-          );
-          const login: LoginEntity = new LoginEntity(
-            usuarioDTO.user.email,
-            passwordHash,
-          );
-          const loginCreate = await this.loginService.createLogin(login);
-          if (loginCreate) {
-            const usuario: UsuarioEntity = new UsuarioEntity(
-              usuarioDTO.dniPersona,
-              usuarioDTO.nombre,
-              usuarioDTO.apellido,
-              usuarioDTO.telefono,
-              true,
-              loginCreate.getIdLogin(),
-            );
-            const newUsuario = await this.userModel.create(usuario);
-            return newUsuario;
-          }
-          throw new HttpException(
-            'No se puedo crear al usuario.',
+            `El usuario con dni ${usuarioDTO.dniPersona} se encuentra registrado.`,
             HttpStatus.BAD_REQUEST,
           );
         }
+        const loginExist = await this.loginService.getLoginByEmail(
+          usuarioDTO.user.email,
+        );
+        if (loginExist) {
+          const condition: FindOptions = {
+            where: { idLogin: loginExist.getIdLogin() },
+          };
+          const usuarioAux = await this.userModel.findOne(condition);
+          if (usuarioAux && usuarioAux.getActivo()) {
+            throw new HttpException(
+              `El usuario con el email ${usuarioDTO.user.email} se encuentra registrado.`,
+              HttpStatus.BAD_REQUEST,
+            );
+          }
+        }
+        const passwordHash = await this.loginService.hashPassword(
+          usuarioDTO.user.password,
+        );
+        const login: LoginEntity = new LoginEntity(
+          usuarioDTO.user.email,
+          passwordHash,
+        );
+        const loginCreate = await this.loginService.createLogin(login);
+        if (loginCreate) {
+          const usuario: UsuarioEntity = new UsuarioEntity(
+            usuarioDTO.dniPersona,
+            usuarioDTO.nombre,
+            usuarioDTO.apellido,
+            usuarioDTO.telefono,
+            true,
+            usuarioDTO.respuesta,
+            loginCreate.getIdLogin(),
+          );
+          const newUsuario = await this.userModel.create(usuario);
+          return newUsuario;
+        }
+        throw new HttpException(
+          'No se puedo crear al usuario.',
+          HttpStatus.BAD_REQUEST,
+        );
       } else {
         throw new HttpException(
           'Los datos para crear al usuario no son válidos.',
@@ -115,6 +130,7 @@ export class UsuariosService {
         usuario.setNombre(personaDTO.nombre);
         usuario.setApellido(personaDTO.apellido);
         usuario.setTelefono(personaDTO.telefono);
+        usuario.setRespuesta(personaDTO.respuesta.toUpperCase());
         usuario.setUpdateAt(new Date());
         await usuario.save();
       }
@@ -134,6 +150,56 @@ export class UsuariosService {
         persona.setActivo(false);
         await persona.save();
         return true;
+      }
+    } catch (error) {
+      throw new HttpException(error.message, HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+  }
+
+  public async updatePassword(id: number, password: string): Promise<boolean> {
+    try {
+      const condition: FindOptions = { where: { idUsuario: id } };
+      const usuario: Usuario = await this.userModel.findOne(condition);
+      if (!usuario) {
+        throw new HttpException(this.userNotFound, HttpStatus.BAD_REQUEST);
+      } else {
+        await this.loginService.updatePassword(usuario.getIdLogin(), password);
+        return true;
+      }
+    } catch (error) {
+      throw new HttpException(error.message, HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+  }
+
+  public async comprobarRespuestas(
+    email: string,
+    respuesta: string,
+  ): Promise<UsuarioLoginDTO> {
+    try {
+      const login = await this.loginService.getLoginByEmail(email);
+      if (login) {
+        const condition: FindOptions = {
+          where: { idLogin: login.getIdLogin() },
+        };
+        const usuario: Usuario = await this.userModel.findOne(condition);
+        if (!usuario) {
+          throw new HttpException(this.userNotFound, HttpStatus.BAD_REQUEST);
+        } else {
+          if (
+            usuario.getRespuesta().toLowerCase() === respuesta.toLowerCase()
+          ) {
+            const usuarioDto: UsuarioLoginDTO = new UsuarioLoginDTO();
+            usuarioDto.idUsuario = usuario.getIdUsuario();
+            usuarioDto.dniPersona = usuario.getDniPersona();
+            usuarioDto.apellido = usuario.getApellido();
+            usuarioDto.email = email;
+            usuarioDto.nombre = usuario.getNombre();
+            usuarioDto.telefono = usuario.getTelefono();
+            usuarioDto.activo = usuario.getActivo();
+            return usuarioDto;
+          }
+          return null;
+        }
       }
     } catch (error) {
       throw new HttpException(error.message, HttpStatus.INTERNAL_SERVER_ERROR);

@@ -1,0 +1,44 @@
+<div class="tus-mascotas-contenedor">
+  <h2>Tus Mascotas</h2>
+
+  <div class="contenedor-cards-mascotas">
+    <form
+      #formularioEditarEstado="ngForm"
+      action="#"
+      id="contenedor-form-buscar"
+      novalidate
+    >
+      <div class="card-mascota" *ngFor="let mascota of mascotas">
+        <div class="image">
+          <img src="data:image/png;base64,{{ mascota.foto }}" alt="img" />
+        </div>
+        <div class="descripcion">
+          <p>{{ mascota.descripcion }}</p>
+          <!-- <p class="visibilidad">{{ mascota.estado }}</p> -->
+        </div>
+        <label class="estadoMascota" for="estadoMascota"
+          ><b class="visibilidad">{{ mascota.estado }}</b></label
+        >
+        <select
+          id="estado{{ mascota.idMascota }}"
+          [(ngModel)]="mascota.activo"
+          name="estado{{ mascota.idMascota }}"
+        >
+          <option value="false" type="text" name="" id="no-visible">
+            NO VISIBLE
+          </option>
+          <option value="true" type="text" name="" id="visible">VISIBLE</option>
+        </select>
+
+        <button
+          type="submit"
+          name="btnEditarEstado{{ mascota.idMascota }}"
+          id="btnEditarEstado{{ mascota.idMascota }}"
+          (click)="updateEstado(mascota)"
+        >
+          Guardar
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

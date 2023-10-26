@@ -1,7 +1,9 @@
 export class FilterMascota {
-  readonly tipo: string;
+  readonly especie: string;
   readonly color: string;
   readonly tamanio: string;
-  readonly raza: string;
   readonly zona: string;
+  //agrego campos para filtro:
+  readonly estado: string;
+  readonly activo: boolean ;
 }

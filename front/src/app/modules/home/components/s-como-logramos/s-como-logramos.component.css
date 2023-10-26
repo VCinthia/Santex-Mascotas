@@ -1,98 +1,130 @@
 /*COMO LO LOGRAMOS*/
 .contenedor-logros {
-    padding: var(--padding-md);
-    position: relative;
-    height: 35rem;
-    background-color: #fff;
-  }
-  
-  .contenedor {
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-  }
-  
+  padding: var(--padding-md);
+  position: relative;
+  height: 100%;
+  background-color: #fff;
+}
+
+.contenedor {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.contenedor-textos-logros {
+  width: 50%;
+}
+
+.contenedor-textos-logros h2 {
+  font-family: var(--font-bodoni-moda);
+  font-size: var(--font-size-xl);
+  margin-bottom: 2rem;
+}
+
+.contenedor-textos-logros p {
+  margin-bottom: 0.5rem;
+  font-size: 1.3125em;
+}
+
+.contenedor-textos-logros ul {
+  list-style: none;
+  font-size: var(--font-size-sm);
+}
+
+.contenedor-textos-logros ul li::before {
+  content: url(../../../../../assets/resources/img/imagenes-web/ellipse.png);
+  margin-right: 0.5rem;
+}
+
+.contenedor img {
+  width: 300px;
+  min-width: 38%;
+  max-width: 100%;
+}
+
+.contenedor-cards {
+  display: flex;
+  justify-content: space-around;
+  width: 50%;
+  height: auto;
+  margin-top: 2rem;
+  position: absolute;
+  top: 55%;
+  left: 50%;
+}
+
+.card-1 {
+  width: 7rem;
+  background-color: var(--color-tertiary);
+  padding: 0.5rem;
+  border-radius: var(--border-xs);
+  text-align: center;
+  font-family: var(--font-advent-pro);
+}
+
+.card-1 .size {
+  font-size: var(--font-size-md);
+  font-family: var(--font-averia-libre);
+  font-weight: 600;
+}
+
+.card-2 {
+  width: 7rem;
+  background-color: var(--color-secondary);
+  padding: 0.5rem;
+  border-radius: var(--border-xs);
+  text-align: center;
+  font-family: var(--font-advent-pro);
+}
+
+.card-2 .size {
+  font-size: var(--font-size-md);
+  font-family: var(--font-averia-libre);
+  font-weight: 600;
+}
+
+.card-3 {
+  width: 7rem;
+  background-color: var(--color-pink);
+  padding: 0.5rem;
+  border-radius: var(--border-xs);
+  text-align: center;
+  font-family: var(--font-advent-pro);
+}
+
+.card-3 .size {
+  font-size: var(--font-size-md);
+  font-family: var(--font-averia-libre);
+  font-weight: 600;
+}
+
+@media (max-width: 1150px) {
   .contenedor-textos-logros {
-    width: 29rem;
-  }
-  
-  .contenedor-textos-logros h2 {
-    font-family: var(--font-bodoni-moda);
-    font-size: var(--font-size-xl);
-    margin-bottom: 2rem;
-  }
-  
-  .contenedor-textos-logros p {
-    margin-bottom: 0.5rem;
-    font-size: 1.3125em;
-  }
-  
-  .contenedor-textos-logros ul {
-    list-style: none;
-    font-size: var(--font-size-sm);
-  }
-  
-  .contenedor-textos-logros ul li::before {
-    content: url(../../../../../assets/resources/img/imagenes-web/ellipse.png);
-    margin-right: 0.5rem;
-  }
-  
-  .contenedor img {
-    max-width: 100%;
-    height: 50vh;
-  }
-  
-  .contenedor-cards {
     display: flex;
-    justify-content: space-evenly;
-    width: 45rem;
-    margin-top: 2rem;
-    position: absolute;
-    top: 46%;
-    left: 44%;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 1rem;
+    width: 100%;
   }
-  
-  .card-1 {
-    width: 7rem;
-    background-color: var(--color-tertiary);
-    padding: 0.5rem;
-    border-radius: var(--border-xs);
+  .contenedor-textos-logros h2 {
+    font-size: clamp(1.9em, 8vw, 3.125em);
+  }
+  .contenedor-textos-logros p {
+    font-size: clamp(0.3em, 10vw, 1.3125em);
     text-align: center;
-    font-family: var(--font-advent-pro);
   }
-  
-  .card-1 .size {
-    font-size: var(--font-size-md);
-    font-family: var(--font-averia-libre);
-    font-weight: 600;
+  .contenedor {
+    flex-direction: column;
   }
-  
-  .card-2 {
-    width: 7rem;
-    background-color: var(--color-secondary);
-    padding: 0.5rem;
-    border-radius: var(--border-xs);
-    text-align: center;
-    font-family: var(--font-advent-pro);
+
+  .contenedor-cards {
+    position: relative;
+    gap: 10px;
+    top: 0;
+    left: 0;
+    margin: 0 auto;
+    margin-top: 1rem;
+    width: 100%;
   }
-  
-  .card-2 .size {
-    font-size: var(--font-size-md);
-    font-family: var(--font-averia-libre);
-    font-weight: 600;
-  }
-  
-  .card-3 {
-    width: 7rem;
-    background-color: var(--color-pink);
-    padding: 0.5rem;
-    border-radius: var(--border-xs);
-    text-align: center;
-    font-family: var(--font-advent-pro);
-  }
-  
-  .card-3 .size {
-    font-size: var(--font-size-md);
-    font-family: var(--font-averia-libre);
-    font-weight: 600;
-  }
+}

@@ -1,20 +1,13 @@
-.contenedor-form-busca {
-  padding: var(--padding-md);
-  display: flex;
-  align-items: center;
-  justify-content: space-evenly;
-  margin: 2rem 0;
+h2 {
+  font-family: var(--font-bodoni-moda);
+  font-size: var(--font-size-xl);
+  margin-bottom: 2rem;
 }
 
 form {
   display: flex;
   flex-direction: column;
-}
-
-.contenedor-form-busca h2 {
-  font-family: var(--font-bodoni-moda);
-  font-size: var(--font-size-xl);
-  margin-bottom: 2rem;
+  width: 300px;
 }
 
 form label {
@@ -42,4 +35,10 @@ button {
   margin: 2rem 0 0 7rem;
   cursor: pointer;
   box-shadow: -3px -3px var(--color-tertiary);
+}
+
+@media (max-width: 1150px) {
+  h2 {
+    text-align: center;
+  }
 }

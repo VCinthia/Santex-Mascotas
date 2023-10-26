@@ -29,8 +29,11 @@ export class Mascota extends Model<Mascota> {
   @Column
   private fechaCarga: Date;
 
-  @Column(DataType.BLOB('long'))
-  private foto: Buffer;
+  @Column({
+    type: DataType.TEXT('long'),
+    allowNull: true,
+  })
+  private foto: string;
 
   @Column
   private descripcion: string;
@@ -75,10 +78,10 @@ export class Mascota extends Model<Mascota> {
   public setFechaCarga(fechaCarga: Date): void {
     this.fechaCarga = fechaCarga;
   }
-  public getFoto(): Buffer {
+  public getFoto(): string | undefined {
     return this.foto;
   }
-  public setFoto(foto: Buffer): void {
+  public setFoto(foto: string): void {
     this.foto = foto;
   }
   public getDescripcion(): string {

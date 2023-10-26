@@ -23,7 +23,6 @@ export class UsuariosController {
   @Public()
   @Get('/getUsuario/:dni')
   getUserById(@Param('dni') dni: number) {
-    console.log(dni);
     return this.usuariosService.getUserByDNI(dni);
   }
 
@@ -37,5 +36,27 @@ export class UsuariosController {
   @Delete('/deleteUsuario/:id')
   deleteUsuario(@Param('id') id: number) {
     return this.usuariosService.deleteUsuario(id);
+  }
+
+  @Public()
+  @Put('/actualizarContrasenia')
+  uupdatePassword(
+    @Body() newPassword: { idUsuario: number; password: string },
+  ) {
+    return this.usuariosService.updatePassword(
+      newPassword['id'],
+      newPassword['password'],
+    );
+  }
+
+  @Public()
+  @Get('/comprobarRespuestas')
+  comprobarRespuestas(
+    @Body() newPassword: { email: string; respuesta: string },
+  ) {
+    return this.usuariosService.comprobarRespuestas(
+      newPassword['email'],
+      newPassword['respuesta'],
+    );
   }
 }

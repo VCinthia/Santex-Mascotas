@@ -1,37 +1,73 @@
-<div class="contenedor-form-busca">
+<h2>Busca Ahora</h2>
+<form #formularioBusquedaMascota="ngForm" action="#" id="contenedor-form-buscar" novalidate (ngSubmit)="onBuscar()">
 
-  <h2>Busca <br>Ahora</h2>
-  <form action="#" id="contenedor-form-buscar">
-    <label for="">¿Que buscas?</label>
-    <select id="especiesCargar"></select>
-    <label for="">Color</label>
-    <select id="color" required>
-      <option value="BLANCO" id="blanco">BLANCO</option>
-      <option value="NEGRO" id="negro">NEGRO</option>
-      <option value="NARANJA" id="naranja">NARANJA</option>
-      <option value="GRIS" id="gris">GRIS</option>
-      <option value="MARRÓN" id="marron">MARRÓN</option>
-      <option value="MANCHADO" id="manchado">MANCHADO</option>
-      <option value="ATIGRADO" id="atigrado">ATIGRADO</option>
-      <option value="CREMA" id="crema">CREMA</option>
-      <option value="TODOS" id="color-todos">TODOS</option>
-    </select>
-    <label for="">Tamaño</label>
-    <select id="tamanio" required>
-      <option value="PEQUEÑO" id="pequeño">PEQUEÑO</option>
-      <option value="MEDIANO" id="mediano">MEDIANO</option>
-      <option value="GRANDE" id="grande">GRANDE</option>
-      <option value="TODOS" id="tamanio-todos">TODOS</option>
-    </select>
-    <label class="label" for="">Ciudad</label>
-    <select id="ciudadesCargar" required></select>
-    <label for="">Barrio</label>
-    <select id="ubicacionesCargar" required></select>
-    <label for="">Tipo</label>
-    <select id="estado" required>
-      <option value="ADOPCION" id="adopcion">ADOPCION</option>
-      <option value="PERDIDO" id="perdido">PERDIDO</option>
-    </select>
-    <button id="carga-buscar">Busca ahora</button>
-  </form>
+  <label class="label" for="especieMascota">¿Que buscas?</label>
+  <select id="especieMascota" required [(ngModel)]="filtro.especie" name="Especie">
+    <!-- <option value="null" disabled selected>Seleccionar</option> -->
+    <option *ngFor="let especie of datosForm.especies" value="{{especie.especie}}" id="{{especie.idEspecie}}">{{especie.especie}}
+    </option>
+    <option value="" id="especie-todos">TODOS</option>
+  </select>
+
+  <label class="label" for="colorMascota">Color</label>
+  <select id="colorMascota" required [(ngModel)]="filtro.color" name="Color">
+    <!-- <option value="null" disabled selected>Seleccionar</option> -->
+    <option value="BLANCO" id="blanco">BLANCO</option>
+    <option value="NEGRO" id="negro">NEGRO</option>
+    <option value="NARANJA" id="naranja">NARANJA</option>
+    <option value="GRIS" id="gris">GRIS</option>
+    <option value="MARRÓN" id="marron">MARRÓN</option>
+    <option value="MANCHADO" id="manchado">MANCHADO</option>
+    <option value="ATIGRADO" id="atigrado">ATIGRADO</option>
+    <option value="CREMA" id="crema">CREMA</option>
+    <option value="" id="color-todos">TODOS</option>
+  </select>
+
+  <label for="tamanioMascota">Tamaño</label>
+  <select id="tamanioMascota" required [(ngModel)]="filtro.tamanio" name="Tamanio">
+    <option value="null" disabled selected>Seleccionar</option>
+    <option value="PEQUEÑO" id="pequeño">PEQUEÑO</option>
+    <option value="MEDIANO" id="mediano">MEDIANO</option>
+    <option value="GRANDE" id="grande">GRANDE</option>
+    <option value="" id="tamanio-todos">TODOS</option>
+  </select>
+
+  <label class="label" for="ciudadMascota">Ciudad</label>
+  <select id="ciudadMascota" required (change)="this.datosForm.onCiudadChange($event)" [(ngModel)]="selectedCiudadId"
+    name="Ciudad">
+    <option value="null" id="ciudad-todos">TODAS</option>
+    <option *ngFor="let ciudad of datosForm.ciudades" value="{{ciudad.idCiudad}}" id="{{ciudad.idCiudad}}">{{ciudad.nombre}}
+    </option> 
+          
+  </select>
+
+  <label class="label" for="barrioMascota">Barrio</label>
+  <select id="barrioMascota" required [(ngModel)]="filtro.zona" name="Ubicacion">    
+    <option *ngFor="let barrio of datosForm.barrios " value="{{barrio.barrio}}" id="{{barrio.idUbicacion}}">{{barrio.barrio}}
+    </option>
+    <option value="" id="barrios-todos">TODOS</option>
+  </select>
+
+  <label class="label" for="tipoMascota">Estado</label>
+  <select id="tipoMascota" required [(ngModel)]="filtro.estado" name="Estado">
+    
+    <option value="ADOPTABLE" id="adoptable">ADOPTABLE</option>
+    <option value="PERDIDO" id="perdido">PERDIDO</option>
+    <option value="" id="estado-todos">TODOS</option>
+  </select>
+
+  <button type="submit" name="btnBuscar" id="btnBuscar">Busca ahora</button>
+</form>
+
+<div class="contenedor-cards-mascotas">
+  <div class="card-mascota" *ngFor="let mascota of mascotasFiltroDTO" id="{{mascota.idMascota}}">
+    <div class="image">
+      <img src="data:image/jpg;base64,{{mascota.foto}}" alt="img" />
+    </div>
+    <div class="descripcion">
+      <p>{{mascota.ubicacion.barrio}}</p>
+      <p>{{mascota.descripcion}}</p>
+      <a href="https://api.whatsapp.com//send?phone=549${{mascota.usuario.telefono}}" target="_blank">Contactar</a>
+    </div>
+  </div>
 </div>

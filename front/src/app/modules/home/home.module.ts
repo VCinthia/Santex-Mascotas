@@ -8,22 +8,21 @@ import { SQueHacemosComponent } from './components/s-que-hacemos/s-que-hacemos.c
 import { SComoLogramosComponent } from './components/s-como-logramos/s-como-logramos.component';
 import { SIntegrantesComponent } from './components/s-integrantes/s-integrantes.component';
 import { STienesDudasComponent } from './components/s-tienes-dudas/s-tienes-dudas.component';
-
-
+import { CarouselModule } from '../carousel/carousel.module';
+import { ScrollToTopComponent } from './components/scroll-to-top/scroll-to-top.component';
 
 @NgModule({
-  declarations: [
-    HomeComponent,
-  ],
+  declarations: [HomeComponent, ScrollToTopComponent],
   imports: [
     CommonModule,
     HomeRoutingModule,
-    SPortadaComponent,//lo saque de declarations y lo importe
+    SPortadaComponent,
     SPodemosAyudarteComponent,
     SQueHacemosComponent,
     SComoLogramosComponent,
     SIntegrantesComponent,
     STienesDudasComponent,
-  ]
+    CarouselModule,
+  ],
 })
-export class HomeModule { }
+export class HomeModule {}

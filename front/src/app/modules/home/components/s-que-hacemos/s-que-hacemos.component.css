@@ -1,57 +1,90 @@
 /*QUE HACEMOS*/
 .contenedor-nosotros {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: var(--padding-md);
-    height: 40rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: var(--padding-md);
+  height: 35rem;
+}
+
+.contenedor-textos-nosotros {
+  width: 40%;
+  margin-left: 1rem;
+}
+
+.contenedor-textos-nosotros h2 {
+  font-family: var(--font-bodoni-moda);
+  font-size: var(--font-size-xl);
+  margin-bottom: 2rem;
+}
+
+.contenedor-textos-nosotros p {
+  margin-bottom: 5rem;
+  font-size: 1.3125em;
+}
+
+.contenedor-textos-nosotros a {
+  background-color: var(--color-secondary);
+  color: #fff;
+  padding: var(--padding-xs);
+  text-decoration: none;
+  border-radius: var(--border-xs);
+  font-family: var(--font-advent-pro);
+  font-weight: 600;
+  box-shadow: -3px -3px var(--color-tertiary);
+}
+
+.boton-nosotros {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.contenedor-nosotros img {
+  width: 300px;
+  height: 350px;
+  object-fit: contain;
+}
+
+.contenedor-nosotros img:first-child {
+  position: relative;
+  top: -90px;
+}
+
+.contenedor-nosotros .perro {
+  position: relative;
+  top: 90px;
+}
+
+@media (max-width: 1000px) {
+  .contenedor-nosotros {
+    flex-direction: column;
+    height: 100%;
   }
-  
+  .contenedor-nosotros img:first-child {
+    top: 0;
+    margin-bottom: 1rem;
+  }
+  .contenedor-nosotros .perro {
+    top: 0;
+  }
   .contenedor-textos-nosotros {
-    width: 30rem;
-    margin-left: 2rem;
+    width: 100%;
+    margin-left: 0;
   }
-  
   .contenedor-textos-nosotros h2 {
-    font-family: var(--font-bodoni-moda);
-    font-size: var(--font-size-xl);
+    font-size: clamp(1em, 9vw, 3.125em);
+    text-align: center;
+  }
+  .contenedor-textos-nosotros p {
+    font-size: clamp(0.3em, 10vw, 1.3125em);
+    text-align: center;
     margin-bottom: 2rem;
   }
-  
-  .contenedor-textos-nosotros p {
-    margin-bottom: 5rem;
-    font-size: 1.3125em;
+  .perro {
+    display: none;
   }
-  
-  .contenedor-textos-nosotros a {
-    background-color: var(--color-secondary);
-    color: #fff;
-    padding: var(--padding-xs);
-    text-decoration: none;
-    border-radius: var(--border-xs);
-    font-family: var(--font-advent-pro);
-    font-weight: 600;
-    box-shadow: -3px -3px var(--color-tertiary);
-  }
-  
   .boton-nosotros {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    margin-bottom: 1rem;
   }
-  
-  .contenedor-nosotros img {
-    width: 300px;
-    height: 350px;
-    object-fit: contain;
-  }
-  
-  .contenedor-nosotros img:first-child {
-    position: relative;
-    top: -110px;
-  }
-  
-  .contenedor-nosotros .perro {
-    position: relative;
-    top: 90px;
-  }
+}

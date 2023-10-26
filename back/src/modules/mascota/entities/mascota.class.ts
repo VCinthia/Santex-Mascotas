@@ -2,7 +2,7 @@ export class MascotaEntity {
   color: string;
   tamanio: string;
   fechaCarga: Date;
-  foto: Buffer;
+  foto: string;
   descripcion: string;
   estado: string;
   activo: boolean;
@@ -13,7 +13,7 @@ export class MascotaEntity {
     color: string,
     tamanio: string,
     fechaCarga: Date,
-    foto: Buffer,
+    foto: string,
     descripcion: string,
     estado: string,
     activo: boolean,
